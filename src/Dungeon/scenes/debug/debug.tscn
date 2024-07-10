@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bet2q8rwyyu31"]
+[gd_scene load_steps=6 format=3 uid="uid://bet2q8rwyyu31"]
 
 [ext_resource type="TileSet" uid="uid://benvgv2a333x6" path="res://world/dungeon/tileset.tres" id="1_8beut"]
+[ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="2_14o5r"]
+[ext_resource type="Script" path="res://world/player/PlayerNode.cs" id="2_u7h5f"]
+[ext_resource type="Script" path="res://world/characters/CharacterNode.cs" id="2_xo0yw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dxfli"]
+radius = 4.0
+height = 14.0
 
 [node name="Debug" type="Node2D"]
 
@@ -15,3 +22,23 @@ layer_1/tile_data = PackedInt32Array(720907, 131073, 3, 720906, 131073, 3, 72090
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(193, 108)
 zoom = Vector2(3, 3)
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(207, 82)
+script = ExtResource("2_u7h5f")
+
+[node name="Character" type="Node2D" parent="Player"]
+script = ExtResource("2_xo0yw")
+_speed = 70.0
+
+[node name="Body" type="CharacterBody2D" parent="Player/Character"]
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Character/Body"]
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_dxfli")
+
+[node name="Animation" type="AnimatedSprite2D" parent="Player/Character/Body"]
+sprite_frames = ExtResource("2_14o5r")
+animation = &"idle"
+frame_progress = 0.406722
