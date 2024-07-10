@@ -23,7 +23,8 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/
+[Dd]ebug/*
+!src/Dungeon/scenes/debug/*
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
