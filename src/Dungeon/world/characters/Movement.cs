@@ -12,6 +12,8 @@ public class Movement
         _animation = node.GetNode<AnimatedSprite2D>("Body/Animation");
         _body = node.GetNode<CharacterBody2D>("Body");
     }
+
+    public bool IsLookingLeft => _animation.FlipH;
     
     public void Move(Vector2 direction, double speed)
     {

@@ -19,4 +19,12 @@ public partial class PlayerNode : Node2D
 
     private Vector2 GetDirectionFromInput() => Input.GetVector("player_movement_left", "player_movement_right",
         "player_movement_up", "player_movement_down");
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("attack"))
+        {
+            _characterNode.Attack();
+        }
+    }
 }

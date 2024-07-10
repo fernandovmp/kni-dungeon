@@ -1,13 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://bet2q8rwyyu31"]
+[gd_scene load_steps=10 format=3 uid="uid://bet2q8rwyyu31"]
 
 [ext_resource type="TileSet" uid="uid://benvgv2a333x6" path="res://world/dungeon/tileset.tres" id="1_8beut"]
 [ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="2_14o5r"]
 [ext_resource type="Script" path="res://world/player/PlayerNode.cs" id="2_u7h5f"]
 [ext_resource type="Script" path="res://world/characters/CharacterNode.cs" id="2_xo0yw"]
+[ext_resource type="Texture2D" uid="uid://b6fb6wn0ih7k2" path="res://world/weapons/sword/weapon_regular_sword.png" id="5_ae6e2"]
+[ext_resource type="Script" path="res://world/weapons/WeaponNode.cs" id="6_maa4f"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dxfli"]
 radius = 4.0
 height = 14.0
+
+[sub_resource type="Animation" id="Animation_mnypc"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lousa"]
+_data = {
+"attack": SubResource("Animation_mnypc")
+}
 
 [node name="Debug" type="Node2D"]
 
@@ -42,3 +65,16 @@ shape = SubResource("CapsuleShape2D_dxfli")
 sprite_frames = ExtResource("2_14o5r")
 animation = &"idle"
 frame_progress = 0.406722
+
+[node name="Weapon" type="Node2D" parent="Player/Character/Body"]
+script = ExtResource("6_maa4f")
+
+[node name="Sprite" type="Sprite2D" parent="Player/Character/Body/Weapon"]
+visible = false
+texture = ExtResource("5_ae6e2")
+offset = Vector2(0, -15)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Character/Body/Weapon/Sprite"]
+libraries = {
+"": SubResource("AnimationLibrary_lousa")
+}
