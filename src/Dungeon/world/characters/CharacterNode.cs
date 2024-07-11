@@ -11,11 +11,14 @@ public partial class CharacterNode : Node2D
     private int _command = -1;
     
     [Export] private double _speed = 4;
+    [Export] public CharacterResource Character { get; set; }
 
     public override void _Ready()
     {
-        _movement = new Movement(this);
         _weapon = GetNode<WeaponNode>("Body/Weapon");
+        var sprite = GetNode<AnimatedSprite2D>("Body/Animation");
+        sprite.SpriteFrames = Character.Sprite;
+        _movement = new Movement(this);
     }
 
     public void Move(Vector2 direction)

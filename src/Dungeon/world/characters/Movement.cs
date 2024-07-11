@@ -11,6 +11,7 @@ public class Movement
     {
         _animation = node.GetNode<AnimatedSprite2D>("Body/Animation");
         _body = node.GetNode<CharacterBody2D>("Body");
+        _animation.Play("idle");
     }
 
     public bool IsLookingLeft => _animation.FlipH;

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cocpsqtnydb2g"]
+
+[ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="1_3ndhh"]
+[ext_resource type="Script" path="res://world/characters/CharacterResource.cs" id="1_hieio"]
+
+[resource]
+script = ExtResource("1_hieio")
+Sprite = ExtResource("1_3ndhh")
