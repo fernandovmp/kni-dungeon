@@ -6,6 +6,7 @@ public partial class WeaponNode : Node2D
 {
     private Sprite2D _sprite;
     private AnimationPlayer _animationPlayer;
+    private WeaponBodyNode _weaponBody;
     private bool _isLookingLeft = false;
     
     public override void _Ready()
@@ -13,10 +14,12 @@ public partial class WeaponNode : Node2D
         _sprite = GetNode<Sprite2D>("Sprite");
         _animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
         _animationPlayer.Connect("animation_finished", new Callable(this, nameof(ResetAnimation)));
+        _weaponBody = GetNode<WeaponBodyNode>("Sprite/Body");
     }
 
     public void Attack(bool isDirectionLeft)
     {
+        _weaponBody.Enable();
         if (_isLookingLeft != isDirectionLeft)
         {
             _isLookingLeft = isDirectionLeft;
@@ -28,6 +31,12 @@ public partial class WeaponNode : Node2D
 
     public void ResetAnimation(string name)
     {
+        _weaponBody.Disable();
         _sprite.Visible = false;
+    }
+
+    public void Configure(bool isEnemy)
+    {
+        _weaponBody.ConfigureLayers(isEnemy);
     }
 }

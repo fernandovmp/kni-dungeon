@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cpumrfm6fh4kf"]
+[gd_scene load_steps=11 format=3 uid="uid://cpumrfm6fh4kf"]
 
 [ext_resource type="Script" path="res://world/characters/CharacterNode.cs" id="1_wc8ay"]
 [ext_resource type="Resource" uid="uid://cocpsqtnydb2g" path="res://world/characters/knight_f/character.tres" id="2_r2smq"]
 [ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="3_c0h51"]
 [ext_resource type="Script" path="res://world/weapons/WeaponNode.cs" id="4_mh8pb"]
 [ext_resource type="Texture2D" uid="uid://b6fb6wn0ih7k2" path="res://world/weapons/sword/weapon_regular_sword.png" id="5_maa58"]
+[ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="6_cc2j0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dxfli"]
 radius = 4.0
@@ -31,12 +32,17 @@ _data = {
 "attack": SubResource("Animation_mnypc")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75cf8"]
+size = Vector2(6, 19)
+
 [node name="Character" type="Node2D"]
 script = ExtResource("1_wc8ay")
 _speed = 70.0
 Character = ExtResource("2_r2smq")
 
 [node name="Body" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 7
 motion_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
@@ -53,6 +59,7 @@ script = ExtResource("4_mh8pb")
 
 [node name="Sprite" type="Sprite2D" parent="Body/Weapon"]
 visible = false
+z_index = 2
 texture = ExtResource("5_maa58")
 offset = Vector2(0, -15)
 
@@ -60,3 +67,14 @@ offset = Vector2(0, -15)
 libraries = {
 "": SubResource("AnimationLibrary_lousa")
 }
+
+[node name="Body" type="Area2D" parent="Body/Weapon/Sprite"]
+collision_layer = 8
+collision_mask = 4
+input_pickable = false
+script = ExtResource("6_cc2j0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/Weapon/Sprite/Body"]
+position = Vector2(0, -16.5)
+shape = SubResource("RectangleShape2D_75cf8")
+disabled = true
