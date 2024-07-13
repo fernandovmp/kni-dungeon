@@ -6,10 +6,12 @@ public partial class CharacterBodyNode : CharacterBody2D
 {
     public Movement Movement { get; private set; }
     public bool IsInvencible { get; private set; }
+    public CharacterNode CharacterOwner { get; private set; }
     
     public override void _Ready()
     {
         Movement = new Movement(this);
+        CharacterOwner = GetNode<CharacterNode>("..");
     }
 
     public async void SetInvecibilityAsync()
@@ -20,4 +22,7 @@ public partial class CharacterBodyNode : CharacterBody2D
         IsInvencible = false;
     }
 
+    public void ApplyKnockBack(int force, Vector2 direction)
+    {
+    }
 }

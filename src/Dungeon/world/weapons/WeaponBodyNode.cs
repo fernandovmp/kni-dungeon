@@ -1,3 +1,4 @@
+using Dungeon.world.characters.commands;
 using Dungeon.world.constants;
 using Godot;
 
@@ -7,20 +8,22 @@ public partial class WeaponBodyNode : Area2D
 {
 
     private CollisionShape2D _shape;
-    
+    private Node2D _sprite;
+
     public override void _Ready()
     {
         base._Ready();
         _shape = GetNode<CollisionShape2D>("CollisionShape2D");
+        _sprite = GetNode<Node2D>(".."); 
         Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
     }
 
     public void ConfigureLayers(bool isEnemy)
     {
-        uint mask = PhysicsConstants.PlayerLayer;
+        uint mask = PhysicsConstants.EnemyLayer;
         if (isEnemy)
         {
-            mask = PhysicsConstants.EnemyLayer;
+            mask = PhysicsConstants.PlayerLayer;
         }
         CollisionMask = mask;
     }
@@ -32,11 +35,9 @@ public partial class WeaponBodyNode : Area2D
     { 
         if (body is CharacterBodyNode characterBodyNode)
         {
-            if (!characterBodyNode.IsInvencible)
-            {
-                characterBodyNode.SetInvecibilityAsync();
-                GD.Print(body.GetInstanceId() + " Entered");
-            }
+            var rotationDegrees = Mathf.RadToDeg(_sprite.Rotation);
+            var command = new CharacterReceivedAttackCommand(rotationDegrees);
+            command.Execute(characterBodyNode.CharacterOwner);
         }
     }
 }
