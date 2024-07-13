@@ -1,4 +1,5 @@
 using Dungeon.world.characters;
+using Dungeon.world.characters.commands;
 using Godot;
 
 namespace Dungeon.world.player;
@@ -6,6 +7,7 @@ namespace Dungeon.world.player;
 public partial class PlayerNode : Node2D
 {
     private CharacterNode _characterNode = default!;
+    
     public override void _Ready()
     {
         _characterNode = GetNode<CharacterNode>("Character");
@@ -14,7 +16,8 @@ public partial class PlayerNode : Node2D
     public override void _PhysicsProcess(double detla)
     {
         Vector2 direction = GetDirectionFromInput();
-        _characterNode.Move(direction);
+        var command = new CharacterMovementCommand(direction);
+        command.Execute(_characterNode);
     }
 
     private Vector2 GetDirectionFromInput() => Input.GetVector("player_movement_left", "player_movement_right",
@@ -24,7 +27,8 @@ public partial class PlayerNode : Node2D
     {
         if (@event.IsActionPressed("attack"))
         {
-            _characterNode.Attack();
+            var command = new CharacterAttackCommand();
+            command.Execute(_characterNode);
         }
     }
 }

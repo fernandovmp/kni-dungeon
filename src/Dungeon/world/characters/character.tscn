@@ -38,7 +38,7 @@ size = Vector2(6, 19)
 
 [node name="Character" type="Node2D"]
 script = ExtResource("1_wc8ay")
-_speed = 70.0
+Speed = 70.0
 Character = ExtResource("2_r2smq")
 
 [node name="Body" type="CharacterBody2D" parent="."]
