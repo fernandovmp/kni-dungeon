@@ -13,7 +13,6 @@ public partial class WeaponBodyNode : Area2D
         base._Ready();
         _shape = GetNode<CollisionShape2D>("CollisionShape2D");
         Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
-        Connect("body_exited", new Callable(this, nameof(OnBodyExited)));
     }
 
     public void ConfigureLayers(bool isEnemy)
@@ -30,12 +29,14 @@ public partial class WeaponBodyNode : Area2D
     public void Disable() => _shape.Disabled = true;
 
     private void OnBodyEntered(Node2D body)
-    {
-        GD.Print(body.GetInstanceId() + " Entered");   
-    }
-
-    private void OnBodyExited(Node2D body)
-    {
-        GD.Print(body.GetInstanceId() + " Exited");
+    { 
+        if (body is CharacterBodyNode characterBodyNode)
+        {
+            if (!characterBodyNode.IsInvencible)
+            {
+                characterBodyNode.SetInvecibilityAsync();
+                GD.Print(body.GetInstanceId() + " Entered");
+            }
+        }
     }
 }

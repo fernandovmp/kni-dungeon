@@ -9,8 +9,8 @@ public class Movement
 
     public Movement(Node2D node)
     {
-        _animation = node.GetNode<AnimatedSprite2D>("Body/Animation");
-        _body = node.GetNode<CharacterBody2D>("Body");
+        _animation = node.GetNode<AnimatedSprite2D>("Animation");
+        _body = (CharacterBody2D) node;
         _animation.Play("idle");
     }
 
