@@ -19,7 +19,7 @@ public partial class CharacterNode : Node2D
         Configure();
     }
 
-    private void Configure()
+    public void Configure()
     {
         var sprite = GetNode<AnimatedSprite2D>("Body/Animation");
         sprite.SpriteFrames = Character.Sprite;
