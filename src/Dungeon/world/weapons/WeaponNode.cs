@@ -35,8 +35,8 @@ public partial class WeaponNode : Node2D
         _sprite.Visible = false;
     }
 
-    public void Configure(bool isEnemy)
+    public void Configure(bool isEnemy, CharacterBodyNode character)
     {
-        _weaponBody.ConfigureLayers(isEnemy);
+        _weaponBody.Configure(isEnemy, character);
     }
 }

@@ -23,7 +23,7 @@ public partial class CharacterNode : Node2D
     {
         var sprite = GetNode<AnimatedSprite2D>("Body/Animation");
         sprite.SpriteFrames = Character.Sprite;
-        Weapon.Configure(IsEnemy);
+        Weapon.Configure(IsEnemy, Body);
         
         uint layer = PhysicsConstants.PlayerLayer;
         if (IsEnemy)

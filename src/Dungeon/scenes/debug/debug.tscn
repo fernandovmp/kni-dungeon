@@ -26,6 +26,6 @@ script = ExtResource("2_u7h5f")
 [node name="Character" parent="Player" instance=ExtResource("3_4otpu")]
 
 [node name="Character" parent="." instance=ExtResource("3_4otpu")]
-position = Vector2(139, 60)
+position = Vector2(152, 96)
 Character = ExtResource("4_ultge")
 IsEnemy = true

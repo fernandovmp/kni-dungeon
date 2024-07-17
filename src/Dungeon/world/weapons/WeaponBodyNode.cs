@@ -9,6 +9,7 @@ public partial class WeaponBodyNode : Area2D
 
     private CollisionShape2D _shape;
     private Node2D _sprite;
+    public CharacterBodyNode CharacterOwner { get; set; }
 
     public override void _Ready()
     {
@@ -18,8 +19,9 @@ public partial class WeaponBodyNode : Area2D
         Connect("body_entered", new Callable(this, nameof(OnBodyEntered)));
     }
 
-    public void ConfigureLayers(bool isEnemy)
+    public void Configure(bool isEnemy, CharacterBodyNode character)
     {
+        CharacterOwner = character;
         uint mask = PhysicsConstants.EnemyLayer;
         if (isEnemy)
         {
@@ -36,7 +38,7 @@ public partial class WeaponBodyNode : Area2D
         if (body is CharacterBodyNode characterBodyNode)
         {
             var rotationDegrees = Mathf.RadToDeg(_sprite.Rotation);
-            var command = new CharacterReceivedAttackCommand(rotationDegrees);
+            var command = new CharacterReceivedAttackCommand(rotationDegrees, CharacterOwner);
             command.Execute(characterBodyNode.CharacterOwner);
         }
     }

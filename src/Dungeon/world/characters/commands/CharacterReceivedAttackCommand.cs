@@ -3,22 +3,25 @@ using Godot;
 
 namespace Dungeon.world.characters.commands;
 
-public class CharacterReceivedAttackCommand(float RotationDegrees) : ICommand<CharacterNode>
+public class CharacterReceivedAttackCommand(float rotationDegrees, Node2D body) : ICommand<CharacterNode>
 {
     public void Execute(CharacterNode target)
     {
         if(target.Body.IsInvencible) return;
         target.Body.SetInvecibilityAsync();
         int force = GetForce();
-        target.Body.ApplyKnockBack(force, Vector2.Zero);
+        Vector2 direction = GetDirection(target);
+        target.Body.ApplyKnockBack(force, direction);
     }
+
+    private Vector2 GetDirection(CharacterNode target) => body.GlobalPosition.DirectionTo(target.Body.GlobalPosition);
 
     private int GetForce()
     {
-        if (RotationDegrees >= 45 && RotationDegrees <= 120)
+        if (rotationDegrees >= 45 && rotationDegrees <= 120)
         {
-            return 60;
+            return 240;
         }
-        return 20;
+        return 80;
     }
 }
