@@ -7,10 +7,12 @@ namespace Dungeon.world.player;
 public partial class PlayerNode : Node2D
 {
     private CharacterNode _characterNode = default!;
+    [Export] public CharacterResource CharacterResource { get; set; }
     
     public override void _Ready()
     {
         _characterNode = GetNode<CharacterNode>("Character");
+        _characterNode.Configure(CharacterResource);
     }
 
     public override void _PhysicsProcess(double detla)

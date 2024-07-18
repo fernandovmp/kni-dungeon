@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bet2q8rwyyu31"]
+[gd_scene load_steps=9 format=3 uid="uid://bet2q8rwyyu31"]
 
 [ext_resource type="TileSet" uid="uid://benvgv2a333x6" path="res://world/dungeon/tileset.tres" id="1_8beut"]
 [ext_resource type="Script" path="res://world/player/PlayerNode.cs" id="2_u7h5f"]
+[ext_resource type="Resource" uid="uid://cocpsqtnydb2g" path="res://world/characters/knight_f/character.tres" id="3_1ec6n"]
 [ext_resource type="PackedScene" uid="uid://cpumrfm6fh4kf" path="res://world/characters/character.tscn" id="3_4otpu"]
 [ext_resource type="PackedScene" uid="uid://bxlt3tw6p2h2q" path="res://world/enemies/enemy.tscn" id="4_lrke3"]
 [ext_resource type="Script" path="res://world/enemies/behaviours/ConstantAttackBehaviour.cs" id="5_vivgu"]
@@ -33,6 +34,7 @@ zoom = Vector2(3, 3)
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(207, 82)
 script = ExtResource("2_u7h5f")
+CharacterResource = ExtResource("3_1ec6n")
 
 [node name="Character" parent="Player" instance=ExtResource("3_4otpu")]
 position = Vector2(-12, 21)

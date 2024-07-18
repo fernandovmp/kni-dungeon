@@ -8,8 +8,8 @@
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_p2gey")
 BehaviourResource = ExtResource("2_u477v")
+CharacterResource = ExtResource("4_qs6ua")
 
 [node name="Character" parent="." instance=ExtResource("3_3n57g")]
 position = Vector2(120, 64)
-Character = ExtResource("4_qs6ua")
 IsEnemy = true

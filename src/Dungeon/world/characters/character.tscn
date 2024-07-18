@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpumrfm6fh4kf"]
+[gd_scene load_steps=11 format=3 uid="uid://cpumrfm6fh4kf"]
 
 [ext_resource type="Script" path="res://world/characters/CharacterNode.cs" id="1_wc8ay"]
-[ext_resource type="Resource" uid="uid://cocpsqtnydb2g" path="res://world/characters/knight_f/character.tres" id="2_r2smq"]
 [ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="3_c0h51"]
 [ext_resource type="Script" path="res://world/characters/CharacterBodyNode.cs" id="3_ddhrh"]
 [ext_resource type="Script" path="res://world/weapons/WeaponNode.cs" id="4_mh8pb"]
@@ -39,7 +38,6 @@ size = Vector2(6, 19)
 [node name="Character" type="Node2D"]
 script = ExtResource("1_wc8ay")
 Speed = 70.0
-Character = ExtResource("2_r2smq")
 
 [node name="Body" type="CharacterBody2D" parent="."]
 collision_layer = 4

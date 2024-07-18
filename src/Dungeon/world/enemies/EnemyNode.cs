@@ -23,13 +23,20 @@ public partial class EnemyNode : Node2D
                 Behaviour = null;
             }
         } }
+    [Export] public CharacterResource CharacterResource { get; set; }
 
     public override void _Ready()
     {
         base._Ready();
         Character = GetNode<CharacterNode>("Character");
         Character.IsEnemy = true;
-        Character.Configure();
+        Character.Configure(CharacterResource);
+        Character.Combatent.Died += Died;
+    }
+
+    private void Died()
+    {
+        QueueFree();
     }
 
     public override void _PhysicsProcess(double delta)
