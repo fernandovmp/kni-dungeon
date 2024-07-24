@@ -4,13 +4,13 @@ namespace Dungeon.world.characters;
 
 public class Movement
 {
-    private AnimatedSprite2D _animation = default!;
-    private CharacterBody2D _body = default!;
+    private AnimatedCharacterNode _animation;
+    private CharacterBodyNode _body;
 
     public Movement(Node2D node)
     {
-        _animation = node.GetNode<AnimatedSprite2D>("Animation");
-        _body = (CharacterBody2D) node;
+        _animation = node.GetNode<AnimatedCharacterNode>("Animation");
+        _body = (CharacterBodyNode) node;
         _animation.Play("idle");
     }
 
@@ -24,27 +24,17 @@ public class Movement
             return;
         }
 
-        FlipSprite(direction);
+        _body.CharacterOwner.State = CharacterState.Moving;
+        _animation.FlipSprite(direction);
         _body.Velocity = direction * (float)speed;
         _body.MoveAndSlide();
-        _animation.Play("run");
-    }
-
-    private void FlipSprite(Vector2 direction)
-    {
-        if (direction.X > 0 && _animation.FlipH)
-        {
-            _animation.FlipH = false;
-        }
-        else if (direction.X < 0 && !_animation.FlipH)
-        {
-            _animation.FlipH = true;
-        }
+        _animation.RequestRun();
     }
 
     public void Stop()
     {
         _body.Velocity = Vector2.Zero;
-        _animation.Play("idle");
+        _body.CharacterOwner.State = CharacterState.Idle;
+        _animation.RequestIdle();
     }
 }

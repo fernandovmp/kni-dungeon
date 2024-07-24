@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpumrfm6fh4kf"]
+[gd_scene load_steps=12 format=3 uid="uid://cpumrfm6fh4kf"]
 
 [ext_resource type="Script" path="res://world/characters/CharacterNode.cs" id="1_wc8ay"]
 [ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="3_c0h51"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://world/weapons/WeaponNode.cs" id="4_mh8pb"]
 [ext_resource type="Texture2D" uid="uid://b6fb6wn0ih7k2" path="res://world/weapons/sword/weapon_regular_sword.png" id="5_maa58"]
 [ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="6_cc2j0"]
+[ext_resource type="Script" path="res://world/characters/AnimatedCharacterNode.cs" id="6_nrbov"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dxfli"]
 radius = 4.0
@@ -53,6 +54,7 @@ shape = SubResource("CapsuleShape2D_dxfli")
 sprite_frames = ExtResource("3_c0h51")
 animation = &"idle"
 frame_progress = 0.406722
+script = ExtResource("6_nrbov")
 
 [node name="Weapon" type="Node2D" parent="Body"]
 script = ExtResource("4_mh8pb")

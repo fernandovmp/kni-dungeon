@@ -9,6 +9,7 @@ public class Combatent
     public int Resistance { get; private set; }
     
     public Action Died { get; set; }
+    public Action Hitted { get; set; }
 
     public void DealDamage()
     {
@@ -17,6 +18,10 @@ public class Combatent
         {
             Life = 0;
             Died?.Invoke();
+        }
+        else
+        {
+            Hitted?.Invoke();
         }
     }
 

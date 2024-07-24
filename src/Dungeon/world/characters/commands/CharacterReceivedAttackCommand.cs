@@ -5,9 +5,10 @@ namespace Dungeon.world.characters.commands;
 
 public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode body) : ICommand<CharacterNode>
 {
+    public bool CanExecute(CharacterNode target) => !target.Body.IsInvencible;
+
     public void Execute(CharacterNode target)
     {
-        if(target.Body.IsInvencible) return;
         target.Body.SetInvecibilityAsync();
         int force = GetForce() + body.Combatent.Force - target.Combatent.Resistance;
         Vector2 direction = GetDirection(target);
@@ -15,7 +16,7 @@ public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode
         target.Body.ApplyKnockBack(force, direction);
     }
 
-    private Vector2 GetDirection(CharacterNode target) => body.GlobalPosition.DirectionTo(target.Body.GlobalPosition);
+    private Vector2 GetDirection(CharacterNode target) => body.Body.GlobalPosition.DirectionTo(target.Body.GlobalPosition);
 
     private int GetForce()
     {
