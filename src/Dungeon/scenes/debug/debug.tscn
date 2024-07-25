@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bet2q8rwyyu31"]
+[gd_scene load_steps=10 format=3 uid="uid://bet2q8rwyyu31"]
 
 [ext_resource type="TileSet" uid="uid://benvgv2a333x6" path="res://world/dungeon/tileset.tres" id="1_8beut"]
 [ext_resource type="Script" path="res://world/player/PlayerNode.cs" id="2_u7h5f"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cpumrfm6fh4kf" path="res://world/characters/character.tscn" id="3_4otpu"]
 [ext_resource type="PackedScene" uid="uid://bxlt3tw6p2h2q" path="res://world/enemies/enemy.tscn" id="4_lrke3"]
 [ext_resource type="Script" path="res://world/enemies/behaviours/ConstantAttackBehaviour.cs" id="5_vivgu"]
+[ext_resource type="Script" path="res://ui/health/HeartGaugeNode.cs" id="7_bjys3"]
 
 [sub_resource type="Resource" id="Resource_g0klk"]
 resource_local_to_scene = true
@@ -45,3 +46,14 @@ BehaviourResource = SubResource("Resource_g0klk")
 [node name="Enemy2" parent="." instance=ExtResource("4_lrke3")]
 position = Vector2(64, 0)
 BehaviourResource = SubResource("Resource_ttsj5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HeartGauge" type="HBoxContainer" parent="CanvasLayer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 50.0
+script = ExtResource("7_bjys3")
+Health = 4
+Count = 4
