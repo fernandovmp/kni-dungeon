@@ -6,3 +6,7 @@
 [resource]
 script = ExtResource("2_xjcvo")
 Sprite = ExtResource("1_hrl3h")
+Life = 2
+Force = 10
+Resistance = 0
+Speed = 50

@@ -15,4 +15,7 @@ public partial class CharacterResource : Resource
 
     [Export]
     public int Resistance { get; set; }
+    
+    [Export]
+    public int Speed { get; set; }
 }

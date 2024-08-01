@@ -27,6 +27,7 @@ public partial class CharacterNode : Node2D
     public void Configure(CharacterResource character)
     {
         Character = character;
+        Speed = character.Speed;
         Combatent = Combatent.From(Character);
         Combatent.Hitted += Hitted;
         _sprite = GetNode<AnimatedCharacterNode>("Body/Animation");

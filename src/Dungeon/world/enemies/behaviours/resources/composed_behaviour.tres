@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b0vb8qhspk637"]
+
+[ext_resource type="Script" path="res://world/enemies/behaviours/ComposedBehaviour.cs" id="1_vmrk7"]
+
+[resource]
+script = ExtResource("1_vmrk7")
+BehavioursResources = []

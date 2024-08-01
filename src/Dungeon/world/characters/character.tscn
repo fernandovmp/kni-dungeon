@@ -83,4 +83,5 @@ shape = SubResource("RectangleShape2D_75cf8")
 disabled = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
+path_desired_distance = 13.0
 target_desired_distance = 20.0
