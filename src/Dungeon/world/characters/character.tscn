@@ -51,6 +51,7 @@ position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_dxfli")
 
 [node name="Animation" type="AnimatedSprite2D" parent="Body"]
+z_index = 1
 sprite_frames = ExtResource("3_c0h51")
 animation = &"idle"
 frame_progress = 0.406722
@@ -80,3 +81,6 @@ script = ExtResource("6_cc2j0")
 position = Vector2(0, -16.5)
 shape = SubResource("RectangleShape2D_75cf8")
 disabled = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
+target_desired_distance = 20.0

@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://6dk3i5bmg6ou"]
+
+[ext_resource type="Script" path="res://world/enemies/behaviours/ChaseBehaviour.cs" id="1_vpqup"]
+
+[resource]
+script = ExtResource("1_vpqup")

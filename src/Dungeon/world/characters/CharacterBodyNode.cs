@@ -8,11 +8,13 @@ public partial class CharacterBodyNode : CharacterBody2D
     public Movement Movement { get; private set; }
     public bool IsInvencible { get; private set; }
     public CharacterNode CharacterOwner { get; private set; }
+    public NavigationAgent2D NavigationAgent { get; private set; }
     
     public override void _Ready()
     {
         Movement = new Movement(this);
         CharacterOwner = GetNode<CharacterNode>("..");
+        NavigationAgent = GetNode<NavigationAgent2D>("NavigationAgent2D");
     }
 
     public override void _PhysicsProcess(double delta)

@@ -89,7 +89,6 @@ public partial class DebugScene : Node
         {
             return;
         }
-        GD.Print(_debugScenes[index].Path);
 
         LoadScene(_debugScenes[index].Scene);
     }

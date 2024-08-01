@@ -10,6 +10,7 @@ public partial class PlayerNode : Node2D
     private CharacterNode _characterNode = default!;
     private HeartGaugeNode _healthGauge;
     [Export] public CharacterResource CharacterResource { get; set; }
+    public CharacterNode Character => _characterNode;
     
     public override void _Ready()
     {
