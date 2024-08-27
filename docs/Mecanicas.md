@@ -43,7 +43,7 @@ O jogador enfrentará pequenas ondas de inimigos em arenas fechadas.
 
 A cada três ondas vencidas, a arena muda.
 
-As ondas podem ser nos formatos:
+As arenas podem ser nos formatos:
 - duas ondas de inimigos + uma onda com apenas um chefe
 - três ondas de inimigos
 

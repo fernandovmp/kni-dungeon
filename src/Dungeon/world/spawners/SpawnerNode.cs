@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Dungeon.world.characters;
 using Dungeon.world.enemies;
 using Dungeon.world.enemies.behaviours;
@@ -16,18 +15,7 @@ public partial class SpawnerNode : Node2D
         _enemyScene = ResourceLoader.Load<PackedScene>("res://world/enemies/enemy.tscn");
     }
 
-    private double timer = 3;
-    public override void _PhysicsProcess(double delta)
-    {
-        timer -= delta;
-        if (timer <= 0)
-        {
-            SpawnEnemy(ResourceLoader.Load<CharacterResource>("res://world/characters/orc_warrior/character.tres"));
-            timer = 3;
-        }
-    }
-
-    public bool SpawnEnemy(CharacterResource character)
+    public bool SpawnEnemy(CharacterResource character, Node root)
     {
         var enemyNode = _enemyScene.Instantiate<EnemyNode>();
         enemyNode.Behaviour = new ComposedBehaviour()
@@ -44,7 +32,7 @@ public partial class SpawnerNode : Node2D
             enemyNode.Character.Body.GlobalPosition = GlobalPosition;
             enemyNode.Visible = true;
         };
-        AddChild(enemyNode);
+        root.AddChild(enemyNode);
         return true;
     }
 }
