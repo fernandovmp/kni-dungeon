@@ -17,9 +17,25 @@ Ao receber um ataque, o alvo é empurrado um pouco para trás, a força do empur
 ##### Força do ataque
 
 Todo ataque terá um valor de força ao acertar o alvo. A força será a base da força da arma + uma variação definida por qual posição do hitbox do ataque atingiu o alvo. Se for nas pontas, a força adicional será baixa, se for no meio, será alta.
+
 ##### Invencibilidade
 
 Ao receber um ataque, o alvo fica com invencibilidade por um curto período.
+
+##### Ondas de inimigos
+
+Cada onda é formada por uma lista de inimigos que serão criados nessa onda.
+
+Os inimigos serão criados na ordem em que aparecem na lista.
+
+Quando a lista estiver vazia e não tiver nenhum inimigo vivo, a onda acaba.
+
+O inimigo deverá ser criado em um "ponto de aparição de inimigos" aleatório no mapa, mas que não seja igual ao último ponto usado.
+
+Se houver 7 inimigos vivos, não será criado outro inimigo até que um morra.
+
+Deve ter um intervalo de pelo menos 3 segundos para aparição de um novo inimigo.
+
 
 ### Estrutura
 

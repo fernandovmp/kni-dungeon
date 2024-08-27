@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfojr5tk1kwsm"]
+
+[ext_resource type="Texture2D" uid="uid://dyronc58ke8gu" path="res://world/spawners/spawner001.png" id="1_7dfs3"]
+[ext_resource type="Script" path="res://world/spawners/SpawnerNode.cs" id="2_td5ov"]
+
+[node name="Spawner" type="Sprite2D"]
+position = Vector2(89, 88)
+texture = ExtResource("1_7dfs3")
+script = ExtResource("2_td5ov")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+amount = 10
+speed_scale = 0.4
+emission_shape = 2
+emission_sphere_radius = 8.0
+direction = Vector2(0, -1)
+spread = 70.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 7.0
+initial_velocity_max = 7.0
+color = Color(0.564706, 0.317647, 0.878431, 1)
