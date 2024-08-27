@@ -19,29 +19,29 @@ parsed_collision_mask = 1
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 
-[sub_resource type="Resource" id="Resource_ol2hu"]
+[sub_resource type="Resource" id="Resource_juvx0"]
 script = ExtResource("7_c0k11")
 
-[sub_resource type="Resource" id="Resource_q78gy"]
+[sub_resource type="Resource" id="Resource_f3bt1"]
 resource_local_to_scene = true
 script = ExtResource("8_0sj3u")
 Interval = 3.0
 
-[sub_resource type="Resource" id="Resource_oq71e"]
+[sub_resource type="Resource" id="Resource_eq506"]
 script = ExtResource("9_kmfjx")
-BehavioursResources = [SubResource("Resource_ol2hu"), SubResource("Resource_q78gy")]
+BehavioursResources = [SubResource("Resource_juvx0"), SubResource("Resource_f3bt1")]
 
-[sub_resource type="Resource" id="Resource_oi7cb"]
+[sub_resource type="Resource" id="Resource_jm2kr"]
 script = ExtResource("7_c0k11")
 
-[sub_resource type="Resource" id="Resource_db7x2"]
+[sub_resource type="Resource" id="Resource_ajc5s"]
 resource_local_to_scene = true
 script = ExtResource("8_0sj3u")
 Interval = 6.0
 
-[sub_resource type="Resource" id="Resource_rsm27"]
+[sub_resource type="Resource" id="Resource_2vy7i"]
 script = ExtResource("9_kmfjx")
-BehavioursResources = [SubResource("Resource_oi7cb"), SubResource("Resource_db7x2")]
+BehavioursResources = [SubResource("Resource_jm2kr"), SubResource("Resource_ajc5s")]
 
 [node name="Debug" type="Node2D"]
 script = ExtResource("1_pl1ob")
@@ -72,11 +72,11 @@ position = Vector2(-17, 78)
 
 [node name="Enemy" parent="." instance=ExtResource("6_aycba")]
 position = Vector2(22, -12)
-BehaviourResource = SubResource("Resource_oq71e")
+BehaviourResource = SubResource("Resource_eq506")
 
 [node name="Enemy2" parent="." instance=ExtResource("6_aycba")]
 position = Vector2(115, -15)
-BehaviourResource = SubResource("Resource_rsm27")
+BehaviourResource = SubResource("Resource_2vy7i")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

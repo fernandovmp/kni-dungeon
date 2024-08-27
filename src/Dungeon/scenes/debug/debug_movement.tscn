@@ -17,10 +17,10 @@ parsed_collision_mask = 1
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 
-[sub_resource type="Resource" id="Resource_f7qvc"]
+[sub_resource type="Resource" id="Resource_l883v"]
 script = ExtResource("7_u4fbm")
 
-[sub_resource type="Resource" id="Resource_34avv"]
+[sub_resource type="Resource" id="Resource_n7v1k"]
 script = ExtResource("7_u4fbm")
 
 [node name="Debug" type="Node2D"]
@@ -52,11 +52,11 @@ position = Vector2(-17, 78)
 
 [node name="Enemy" parent="." instance=ExtResource("5_ca8uk")]
 position = Vector2(22, -12)
-BehaviourResource = SubResource("Resource_f7qvc")
+BehaviourResource = SubResource("Resource_l883v")
 
 [node name="Enemy2" parent="." instance=ExtResource("5_ca8uk")]
 position = Vector2(115, -15)
-BehaviourResource = SubResource("Resource_34avv")
+BehaviourResource = SubResource("Resource_n7v1k")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -19,6 +19,13 @@ public partial class ChaseBehaviour : Resource, IEnemyBehaviour
                 return;
             }
         }
+
+        if (!IsInstanceValid(_target) || !IsInstanceValid(_target.Character) ||
+            !IsInstanceValid(_target.Character.Body))
+        {
+            _target = null;
+            return;
+        }
         body.NavigationAgent.TargetPosition = _target.Character.Body.GlobalPosition;
         if (body.NavigationAgent.IsNavigationFinished())
         {
