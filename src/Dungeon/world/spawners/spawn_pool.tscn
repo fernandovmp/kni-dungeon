@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://be0nwnq68h2a6"]
+
+[ext_resource type="Script" path="res://world/spawners/SpawnPoolNode.cs" id="1_7ol71"]
+
+[node name="SpawnPool" type="Node2D"]
+script = ExtResource("1_7ol71")
+
+[node name="EnemiesRoot" type="Node2D" parent="."]

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://760ug0fxpf0d"]
+
+[ext_resource type="Script" path="res://world/player/PlayerNode.cs" id="1_qng4v"]
+[ext_resource type="Resource" uid="uid://cocpsqtnydb2g" path="res://world/characters/knight_f/character.tres" id="2_sl4eb"]
+[ext_resource type="PackedScene" uid="uid://cpumrfm6fh4kf" path="res://world/characters/character.tscn" id="3_57vg6"]
+
+[node name="Player" type="Node2D"]
+position = Vector2(207, 82)
+script = ExtResource("1_qng4v")
+CharacterResource = ExtResource("2_sl4eb")
+
+[node name="Character" parent="." instance=ExtResource("3_57vg6")]
+position = Vector2(-12, 21)
