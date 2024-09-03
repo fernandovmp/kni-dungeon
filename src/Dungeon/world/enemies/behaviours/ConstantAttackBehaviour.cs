@@ -3,12 +3,13 @@ using Godot;
 
 namespace Dungeon.world.enemies.behaviours;
 
-public partial class ConstantAttackBehaviour : Resource, IEnemyBehaviour
+[GlobalClass]
+public partial class ConstantAttackBehaviour : BehaviourBase
 {
     [Export] public double Interval { get; set; } = 3;
     private double _timer = 0;
 
-    public void OnPhysicsProcess(double delta, EnemyNode enemyNode)
+    public override void OnPhysicsProcess(double delta, EnemyNode enemyNode)
     {
         _timer -= delta;
         if (_timer <= 0)

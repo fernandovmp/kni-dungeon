@@ -3,11 +3,12 @@ using Godot.Collections;
 
 namespace Dungeon.world.enemies.behaviours;
 
-public partial class ComposedBehaviour : Resource, IEnemyBehaviour
+[GlobalClass]
+public partial class ComposedBehaviour : BehaviourBase
 {
     [Export] public Array<Resource> BehavioursResources { get; set; } = new Array<Resource>();
     
-    public void OnPhysicsProcess(double delta, EnemyNode enemyNode)
+    public override void OnPhysicsProcess(double delta, EnemyNode enemyNode)
     {
         foreach (var resource in BehavioursResources)
         {

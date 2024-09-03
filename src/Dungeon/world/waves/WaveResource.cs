@@ -4,6 +4,7 @@ using Godot.Collections;
 
 namespace Dungeon.world.waves;
 
+[GlobalClass]
 public partial class WaveResource : Resource
 {
     [Export] public Array<CharacterResource> Enemies { get; set; }

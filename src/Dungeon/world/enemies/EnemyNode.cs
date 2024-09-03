@@ -7,14 +7,14 @@ namespace Dungeon.world.enemies;
 public partial class EnemyNode : Node2D
 {
     public CharacterNode Character { get; set; }
-    public IEnemyBehaviour Behaviour { get; set; }
-    private Resource _behaviourResource;
+    public BehaviourBase Behaviour { get; set; }
+    private BehaviourBase _behaviourResource;
     [Export]
-    public Resource BehaviourResource { get => _behaviourResource;
+    public BehaviourBase BehaviourResource { get => _behaviourResource;
         set
         {
             _behaviourResource = value;
-            if (_behaviourResource is IEnemyBehaviour enemyBehaviour)
+            if (_behaviourResource is BehaviourBase enemyBehaviour)
             {
                 Behaviour = enemyBehaviour;
             }

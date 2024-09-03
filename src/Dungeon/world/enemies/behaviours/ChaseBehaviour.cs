@@ -4,11 +4,12 @@ using Godot;
 
 namespace Dungeon.world.enemies.behaviours;
 
-public partial class ChaseBehaviour : Resource, IEnemyBehaviour
+[GlobalClass]
+public partial class ChaseBehaviour : BehaviourBase
 {
     private PlayerNode _target;
 
-    public void OnPhysicsProcess(double delta, EnemyNode enemyNode)
+    public override void OnPhysicsProcess(double delta, EnemyNode enemyNode)
     {
         var body = enemyNode.Character.Body;
         if (_target == null)
