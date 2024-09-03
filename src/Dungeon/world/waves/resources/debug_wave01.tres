@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WaveResource" load_steps=4 format=3 uid="uid://eqtrwbjd50k1"]
+
+[ext_resource type="Resource" uid="uid://cp83dnnywp2nm" path="res://world/characters/orc_warrior/character.tres" id="1_l3xae"]
+[ext_resource type="Resource" uid="uid://cocpsqtnydb2g" path="res://world/characters/knight_f/character.tres" id="2_lo5fk"]
+[ext_resource type="Script" path="res://world/waves/WaveResource.cs" id="3_j00dd"]
+
+[resource]
+script = ExtResource("3_j00dd")
+Enemies = Array[Resource]([ExtResource("1_l3xae"), ExtResource("1_l3xae"), ExtResource("2_lo5fk"), ExtResource("2_lo5fk"), ExtResource("1_l3xae"), ExtResource("1_l3xae"), ExtResource("1_l3xae"), ExtResource("2_lo5fk"), ExtResource("2_lo5fk"), ExtResource("2_lo5fk")])

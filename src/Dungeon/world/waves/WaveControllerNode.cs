@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Dungeon.world.characters;
 using Dungeon.world.spawners;
@@ -13,6 +14,9 @@ public partial class WaveControllerNode : Node2D
     [Export] private WaveResource? _wave;
     private double _timer;
     private Queue<CharacterResource> _enemiesQueue = new Queue<CharacterResource>(0);
+    private bool _notNotifiedWaveEnd;
+
+    public Action OnWaveEnd { get; set; }
 
     public override void _Ready()
     {
@@ -29,6 +33,7 @@ public partial class WaveControllerNode : Node2D
     {
         _wave = wave;
         _enemiesQueue = new Queue<CharacterResource>(_wave!.Enemies);
+        _notNotifiedWaveEnd = true;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -47,6 +52,12 @@ public partial class WaveControllerNode : Node2D
             var character = _enemiesQueue.Dequeue();
             SpawnPool.SpawnEnemy(character);
             _timer = _minimumInterval;
+        }
+
+        if (enemyCount == 0 && _enemiesQueue.Count == 0 && _notNotifiedWaveEnd)
+        {
+            _notNotifiedWaveEnd = false;
+            OnWaveEnd?.Invoke();
         }
     }
 }
