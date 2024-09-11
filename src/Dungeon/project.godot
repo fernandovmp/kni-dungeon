@@ -24,6 +24,10 @@ window/stretch/mode="viewport"
 project/assembly_name="Dungeon"
 project/solution_directory="../../"
 
+[gui]
+
+theme/custom="res://ui/themes/default_theme.tres"
+
 [input]
 
 player_movement_up={

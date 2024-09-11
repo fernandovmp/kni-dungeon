@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=2 format=3 uid="uid://da8usnqbuygt1"]
+[gd_resource type="Resource" script_class="ConstantAttackBehaviour" load_steps=2 format=3 uid="uid://da8usnqbuygt1"]
 
 [ext_resource type="Script" path="res://world/enemies/behaviours/ConstantAttackBehaviour.cs" id="1_g8sng"]
 

@@ -10,6 +10,9 @@ public partial class ArenaNode : Node2D
     [Export] public PackedScene Level { get; set; }
     [Export] public WaveResource CurrentWaveResource { get; set; }
     [Export] public Array<WaveResource> WavesResources { get; set; }
+    
+    [Signal]
+    public delegate void ArenaStateChangedEventHandler(ArenaState state);
 
     private int _currentWaveIndex;
     private Node2D _map;
@@ -19,6 +22,9 @@ public partial class ArenaNode : Node2D
     {
         Configure();
         base._Ready();
+        
+        EmitSignal(SignalName.ArenaStateChanged,
+            new ArenaState(null, -1, ArenaStateEnum.Setup));
     }
 
     public void Configure()
@@ -42,6 +48,8 @@ public partial class ArenaNode : Node2D
         _currentWaveIndex++;
         if (_currentWaveIndex >= WavesResources.Count)
         {
+            EmitSignal(SignalName.ArenaStateChanged,
+                new ArenaState(null, -1, ArenaStateEnum.Cleared));
             return;
         }
         UpdateCurrentWave();
@@ -51,5 +59,21 @@ public partial class ArenaNode : Node2D
     {
         CurrentWaveResource = WavesResources[_currentWaveIndex];
         _waveController.Configure(CurrentWaveResource);
+        EmitSignal(SignalName.ArenaStateChanged,
+            new ArenaState(CurrentWaveResource, _currentWaveIndex, ArenaStateEnum.WaveChange));
     }
+}
+
+public partial class ArenaState(WaveResource wave, int index, ArenaStateEnum state) : GodotObject
+{
+    public WaveResource Wave { get; } = wave;
+    public int Index { get; } = index;
+    public ArenaStateEnum State { get; } = state;
+}
+
+public enum ArenaStateEnum
+{
+    Setup,
+    WaveChange,
+    Cleared
 }
