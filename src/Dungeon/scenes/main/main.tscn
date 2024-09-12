@@ -57,3 +57,5 @@ text = "This is a test"
 label_settings = SubResource("LabelSettings_q3gid")
 
 [connection signal="ArenaStateChanged" from="Arena" to="CanvasLayer/WaveMessage" method="_on_arena_arena_state_changed"]
+[connection signal="CombatentUpdated" from="Player" to="CanvasLayer/HeartGauge" method="OnCombatentUpdated"]
+[connection signal="PlayerReadied" from="Player" to="CanvasLayer/HeartGauge" method="OnPlayerReadied"]

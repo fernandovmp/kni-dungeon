@@ -8,25 +8,24 @@ namespace Dungeon.world.player;
 public partial class PlayerNode : Node2D
 {
     private CharacterNode _characterNode = default!;
-    private HeartGaugeNode _healthGauge;
     [Export] public CharacterResource CharacterResource { get; set; }
     public CharacterNode Character => _characterNode;
+    
+    [Signal]
+    public delegate void PlayerReadiedEventHandler(PlayerNode player);
+    [Signal]
+    public delegate void CombatentUpdatedEventHandler(PlayerNode player);
     
     public override void _Ready()
     {
         _characterNode = GetNode<CharacterNode>("Character");
         _characterNode.Configure(CharacterResource);
-        _healthGauge = GetNode<HeartGaugeNode>("../CanvasLayer/HeartGauge");
-        _healthGauge.Count = CharacterResource.Life / 2;
-        _healthGauge.Health = CharacterResource.Life;
-        _characterNode.Combatent.Hitted += UpdateHealth;
-        _characterNode.Combatent.Died += UpdateHealth;
+        _characterNode.Combatent.Hitted += EmitCombatentUpdate;
+        _characterNode.Combatent.Died += EmitCombatentUpdate;
+        EmitSignal(SignalName.PlayerReadied, this);
     }
 
-    private void UpdateHealth()
-    {
-        _healthGauge.Health = _characterNode.Combatent.Life;
-    }
+    private void EmitCombatentUpdate() => EmitSignal(SignalName.CombatentUpdated, this);
 
     public override void _PhysicsProcess(double detla)
     {

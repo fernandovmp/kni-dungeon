@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbgixtoe1ffhv"]
+[gd_scene load_steps=13 format=3 uid="uid://dbgixtoe1ffhv"]
 
 [ext_resource type="TileSet" uid="uid://benvgv2a333x6" path="res://world/dungeon/tileset.tres" id="1_gfdyx"]
 [ext_resource type="Script" path="res://scenes/debug/DebugScene.cs" id="1_ou0r7"]
@@ -22,6 +22,9 @@ script = ExtResource("7_u4fbm")
 
 [sub_resource type="Resource" id="Resource_n7v1k"]
 script = ExtResource("7_u4fbm")
+
+[sub_resource type="LabelSettings" id="LabelSettings_lm7u3"]
+font_size = 12
 
 [node name="Debug" type="Node2D"]
 script = ExtResource("1_ou0r7")
@@ -90,5 +93,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "[1] Load {Scene}  [2] Reload {Scene} [3] Load scene"
+label_settings = SubResource("LabelSettings_lm7u3")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="CombatentUpdated" from="Player" to="CanvasLayer/HeartGauge" method="OnCombatentUpdated"]
+[connection signal="PlayerReadied" from="Player" to="CanvasLayer/HeartGauge" method="OnPlayerReadied"]

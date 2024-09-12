@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using Dungeon.world.player;
 using Godot;
 
 namespace Dungeon.ui.health;
@@ -24,12 +24,19 @@ public partial class HeartGaugeNode : HBoxContainer
         _health = value;
         UpdateHearts();
     }
-    
-    public override void _Ready()
+
+    public void OnPlayerReadied(PlayerNode player)
     {
-        base._Ready();
+        Count = player.CharacterResource.Life / 2;
+        Health = player.CharacterResource.Life;
+            
         PlaceHearts();
         UpdateHearts();
+    }
+
+    public void OnCombatentUpdated(PlayerNode player)
+    {
+        Health = player.Character.Combatent.Life;
     }
 
     private void PlaceHearts()
