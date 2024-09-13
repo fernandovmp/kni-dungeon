@@ -1,3 +1,4 @@
+using Dungeon.ui.controls;
 using Dungeon.world.arena;
 using Dungeon.world.waves;
 using FernandoVmp.GodotUtils.Services;
@@ -8,6 +9,8 @@ namespace Dungeon.scenes.main;
 
 public partial class MainScene : Node2D
 {
+    private ArenaNode _arenaNode;
+
     public override void _Ready()
     {
         var cacheService = new MemoryCacheService();
@@ -23,15 +26,38 @@ public partial class MainScene : Node2D
 #endif
         }
 
-        var arenaNode = GetNode<ArenaNode>("Arena");
+        ConfigureArena(arenaData);
+        base._Ready();
+    }
+
+    private void ConfigureArena(ArenaData arenaData)
+    {
+        _arenaNode = GetNode<ArenaNode>("Arena");
         var waves = new Array<WaveResource>();
         foreach (var wave in arenaData.WavesResources)
         {
             waves.Add(ResourceLoader.Load<WaveResource>(wave));
         }
-        arenaNode.WavesResources = waves;
-        arenaNode.Level = ResourceLoader.Load<PackedScene>(arenaData.Level);
-        arenaNode.Configure();
-        base._Ready();
+        _arenaNode.WavesResources = waves;
+        _arenaNode.Level = ResourceLoader.Load<PackedScene>(arenaData.Level);
+        _arenaNode.Configure();
+    }
+
+    public void OnWaveMessagePressed(WaveMessagePressedEvent @event)
+    {
+        if (@event.ArenaState == ArenaStateEnum.Setup)
+        {
+            _arenaNode.Start();
+        }
+        
+        if (@event.ArenaState == ArenaStateEnum.Cleared)
+        {
+            ChangeArena();
+        }
+    }
+
+    private void ChangeArena()
+    {
+        GD.Print("Change Arena");
     }
 }

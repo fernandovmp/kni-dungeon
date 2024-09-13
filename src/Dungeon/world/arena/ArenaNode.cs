@@ -18,15 +18,6 @@ public partial class ArenaNode : Node2D
     private Node2D _map;
     private WaveControllerNode _waveController;
 
-    public override void _Ready()
-    {
-        Configure();
-        base._Ready();
-        
-        EmitSignal(SignalName.ArenaStateChanged,
-            new ArenaState(null, -1, ArenaStateEnum.Setup));
-    }
-
     public void Configure()
     {
         if (Level == null || WavesResources == null || WavesResources.Count == 0)
@@ -40,6 +31,13 @@ public partial class ArenaNode : Node2D
         _waveController = GetNode<WaveControllerNode>("WaveController");
         _waveController.OnWaveEnd += OnWaveEnd;
         _waveController.SpawnPool = level.GetNode<SpawnPoolNode>("SpawnPool");
+        
+        EmitSignal(SignalName.ArenaStateChanged,
+            new ArenaState(null, -1, ArenaStateEnum.Setup));
+    }
+
+    public void Start()
+    {
         UpdateCurrentWave();
     }
 
@@ -73,6 +71,7 @@ public partial class ArenaState(WaveResource wave, int index, ArenaStateEnum sta
 
 public enum ArenaStateEnum
 {
+    None,
     Setup,
     WaveChange,
     Cleared
