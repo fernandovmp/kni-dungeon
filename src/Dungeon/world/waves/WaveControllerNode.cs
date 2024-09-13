@@ -51,6 +51,7 @@ public partial class WaveControllerNode : Node2D
         {
             var character = _enemiesQueue.Dequeue();
             SpawnPool.SpawnEnemy(character);
+            enemyCount += 1;
             _timer = _minimumInterval;
         }
 

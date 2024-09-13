@@ -12,14 +12,8 @@ public partial class CurrentArena : Panel
         _label = GetNode<Label>("Label");
     }
 
-    public void OnWaveChange(ArenaState arenaState)
+    public void SetArena(ArenaData arenaData)
     {
-        bool waveChanged = arenaState.State == ArenaStateEnum.WaveChange; 
-        if (waveChanged)
-        {
-            _label.Text = $"Arena: {arenaState.Index + 1}";
-        }
-
-        Visible = waveChanged;
+        _label.Text = $"Arena: {arenaData.ArenaNumber}";
     }
 }

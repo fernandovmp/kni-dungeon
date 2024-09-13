@@ -17,7 +17,7 @@ public partial class CurrentWave : Panel
         bool waveChanged = arenaState.State == ArenaStateEnum.WaveChange; 
         if (waveChanged)
         {
-            _label.Text = $"Wave {arenaState.Index + 1}";
+            _label.Text = $"Wave: {arenaState.Index + 1}";
         }
 
         Visible = waveChanged;

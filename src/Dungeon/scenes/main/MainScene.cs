@@ -1,6 +1,7 @@
 using Dungeon.ui.controls;
 using Dungeon.world.arena;
 using Dungeon.world.waves;
+using FernandoVmp.GodotUtils.Scene;
 using FernandoVmp.GodotUtils.Services;
 using Godot;
 using Godot.Collections;
@@ -10,6 +11,7 @@ namespace Dungeon.scenes.main;
 public partial class MainScene : Node2D
 {
     private ArenaNode _arenaNode;
+    private ArenaData _arenaData;
 
     public override void _Ready()
     {
@@ -26,6 +28,9 @@ public partial class MainScene : Node2D
 #endif
         }
 
+        _arenaData = arenaData;
+
+        GetNode<CurrentArena>("CanvasLayer/ArenaInfo/CurrentArena").SetArena(arenaData);
         ConfigureArena(arenaData);
         base._Ready();
     }
@@ -58,6 +63,14 @@ public partial class MainScene : Node2D
 
     private void ChangeArena()
     {
-        GD.Print("Change Arena");
+        var cacheService = new MemoryCacheService();
+        
+        cacheService.AddOrReplace("ArenaData", new ArenaData()
+        {
+            Level = "res://world/dungeon/levels/level_00.tscn",
+            WavesResources = ["res://world/waves/resources/debug_wave.tres", "res://world/waves/resources/debug_wave01.tres"],
+            ArenaNumber = _arenaData.ArenaNumber + 1
+        });
+        SceneLoader.LoadInto(GetTree().Root, "res://scenes/main/main.tscn");
     }
 }
