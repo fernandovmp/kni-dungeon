@@ -121,5 +121,6 @@ Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_j0s0p")
 Label/styles/normal = SubResource("StyleBoxEmpty_0jvse")
+TitleButton/base_type = &"Button"
 WaveMessagePanel/base_type = &"Panel"
 WaveMessagePanel/styles/panel = SubResource("StyleBoxTexture_a1lqg")

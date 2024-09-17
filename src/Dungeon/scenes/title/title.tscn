@@ -1,0 +1,109 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd2stnxste5vs"]
+
+[ext_resource type="Script" path="res://scenes/title/TitleScene.cs" id="1_vr3n8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_lx0lw"]
+line_spacing = 12.0
+
+[node name="Title" type="Node2D"]
+script = ExtResource("1_vr3n8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Main" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Buttons" type="VBoxContainer" parent="CanvasLayer/Main"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -75.0
+offset_right = 100.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Start" type="Button" parent="CanvasLayer/Main/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Start"
+
+[node name="Credits" type="Button" parent="CanvasLayer/Main/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Credits"
+
+[node name="Quit" type="Button" parent="CanvasLayer/Main/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Close"
+
+[node name="Credits" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Credits"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Credits/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Credits/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer/Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Credits text sample"
+label_settings = SubResource("LabelSettings_lx0lw")
+horizontal_alignment = 1
+
+[node name="GoBack" type="Button" parent="CanvasLayer/Credits/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Go back"
+
+[connection signal="pressed" from="CanvasLayer/Main/Buttons/Start" to="." method="Start"]
+[connection signal="pressed" from="CanvasLayer/Main/Buttons/Credits" to="." method="Credits"]
+[connection signal="pressed" from="CanvasLayer/Main/Buttons/Quit" to="." method="Quit"]
+[connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/GoBack" to="." method="CloseCredits"]
