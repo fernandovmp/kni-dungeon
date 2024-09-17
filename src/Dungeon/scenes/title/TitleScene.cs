@@ -1,3 +1,6 @@
+using Dungeon.world;
+using FernandoVmp.GodotUtils.Scene;
+using FernandoVmp.GodotUtils.Services;
 using Godot;
 
 namespace Dungeon.scenes.title;
@@ -20,7 +23,12 @@ public partial class TitleScene : Node2D
 
     public void Start()
     {
+        var cacheService = new MemoryCacheService();
+        var arenaData = ArenaDefinitionListResource.S_CreateArena(0, null);
+        arenaData.ArenaNumber = 1;
         
+        cacheService.AddOrReplace("ArenaData", arenaData);
+        SceneLoader.LoadInto(GetTree().Root, "res://scenes/main/main.tscn");
     }
 
     public void Credits()

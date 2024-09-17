@@ -1,0 +1,29 @@
+[gd_resource type="Resource" load_steps=9 format=3 uid="uid://0al47n72jbu0"]
+
+[ext_resource type="Resource" uid="uid://eqtrwbjd50k1" path="res://world/waves/resources/debug_wave01.tres" id="1_5ghki"]
+[ext_resource type="Script" path="res://world/ArenaDefinitionResource.cs" id="1_f6v8m"]
+[ext_resource type="PackedScene" uid="uid://c6oha2xyc2ghj" path="res://world/dungeon/levels/level_00.tscn" id="2_6kr3u"]
+[ext_resource type="Resource" uid="uid://flvu7o04uvep" path="res://world/waves/resources/debug_wave.tres" id="3_ukss3"]
+[ext_resource type="Script" path="res://world/ArenaDefinitionListResource.cs" id="5_wi34w"]
+
+[sub_resource type="Resource" id="Resource_jducg"]
+script = ExtResource("1_f6v8m")
+Levels = Array[PackedScene]([ExtResource("2_6kr3u")])
+Waves = Array[Object]([ExtResource("3_ukss3"), ExtResource("1_5ghki")])
+FinalWaves = Array[Object]([ExtResource("1_5ghki")])
+
+[sub_resource type="Resource" id="Resource_ebg65"]
+script = ExtResource("1_f6v8m")
+Levels = Array[PackedScene]([ExtResource("2_6kr3u")])
+Waves = Array[Object]([ExtResource("3_ukss3"), ExtResource("1_5ghki")])
+FinalWaves = Array[Object]([ExtResource("1_5ghki")])
+
+[sub_resource type="Resource" id="Resource_usd1j"]
+script = ExtResource("1_f6v8m")
+Levels = Array[PackedScene]([ExtResource("2_6kr3u")])
+Waves = Array[Object]([ExtResource("3_ukss3"), ExtResource("1_5ghki")])
+FinalWaves = Array[Object]([ExtResource("1_5ghki")])
+
+[resource]
+script = ExtResource("5_wi34w")
+Arenas = Array[Object]([SubResource("Resource_jducg"), SubResource("Resource_ebg65"), SubResource("Resource_usd1j")])

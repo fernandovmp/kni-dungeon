@@ -1,4 +1,5 @@
 using Dungeon.ui.controls;
+using Dungeon.world;
 using Dungeon.world.arena;
 using Dungeon.world.waves;
 using FernandoVmp.GodotUtils.Scene;
@@ -65,12 +66,9 @@ public partial class MainScene : Node2D
     {
         var cacheService = new MemoryCacheService();
         
-        cacheService.AddOrReplace("ArenaData", new ArenaData()
-        {
-            Level = "res://world/dungeon/levels/level_00.tscn",
-            WavesResources = ["res://world/waves/resources/debug_wave.tres", "res://world/waves/resources/debug_wave01.tres"],
-            ArenaNumber = _arenaData.ArenaNumber + 1
-        });
+        var arenaData = ArenaDefinitionListResource.S_CreateArena(_arenaData.ArenaNumber, _arenaData);
+        arenaData.ArenaNumber = _arenaData.ArenaNumber + 1;
+        cacheService.AddOrReplace("ArenaData", arenaData);
         SceneLoader.LoadInto(GetTree().Root, "res://scenes/main/main.tscn");
     }
 }
