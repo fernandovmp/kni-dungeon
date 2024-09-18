@@ -1,6 +1,7 @@
 using Dungeon.ui.controls;
 using Dungeon.world;
 using Dungeon.world.arena;
+using Dungeon.world.player;
 using Dungeon.world.waves;
 using FernandoVmp.GodotUtils.Scene;
 using FernandoVmp.GodotUtils.Services;
@@ -13,6 +14,17 @@ public partial class MainScene : Node2D
 {
     private ArenaNode _arenaNode;
     private ArenaData _arenaData;
+    
+    private Control _mainUI;
+    private Control _deathUI;
+    private Control _clearedUI;
+
+    private enum UIRoutesEnum
+    {
+        Main,
+        Death,
+        Cleared
+    }
 
     public override void _Ready()
     {
@@ -31,9 +43,30 @@ public partial class MainScene : Node2D
 
         _arenaData = arenaData;
 
-        GetNode<CurrentArena>("CanvasLayer/ArenaInfo/CurrentArena").SetArena(arenaData);
+        ConfigureUI(arenaData);
         ConfigureArena(arenaData);
         base._Ready();
+    }
+
+    private void ConfigureUI(ArenaData arenaData)
+    {
+        GetNode<CurrentArena>("CanvasLayer/MainUI/ArenaInfo/CurrentArena").SetArena(arenaData);
+        _mainUI = GetNode<Control>("CanvasLayer/MainUI");
+        _deathUI = GetNode<Control>("CanvasLayer/DeathUI");
+        _clearedUI = GetNode<Control>("CanvasLayer/ClearedUI");
+        ShowUI(UIRoutesEnum.Main);
+    }
+
+    public void OnPlayerDied(PlayerNode playerNode)
+    {
+        ShowUI(UIRoutesEnum.Death);
+    }
+
+    private void ShowUI(UIRoutesEnum route)
+    {
+        _mainUI.Visible = route == UIRoutesEnum.Main;
+        _deathUI.Visible = route == UIRoutesEnum.Death;
+        _clearedUI.Visible = route == UIRoutesEnum.Cleared;
     }
 
     private void ConfigureArena(ArenaData arenaData)
@@ -58,7 +91,14 @@ public partial class MainScene : Node2D
         
         if (@event.ArenaState == ArenaStateEnum.Cleared)
         {
-            ChangeArena();
+            if (_arenaData.ArenaNumber >= 3)
+            {
+                ShowUI(UIRoutesEnum.Cleared);
+            }
+            else
+            {
+                ChangeArena();
+            }
         }
     }
 
@@ -70,5 +110,15 @@ public partial class MainScene : Node2D
         arenaData.ArenaNumber = _arenaData.ArenaNumber + 1;
         cacheService.AddOrReplace("ArenaData", arenaData);
         SceneLoader.LoadInto(GetTree().Root, "res://scenes/main/main.tscn");
+    }
+
+    public void Retry()
+    {
+        SceneLoader.LoadInto(GetTree().Root, "res://scenes/main/main.tscn");
+    }
+
+    public void GoToTitle()
+    {
+        SceneLoader.LoadInto(GetTree().Root, "res://scenes/title/title.tscn");
     }
 }

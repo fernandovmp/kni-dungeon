@@ -15,14 +15,22 @@ public partial class PlayerNode : Node2D
     public delegate void PlayerReadiedEventHandler(PlayerNode player);
     [Signal]
     public delegate void CombatentUpdatedEventHandler(PlayerNode player);
+    [Signal]
+    public delegate void PlayerDiedEventHandler(PlayerNode player);
     
     public override void _Ready()
     {
         _characterNode = GetNode<CharacterNode>("Character");
         _characterNode.Configure(CharacterResource);
         _characterNode.Combatent.Hitted += EmitCombatentUpdate;
-        _characterNode.Combatent.Died += EmitCombatentUpdate;
+        _characterNode.Combatent.Died += EmitDiedEvent;
         EmitSignal(SignalName.PlayerReadied, this);
+    }
+
+    private void EmitDiedEvent()
+    {
+        EmitCombatentUpdate();
+        EmitSignal(SignalName.PlayerDied, this);
     }
 
     private void EmitCombatentUpdate() => EmitSignal(SignalName.CombatentUpdated, this);
