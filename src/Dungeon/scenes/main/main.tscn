@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://b76qkxuukf2u4"]
+[gd_scene load_steps=11 format=3 uid="uid://b76qkxuukf2u4"]
 
 [ext_resource type="Script" path="res://scenes/main/MainScene.cs" id="1_sfhro"]
 [ext_resource type="PackedScene" uid="uid://8nf0bbs0cf8j" path="res://world/arena/arena.tscn" id="1_wpur1"]
+[ext_resource type="Script" path="res://scenes/main/ProgressMonitorNode.cs" id="2_f7ec1"]
 [ext_resource type="PackedScene" uid="uid://760ug0fxpf0d" path="res://world/player/player.tscn" id="2_pv2r0"]
 [ext_resource type="Script" path="res://ui/health/HeartGaugeNode.cs" id="4_05261"]
 [ext_resource type="Script" path="res://ui/controls/WaveMessage.cs" id="5_221eh"]
@@ -15,6 +16,9 @@ font_size = 32
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_sfhro")
+
+[node name="ProgressMonitor" type="Node2D" parent="."]
+script = ExtResource("2_f7ec1")
 
 [node name="Arena" parent="." instance=ExtResource("1_wpur1")]
 
@@ -32,6 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HeartGauge" type="HBoxContainer" parent="CanvasLayer/MainUI"]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 210.0
@@ -268,8 +273,11 @@ custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
 text = "Title"
 
+[connection signal="ArenaStateChanged" from="Arena" to="ProgressMonitor" method="OnArenaStateChanged"]
 [connection signal="ArenaStateChanged" from="Arena" to="CanvasLayer/MainUI/WaveMessage" method="_on_arena_arena_state_changed"]
 [connection signal="ArenaStateChanged" from="Arena" to="CanvasLayer/MainUI/ArenaInfo/CurrentWave" method="OnWaveChange"]
+[connection signal="OnArenaEnemyDied" from="Arena" to="ProgressMonitor" method="OnArenaEnemyDied"]
+[connection signal="child_exiting_tree" from="Arena" to="ProgressMonitor" method="OnArenaChildExited"]
 [connection signal="CombatentUpdated" from="Player" to="CanvasLayer/MainUI/HeartGauge" method="OnCombatentUpdated"]
 [connection signal="PlayerDied" from="Player" to="." method="OnPlayerDied"]
 [connection signal="PlayerReadied" from="Player" to="CanvasLayer/MainUI/HeartGauge" method="OnPlayerReadied"]

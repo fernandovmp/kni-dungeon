@@ -1,3 +1,4 @@
+using Dungeon.scenes.main;
 using Dungeon.world;
 using FernandoVmp.GodotUtils.Scene;
 using FernandoVmp.GodotUtils.Services;
@@ -28,6 +29,7 @@ public partial class TitleScene : Node2D
         arenaData.ArenaNumber = 1;
         
         cacheService.AddOrReplace("ArenaData", arenaData);
+        ProgressMonitorNode.S_Reset();
         SceneLoader.LoadInto(GetTree().Root, "res://scenes/main/main.tscn");
     }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Dungeon.world.characters;
+using Dungeon.world.enemies;
 using Godot;
 
 namespace Dungeon.world.spawners;
@@ -11,6 +12,9 @@ public partial class SpawnPoolNode : Node2D
     private List<SpawnerNode> _spawnersNodes = new List<SpawnerNode>();
     private int _lastSpawnerIndex = -1;
     private readonly Random _random = new Random();
+    
+    [Signal]
+    public delegate void OnEnemyDiedEventHandler();
 
     public override void _Ready()
     {
@@ -45,7 +49,13 @@ public partial class SpawnPoolNode : Node2D
         }
         var spawner = _spawnersNodes[index];
         _lastSpawnerIndex = index;
-        spawner.SpawnEnemy(character, _enemiesRoot);
+        var enemy = spawner.SpawnEnemy(character, _enemiesRoot);
+        enemy.Connect(EnemyNode.SignalName.OnDied, new Callable(this, nameof(EmitEnemyDied)));
+    }
+
+    private void EmitEnemyDied()
+    {
+        EmitSignal(SignalName.OnEnemyDied);
     }
 
     public int CountActiveEnemies() => _enemiesRoot.GetChildCount();

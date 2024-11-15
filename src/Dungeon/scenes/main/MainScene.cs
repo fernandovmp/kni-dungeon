@@ -67,6 +67,14 @@ public partial class MainScene : Node2D
         _mainUI.Visible = route == UIRoutesEnum.Main;
         _deathUI.Visible = route == UIRoutesEnum.Death;
         _clearedUI.Visible = route == UIRoutesEnum.Cleared;
+        if (route == UIRoutesEnum.Cleared || route == UIRoutesEnum.Death)
+        {
+            var progressMonitor = GetNode<ProgressMonitorNode>("ProgressMonitor");
+            var player = GetNode<PlayerNode>("Player");
+            var progress = progressMonitor.GetProgress();
+            string resultValues = $"{player.Character.Combatent.Life}\n{progress.TotalArenas}\n{progress.TotalWaves}\n{progress.TotalEnemies}";
+            GetNode<Label>("CanvasLayer/DeathUI/VBoxContainer/Panel/HBoxContainer/ResultValues").Text = resultValues;
+        }
     }
 
     private void ConfigureArena(ArenaData arenaData)

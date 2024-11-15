@@ -14,7 +14,7 @@ public partial class EnemyNode : Node2D
         set
         {
             _behaviourResource = value;
-            if (_behaviourResource is BehaviourBase enemyBehaviour)
+            if (_behaviourResource is { } enemyBehaviour)
             {
                 Behaviour = enemyBehaviour;
             }
@@ -24,6 +24,9 @@ public partial class EnemyNode : Node2D
             }
         } }
     [Export] public CharacterResource CharacterResource { get; set; }
+    
+    [Signal]
+    public delegate void OnDiedEventHandler();
 
     public override void _Ready()
     {
@@ -36,6 +39,7 @@ public partial class EnemyNode : Node2D
 
     private void Died()
     {
+        EmitSignal(SignalName.OnDied);
         QueueFree();
     }
 

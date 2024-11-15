@@ -13,6 +13,9 @@ public partial class ArenaNode : Node2D
     
     [Signal]
     public delegate void ArenaStateChangedEventHandler(ArenaState state);
+    
+    [Signal]
+    public delegate void OnArenaEnemyDiedEventHandler();
 
     private int _currentWaveIndex;
     private Node2D _map;
@@ -31,6 +34,7 @@ public partial class ArenaNode : Node2D
         _waveController = GetNode<WaveControllerNode>("WaveController");
         _waveController.OnWaveEnd += OnWaveEnd;
         _waveController.SpawnPool = level.GetNode<SpawnPoolNode>("SpawnPool");
+        _waveController.SpawnPool.Connect(SpawnPoolNode.SignalName.OnEnemyDied, new Callable(this, nameof(OnEnemyDied)));
         
         EmitSignal(SignalName.ArenaStateChanged,
             new ArenaState(null, -1, ArenaStateEnum.Setup));
@@ -59,6 +63,12 @@ public partial class ArenaNode : Node2D
         _waveController.Configure(CurrentWaveResource);
         EmitSignal(SignalName.ArenaStateChanged,
             new ArenaState(CurrentWaveResource, _currentWaveIndex, ArenaStateEnum.WaveChange));
+    }
+
+    public void OnEnemyDied()
+    {
+        GD.Print("ArenaNode");
+        EmitSignal(SignalName.OnArenaEnemyDied);
     }
 }
 

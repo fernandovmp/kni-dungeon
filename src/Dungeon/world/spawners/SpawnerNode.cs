@@ -15,7 +15,7 @@ public partial class SpawnerNode : Node2D
         _enemyScene = ResourceLoader.Load<PackedScene>("res://world/enemies/enemy.tscn");
     }
 
-    public bool SpawnEnemy(CharacterResource character, Node root)
+    public EnemyNode SpawnEnemy(CharacterResource character, Node root)
     {
         var enemyNode = _enemyScene.Instantiate<EnemyNode>();
         enemyNode.Behaviour = new ComposedBehaviour()
@@ -33,6 +33,6 @@ public partial class SpawnerNode : Node2D
             enemyNode.Visible = true;
         };
         root.AddChild(enemyNode);
-        return true;
+        return enemyNode;
     }
 }
