@@ -67,7 +67,6 @@ public partial class ArenaNode : Node2D
 
     public void OnEnemyDied()
     {
-        GD.Print("ArenaNode");
         EmitSignal(SignalName.OnArenaEnemyDied);
     }
 }

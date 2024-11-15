@@ -1,8 +1,9 @@
 using Dungeon.world.arena;
+using Dungeon.world.player;
 using FernandoVmp.GodotUtils.Services;
 using Godot;
 
-namespace Dungeon.scenes.main;
+namespace Dungeon.services;
 
 public partial class ProgressMonitorNode : Node2D
 {
@@ -43,8 +44,13 @@ public partial class ProgressMonitorNode : Node2D
 
     public void OnArenaEnemyDied()
     {
-        GD.Print("OIE");
         var data = GetProgress();
         data.TotalEnemies++;
+    }
+    
+    public void OnPlayerDied(PlayerNode playerNode)
+    {
+        var data = GetProgress();
+        data.TotalDeaths++;
     }
 }

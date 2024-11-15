@@ -1,3 +1,4 @@
+using Dungeon.services;
 using Dungeon.ui.controls;
 using Dungeon.world;
 using Dungeon.world.arena;
@@ -16,8 +17,7 @@ public partial class MainScene : Node2D
     private ArenaData _arenaData;
     
     private Control _mainUI;
-    private Control _deathUI;
-    private Control _clearedUI;
+    private ArenaResultPanel _resultsUI;
 
     private enum UIRoutesEnum
     {
@@ -52,8 +52,7 @@ public partial class MainScene : Node2D
     {
         GetNode<CurrentArena>("CanvasLayer/MainUI/ArenaInfo/CurrentArena").SetArena(arenaData);
         _mainUI = GetNode<Control>("CanvasLayer/MainUI");
-        _deathUI = GetNode<Control>("CanvasLayer/DeathUI");
-        _clearedUI = GetNode<Control>("CanvasLayer/ClearedUI");
+        _resultsUI = GetNode<ArenaResultPanel>("CanvasLayer/ResultsUI");
         ShowUI(UIRoutesEnum.Main);
     }
 
@@ -65,16 +64,28 @@ public partial class MainScene : Node2D
     private void ShowUI(UIRoutesEnum route)
     {
         _mainUI.Visible = route == UIRoutesEnum.Main;
-        _deathUI.Visible = route == UIRoutesEnum.Death;
-        _clearedUI.Visible = route == UIRoutesEnum.Cleared;
         if (route == UIRoutesEnum.Cleared || route == UIRoutesEnum.Death)
         {
             var progressMonitor = GetNode<ProgressMonitorNode>("ProgressMonitor");
             var player = GetNode<PlayerNode>("Player");
             var progress = progressMonitor.GetProgress();
-            string resultValues = $"{player.Character.Combatent.Life}\n{progress.TotalArenas}\n{progress.TotalWaves}\n{progress.TotalEnemies}";
-            GetNode<Label>("CanvasLayer/DeathUI/VBoxContainer/Panel/HBoxContainer/ResultValues").Text = resultValues;
+            progress.CurrentLife = player.Character.Combatent.Life;
+            ShowResults(route, progress);
         }
+        else
+        {
+            _resultsUI.Hide();
+        }
+    }
+
+    private void ShowResults(UIRoutesEnum route, ProgressData progress)
+    {
+        if (route == UIRoutesEnum.Cleared)
+        {
+            _resultsUI.ShowCleared(progress);
+            return;
+        }
+        _resultsUI.ShowDeath(progress);
     }
 
     private void ConfigureArena(ArenaData arenaData)

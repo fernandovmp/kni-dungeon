@@ -1,4 +1,4 @@
-using Dungeon.scenes.main;
+using Dungeon.services;
 using Dungeon.world;
 using FernandoVmp.GodotUtils.Scene;
 using FernandoVmp.GodotUtils.Services;
