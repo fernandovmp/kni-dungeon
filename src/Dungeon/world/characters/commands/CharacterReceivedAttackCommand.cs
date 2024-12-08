@@ -15,13 +15,32 @@ public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode
         Vector2 direction = GetDirection(target);
         target.Combatent.DealDamage();
         target.Body.ApplyKnockBack(force, direction);
+        PlayHitSound(target);
+    }
+
+    private void PlayHitSound(CharacterNode target)
+    {
+        AudioStream sound = body.Weapon.HitSound;
+        if (IsCritical())
+        {
+            sound = body.Weapon.CriticalSound;
+        }
+
+        if (target.Body.HitSoundPlayer.Playing)
+        {
+            target.Body.HitSoundPlayer.Stop();
+        }
+        target.Body.HitSoundPlayer.Stream = sound;
+        target.Body.HitSoundPlayer.Play();
     }
 
     private Vector2 GetDirection(CharacterNode target) => body.Body.GlobalPosition.DirectionTo(target.Body.GlobalPosition);
 
+    public bool IsCritical() => rotationDegrees >= 45 && rotationDegrees <= 120;
+    
     private int GetForce()
     {
-        if (rotationDegrees >= 45 && rotationDegrees <= 120)
+        if (IsCritical())
         {
             return 230;
         }

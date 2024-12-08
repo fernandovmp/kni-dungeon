@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://gugos5a2guv4"]
+[gd_scene load_steps=8 format=3 uid="uid://gugos5a2guv4"]
 
 [ext_resource type="Texture2D" uid="uid://db3k7brl88pnf" path="res://world/particles/magic_flame.png" id="2_5l3bd"]
 [ext_resource type="Script" path="res://world/particles/EnemyExplosionNode.cs" id="2_k87px"]
+[ext_resource type="AudioStream" uid="uid://gmqc1oqrhfjy" path="res://sounds/sfx/sfx_exp_short_soft11.wav" id="3_jmjif"]
 
 [sub_resource type="Curve" id="Curve_owf0v"]
 max_value = 15.0
@@ -44,3 +45,8 @@ scale_amount_curve = SubResource("Curve_bvr2m")
 color_ramp = SubResource("Gradient_n4qo3")
 hue_variation_max = 0.5
 script = ExtResource("2_k87px")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jmjif")
+volume_db = -15.0
+autoplay = true

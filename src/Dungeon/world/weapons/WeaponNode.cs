@@ -8,6 +8,9 @@ public partial class WeaponNode : Node2D
     private AnimationPlayer _animationPlayer;
     private WeaponBodyNode _weaponBody;
     private bool _isLookingLeft = false;
+    [Export] public AudioStream CriticalSound;
+    [Export] public AudioStream HitSound;
+    public AudioStreamPlayer2D AttackSound { get; private set; }
     
     public override void _Ready()
     {
@@ -15,6 +18,7 @@ public partial class WeaponNode : Node2D
         _animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
         _animationPlayer.Connect("animation_finished", new Callable(this, nameof(ResetAnimation)));
         _weaponBody = GetNode<WeaponBodyNode>("Sprite/Body");
+        AttackSound = GetNode<AudioStreamPlayer2D>("AttackSound");
     }
 
     public void Attack(bool isDirectionLeft)
@@ -27,6 +31,12 @@ public partial class WeaponNode : Node2D
         }
         _sprite.Visible = true;
         _animationPlayer.Play("attack");
+        PlayAttackSound();
+    }
+
+    private void PlayAttackSound()
+    {
+        AttackSound.Play();
     }
 
     public void ResetAnimation(string name)

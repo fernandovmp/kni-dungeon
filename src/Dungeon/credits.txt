@@ -10,3 +10,19 @@ Credits: GGBotNet
 License: CC0 1.0
 Link: https://ggbot.itch.io/public-pixel-font
 
+[512 Sound Effects (8-bit style)]
+Credits: Juhani Junkala
+License: CC0 1.0
+Link: https://opengameart.org/content/512-sound-effects-8-bit-style
+
+[Adventure HO!]
+Credits: Patrick Maney
+License: CC-BY 3.0
+License Link: http://creativecommons.org/licenses/by/3.0/
+Link: https://opengameart.org/content/adventure-ho
+
+[20 Sword Sound Effects (Attacks and Clashes)]
+Credits: StarNinjas
+License: CC0 1.0
+License Link: https://creativecommons.org/publicdomain/zero/1.0/
+Link: https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes

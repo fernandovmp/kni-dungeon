@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b76qkxuukf2u4"]
+[gd_scene load_steps=13 format=3 uid="uid://b76qkxuukf2u4"]
 
 [ext_resource type="Script" path="res://scenes/main/MainScene.cs" id="1_sfhro"]
 [ext_resource type="PackedScene" uid="uid://8nf0bbs0cf8j" path="res://world/arena/arena.tscn" id="1_wpur1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://services/ProgressMonitorNode.cs" id="2_w5h62"]
 [ext_resource type="Script" path="res://ui/health/HeartGaugeNode.cs" id="4_05261"]
 [ext_resource type="Script" path="res://ui/controls/WaveMessage.cs" id="5_221eh"]
+[ext_resource type="AudioStream" uid="uid://dimrckpjccny3" path="res://sounds/music/AdventureHO2.ogg" id="5_j70wr"]
 [ext_resource type="Script" path="res://ui/controls/CurrentWave.cs" id="6_hsh5u"]
 [ext_resource type="Script" path="res://ui/controls/CurrentArena.cs" id="7_741b5"]
 [ext_resource type="Script" path="res://ui/controls/ArenaResultPanel.cs" id="9_3l0gs"]
@@ -24,6 +25,11 @@ script = ExtResource("2_w5h62")
 [node name="Arena" parent="." instance=ExtResource("1_wpur1")]
 
 [node name="Player" parent="." instance=ExtResource("2_pv2r0")]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_j70wr")
+volume_db = -20.0
+autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
