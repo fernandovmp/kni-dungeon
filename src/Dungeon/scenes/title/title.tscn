@@ -91,12 +91,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/Credits/VBoxContainer/Panel/ScrollContainer"]
+custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Credits text sample"
 label_settings = SubResource("LabelSettings_lx0lw")
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="GoBack" type="Button" parent="CanvasLayer/Credits/VBoxContainer"]
 custom_minimum_size = Vector2(0, 45)

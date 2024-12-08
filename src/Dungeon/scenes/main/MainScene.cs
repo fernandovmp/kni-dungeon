@@ -18,6 +18,7 @@ public partial class MainScene : Node2D
     
     private Control _mainUI;
     private ArenaResultPanel _resultsUI;
+    private AudioStreamPlayer2D _backgroundMusic;
 
     private enum UIRoutesEnum
     {
@@ -43,6 +44,7 @@ public partial class MainScene : Node2D
 
         _arenaData = arenaData;
 
+        _backgroundMusic = GetNode<AudioStreamPlayer2D>("BackgroundMusic");
         ConfigureUI(arenaData);
         ConfigureArena(arenaData);
         base._Ready();
@@ -70,6 +72,7 @@ public partial class MainScene : Node2D
             var player = GetNode<PlayerNode>("Player");
             var progress = progressMonitor.GetProgress();
             progress.CurrentLife = player.Character.Combatent.Life;
+            _backgroundMusic.Stop();
             ShowResults(route, progress);
         }
         else
