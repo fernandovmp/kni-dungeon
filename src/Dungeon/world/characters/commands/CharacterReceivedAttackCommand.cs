@@ -5,7 +5,8 @@ namespace Dungeon.world.characters.commands;
 
 public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode body) : ICommand<CharacterNode>
 {
-    public bool CanExecute(CharacterNode target) => !target.Body.IsInvencible;
+    public bool CanExecute(CharacterNode target) => !target.Body.IsInvencible
+                                                    && target.IsAlive;
 
     public void Execute(CharacterNode target)
     {

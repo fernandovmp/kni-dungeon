@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://gugos5a2guv4"]
+
+[ext_resource type="Texture2D" uid="uid://db3k7brl88pnf" path="res://world/particles/magic_flame.png" id="2_5l3bd"]
+[ext_resource type="Script" path="res://world/particles/EnemyExplosionNode.cs" id="2_k87px"]
+
+[sub_resource type="Curve" id="Curve_owf0v"]
+max_value = 15.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.809, 10), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_mwebu"]
+max_value = 2.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1.86802), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bvr2m"]
+min_value = 0.5
+max_value = 1.5
+_data = [Vector2(0, 0.9), 0.0, 0.0, 0, 0, Vector2(0.755, 1.25), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_n4qo3"]
+colors = PackedColorArray(0.851282, 0.234655, 0.919858, 1, 0.737255, 0, 1, 1)
+
+[node name="MagicExplosion" type="CPUParticles2D"]
+position = Vector2(0, 10)
+emitting = false
+amount = 5
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource("2_5l3bd")
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+linear_accel_min = 5.0
+linear_accel_max = 15.0
+linear_accel_curve = SubResource("Curve_owf0v")
+angle_max = 15.0
+angle_curve = SubResource("Curve_mwebu")
+scale_amount_max = 1.5
+scale_amount_curve = SubResource("Curve_bvr2m")
+color_ramp = SubResource("Gradient_n4qo3")
+hue_variation_max = 0.5
+script = ExtResource("2_k87px")

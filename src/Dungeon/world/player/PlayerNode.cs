@@ -23,8 +23,14 @@ public partial class PlayerNode : Node2D
         _characterNode = GetNode<CharacterNode>("Character");
         _characterNode.Configure(CharacterResource);
         _characterNode.Combatent.Hitted += EmitCombatentUpdate;
-        _characterNode.Combatent.Died += EmitDiedEvent;
+        _characterNode.Combatent.Died += OnDied;
         EmitSignal(SignalName.PlayerReadied, this);
+    }
+
+    public void OnDied()
+    {
+        _characterNode.Sprite.RequestDeath();
+        EmitDiedEvent();
     }
 
     private void EmitDiedEvent()

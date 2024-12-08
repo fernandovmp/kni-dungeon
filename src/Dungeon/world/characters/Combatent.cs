@@ -10,6 +10,8 @@ public class Combatent
     
     public Action Died { get; set; }
     public Action Hitted { get; set; }
+    
+    public bool IsAlive => Life > 0;
 
     public void DealDamage()
     {

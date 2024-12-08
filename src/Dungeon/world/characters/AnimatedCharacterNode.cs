@@ -28,6 +28,16 @@ public partial class AnimatedCharacterNode : AnimatedSprite2D
             CharacterOwner.State = CharacterState.Idle;
         }
     }
+
+    public void RequestDeath()
+    {
+        const string hitAnimation = "hit";
+        if (SpriteFrames.HasAnimation(hitAnimation))
+        {
+            Play(hitAnimation);
+            CharacterOwner.State = CharacterState.Dead;
+        }
+    }
     
     public void FlipSprite(Vector2 direction)
     {

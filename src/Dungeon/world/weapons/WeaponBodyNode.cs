@@ -1,3 +1,4 @@
+using Dungeon.abstractions;
 using Dungeon.world.characters.commands;
 using Dungeon.world.constants;
 using Godot;
@@ -39,7 +40,7 @@ public partial class WeaponBodyNode : Area2D
         {
             var rotationDegrees = Mathf.RadToDeg(_sprite.Rotation);
             var command = new CharacterReceivedAttackCommand(rotationDegrees, CharacterOwner.CharacterOwner);
-            command.Execute(characterBodyNode.CharacterOwner);
+            command.TryExecute(characterBodyNode.CharacterOwner);
         }
     }
 }

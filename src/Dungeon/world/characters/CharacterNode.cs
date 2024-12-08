@@ -15,7 +15,8 @@ public partial class CharacterNode : Node2D
     public WeaponNode Weapon { get; private set; }
     public Combatent Combatent { get; private set; }
     public CharacterState State { get; set; }
-    
+    public bool IsAlive => Combatent?.IsAlive ?? false;
+    public AnimatedCharacterNode Sprite => _sprite;
 
     public override void _Ready()
     {

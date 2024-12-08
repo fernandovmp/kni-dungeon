@@ -40,6 +40,10 @@ public partial class EnemyNode : Node2D
     private void Died()
     {
         EmitSignal(SignalName.OnDied);
+        var explosion = ResourceLoader.Load<PackedScene>("res://world/particles/enemy_explosion.tscn");
+        var node = explosion.Instantiate<CpuParticles2D>();
+        node.GlobalPosition = Character.Body.GlobalPosition;
+        GetParent().AddChild(node);
         QueueFree();
     }
 
