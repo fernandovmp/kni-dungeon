@@ -1,12 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd2stnxste5vs"]
+[gd_scene load_steps=5 format=3 uid="uid://bd2stnxste5vs"]
 
 [ext_resource type="Script" path="res://scenes/title/TitleScene.cs" id="1_vr3n8"]
+[ext_resource type="PackedScene" uid="uid://dhqc7w3cxkj0i" path="res://scenes/title/background.tscn" id="2_3a31k"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gch4v"]
+font_size = 36
+shadow_size = 14
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lx0lw"]
 line_spacing = 12.0
 
 [node name="Title" type="Node2D"]
 script = ExtResource("1_vr3n8")
+
+[node name="Background" parent="." instance=ExtResource("2_3a31k")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -19,6 +27,21 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/Main"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.0
+offset_top = 50.0
+offset_right = 216.0
+offset_bottom = 164.0
+grow_horizontal = 2
+text = "Kni. Dungeon"
+label_settings = SubResource("LabelSettings_gch4v")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Buttons" type="VBoxContainer" parent="CanvasLayer/Main"]
 layout_mode = 1
@@ -104,6 +127,10 @@ autowrap_mode = 3
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 text = "Go back"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(227, 147)
+zoom = Vector2(3, 3)
 
 [connection signal="pressed" from="CanvasLayer/Main/Buttons/Start" to="." method="Start"]
 [connection signal="pressed" from="CanvasLayer/Main/Buttons/Credits" to="." method="Credits"]
