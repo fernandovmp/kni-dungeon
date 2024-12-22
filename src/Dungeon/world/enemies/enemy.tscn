@@ -1,15 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxlt3tw6p2h2q"]
+[gd_scene load_steps=7 format=3 uid="uid://bxlt3tw6p2h2q"]
 
 [ext_resource type="Script" path="res://world/enemies/EnemyNode.cs" id="1_p2gey"]
 [ext_resource type="Resource" uid="uid://da8usnqbuygt1" path="res://world/enemies/behaviours/resources/constant_attack_behaviour.tres" id="2_u477v"]
-[ext_resource type="PackedScene" uid="uid://cpumrfm6fh4kf" path="res://world/characters/character.tscn" id="3_3n57g"]
+[ext_resource type="Script" path="res://world/characters/CharacterNode.cs" id="4_3tjds"]
 [ext_resource type="Resource" uid="uid://cp83dnnywp2nm" path="res://world/characters/orc_warrior/character.tres" id="4_qs6ua"]
+[ext_resource type="PackedScene" uid="uid://dlvumaqtwodwn" path="res://world/characters/character_body.tscn" id="5_lmeq7"]
+[ext_resource type="PackedScene" uid="uid://gugos5a2guv4" path="res://world/particles/enemy_explosion.tscn" id="6_qtc3v"]
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_p2gey")
 BehaviourResource = ExtResource("2_u477v")
 CharacterResource = ExtResource("4_qs6ua")
 
-[node name="Character" parent="." instance=ExtResource("3_3n57g")]
-position = Vector2(120, 64)
+[node name="Character" type="Node2D" parent="."]
+script = ExtResource("4_3tjds")
+Speed = 70.0
 IsEnemy = true
+
+[node name="Body" parent="Character" instance=ExtResource("5_lmeq7")]
+
+[node name="MagicExplosion" parent="Character/Body" instance=ExtResource("6_qtc3v")]
+
+[connection signal="CharacterDied" from="Character/Body" to="Character/Body/MagicExplosion" method="Play"]
+[connection signal="finished" from="Character/Body/MagicExplosion" to="." method="DeathAnimationFinished"]

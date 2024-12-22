@@ -11,6 +11,10 @@ public partial class CharacterBodyNode : CharacterBody2D
     public NavigationAgent2D NavigationAgent { get; private set; }
     public AudioStreamPlayer2D HitSoundPlayer { get; private set; }
     
+    
+    [Signal]
+    public delegate void CharacterDiedEventHandler();
+    
     public override void _Ready()
     {
         Movement = new Movement(this);
@@ -19,8 +23,14 @@ public partial class CharacterBodyNode : CharacterBody2D
         HitSoundPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
     }
 
+    private bool tempInit = false;
     public override void _PhysicsProcess(double delta)
     {
+        if (!tempInit)
+        {
+            tempInit = true;
+            CharacterOwner.Combatent.Died += () => EmitSignal(SignalName.CharacterDied);
+        }
         base._PhysicsProcess(delta);
         if (_knockback.force > 0)
         {
