@@ -5,7 +5,7 @@ namespace Dungeon.world.characters;
 
 public partial class AnimatedCharacterNode : AnimatedSprite2D
 {
-    public CharacterNode CharacterOwner { get; set; }
+    public CharacterBodyNode CharacterOwner { get; set; }
 
     public void RequestIdle()
     {
@@ -23,9 +23,9 @@ public partial class AnimatedCharacterNode : AnimatedSprite2D
         if (SpriteFrames.HasAnimation(hitAnimation))
         {
             Play(hitAnimation);
-            CharacterOwner.State = CharacterState.Hitted;
+            CharacterOwner.CharacterOwner.State = CharacterState.Hitted;
             await ToSignal(GetTree().CreateTimer(0.6), "timeout");
-            CharacterOwner.State = CharacterState.Idle;
+            CharacterOwner.CharacterOwner.State = CharacterState.Idle;
         }
     }
 
@@ -35,7 +35,7 @@ public partial class AnimatedCharacterNode : AnimatedSprite2D
         if (SpriteFrames.HasAnimation(hitAnimation))
         {
             Play(hitAnimation);
-            CharacterOwner.State = CharacterState.Dead;
+            CharacterOwner.CharacterOwner.State = CharacterState.Dead;
         }
     }
     

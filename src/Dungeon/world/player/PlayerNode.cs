@@ -28,7 +28,6 @@ public partial class PlayerNode : Node2D
 
     public void OnDied()
     {
-        _characterNode.Sprite.RequestDeath();
         EmitDiedEvent();
     }
 

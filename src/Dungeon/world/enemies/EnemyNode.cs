@@ -43,7 +43,8 @@ public partial class EnemyNode : Node2D
     private void Died()
     {
         EmitSignal(SignalName.OnDied);
-        Character.Sprite.Hide();
+        Character.State = CharacterState.Dead;
+        Character.Body.Sprite.Hide();
     }
 
     public void DeathAnimationFinished()
@@ -54,9 +55,6 @@ public partial class EnemyNode : Node2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        if (Behaviour != null)
-        {
-            Behaviour.OnPhysicsProcess(delta, this);
-        }
+        Behaviour?.OnPhysicsProcess(delta, this);
     }
 }

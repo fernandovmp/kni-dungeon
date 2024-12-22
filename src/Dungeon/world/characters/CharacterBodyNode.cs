@@ -11,6 +11,7 @@ public partial class CharacterBodyNode : CharacterBody2D
     public bool IsInvencible { get; private set; }
     public CharacterNode CharacterOwner { get; private set; }
     public AudioStreamPlayer2D HitSoundPlayer { get; private set; }
+    public AnimatedCharacterNode Sprite { get; private set; }
     
     
     [Signal]
@@ -21,6 +22,8 @@ public partial class CharacterBodyNode : CharacterBody2D
         Movement = new Movement(this);
         CharacterOwner = GetNode<CharacterNode>("..");
         HitSoundPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+        Sprite = GetNode<AnimatedCharacterNode>("Animation");
+        Sprite.CharacterOwner = this;
     }
 
     private bool tempInit = false;
@@ -29,6 +32,7 @@ public partial class CharacterBodyNode : CharacterBody2D
         if (!tempInit)
         {
             tempInit = true;
+            Sprite.SpriteFrames = CharacterOwner.Character.Sprite;
             var combatent = this.GetMetadata<CombatentNode>(nameof(CombatentNode));
             combatent.Load(CharacterOwner.Character);
             combatent.Connect(CombatentNode.SignalName.Died, new Callable(this, nameof(OnDied)));
