@@ -21,5 +21,9 @@ IsEnemy = true
 
 [node name="MagicExplosion" parent="Character/Body" instance=ExtResource("6_qtc3v")]
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Character/Body"]
+path_desired_distance = 13.0
+target_desired_distance = 20.0
+
 [connection signal="CharacterDied" from="Character/Body" to="Character/Body/MagicExplosion" method="Play"]
 [connection signal="finished" from="Character/Body/MagicExplosion" to="." method="DeathAnimationFinished"]

@@ -86,9 +86,5 @@ disabled = true
 stream = ExtResource("9_jj2pi")
 volume_db = -20.0
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 13.0
-target_desired_distance = 20.0
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.0

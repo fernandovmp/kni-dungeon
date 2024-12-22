@@ -8,6 +8,7 @@ namespace Dungeon.world.enemies.behaviours;
 public partial class ChaseBehaviour : BehaviourBase
 {
     private PlayerNode _target;
+    private NavigationAgent2D _navigationAgent;
 
     public override void OnPhysicsProcess(double delta, EnemyNode enemyNode)
     {
@@ -27,15 +28,26 @@ public partial class ChaseBehaviour : BehaviourBase
             _target = null;
             return;
         }
-        body.NavigationAgent.TargetPosition = _target.Character.Body.GlobalPosition;
-        if (body.NavigationAgent.IsNavigationFinished())
+
+        if (_navigationAgent == null)
+        {
+            _navigationAgent = body.GetNodeOrNull<NavigationAgent2D>("NavigationAgent2D");
+        }
+
+        if (_navigationAgent == null)
+        {
+            return;
+        }
+        
+        _navigationAgent.TargetPosition = _target.Character.Body.GlobalPosition;
+        if (_navigationAgent.IsNavigationFinished())
         {
             enemyNode.Character.Execute(new CharacterMovementCommand(Vector2.Zero));
             return;
         }
 
         Vector2 currentAgentPosition = body.GlobalTransform.Origin;
-        Vector2 nextPathPosition = body.NavigationAgent.GetNextPathPosition();
+        Vector2 nextPathPosition = _navigationAgent.GetNextPathPosition();
         Vector2 direction = currentAgentPosition.DirectionTo(nextPathPosition);
         enemyNode.Character.Execute(new CharacterMovementCommand(direction));
     }
