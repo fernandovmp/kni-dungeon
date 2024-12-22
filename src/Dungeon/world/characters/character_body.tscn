@@ -92,5 +92,6 @@ volume_db = -15.0
 [node name="Combatent" type="Node" parent="."]
 script = ExtResource("10_g3vjw")
 
+[connection signal="Died" from="Combatent" to="." method="OnDied"]
 [connection signal="Died" from="Combatent" to="Animation" method="RequestDeath"]
 [connection signal="Hitted" from="Combatent" to="Animation" method="RequestHit"]

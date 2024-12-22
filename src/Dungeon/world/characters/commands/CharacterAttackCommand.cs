@@ -2,12 +2,12 @@ using Dungeon.abstractions;
 
 namespace Dungeon.world.characters.commands;
 
-public struct CharacterAttackCommand : ICommand<CharacterNode>
+public struct CharacterAttackCommand : ICommand<CharacterBodyNode>
 {
-    public bool CanExecute(CharacterNode target) => target.State is CharacterState.Idle or CharacterState.Moving;
+    public bool CanExecute(CharacterBodyNode target) => target.State is CharacterState.Idle or CharacterState.Moving;
 
-    public void Execute(CharacterNode target)
+    public void Execute(CharacterBodyNode target)
     {
-        target.Weapon.Attack(target.Body.Movement.IsLookingLeft);
+        target.CharacterOwner.Weapon.Attack(target.Movement.IsLookingLeft);
     }
 }

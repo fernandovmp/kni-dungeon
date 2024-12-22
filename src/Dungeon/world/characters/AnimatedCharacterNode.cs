@@ -23,9 +23,9 @@ public partial class AnimatedCharacterNode : AnimatedSprite2D
         if (SpriteFrames.HasAnimation(hitAnimation))
         {
             Play(hitAnimation);
-            CharacterOwner.CharacterOwner.State = CharacterState.Hitted;
+            CharacterOwner.State = CharacterState.Hitted;
             await ToSignal(GetTree().CreateTimer(0.6), "timeout");
-            CharacterOwner.CharacterOwner.State = CharacterState.Idle;
+            CharacterOwner.State = CharacterState.Idle;
         }
     }
 
@@ -35,7 +35,7 @@ public partial class AnimatedCharacterNode : AnimatedSprite2D
         if (SpriteFrames.HasAnimation(hitAnimation))
         {
             Play(hitAnimation);
-            CharacterOwner.CharacterOwner.State = CharacterState.Dead;
+            CharacterOwner.State = CharacterState.Dead;
         }
     }
     

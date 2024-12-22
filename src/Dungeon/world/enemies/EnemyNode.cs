@@ -43,7 +43,7 @@ public partial class EnemyNode : Node2D
     private void Died()
     {
         EmitSignal(SignalName.OnDied);
-        Character.State = CharacterState.Dead;
+        Character.Body.State = CharacterState.Dead;
         Character.Body.Sprite.Hide();
     }
 

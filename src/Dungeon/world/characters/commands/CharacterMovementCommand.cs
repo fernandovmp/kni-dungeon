@@ -3,12 +3,12 @@ using Godot;
 
 namespace Dungeon.world.characters.commands;
 
-public struct CharacterMovementCommand(Vector2 Direction) : ICommand<CharacterNode>
+public struct CharacterMovementCommand(Vector2 Direction) : ICommand<CharacterBodyNode>
 {
-    public bool CanExecute(CharacterNode target) => target.State is CharacterState.Idle or CharacterState.Moving;
+    public bool CanExecute(CharacterBodyNode target) => target.State is CharacterState.Idle or CharacterState.Moving;
 
-    public void Execute(CharacterNode target)
+    public void Execute(CharacterBodyNode target)
     {
-        target.Body.Movement.Move(Direction, target.Speed);
+        target.Movement.Move(Direction, target.Speed);
     }
 }

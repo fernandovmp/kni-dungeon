@@ -24,7 +24,7 @@ public class Movement
             return;
         }
 
-        _body.CharacterOwner.State = CharacterState.Moving;
+        _body.State = CharacterState.Moving;
         _animation.FlipSprite(direction);
         _body.Velocity = direction * (float)speed;
         _body.MoveAndSlide();
@@ -34,7 +34,7 @@ public class Movement
     public void Stop()
     {
         _body.Velocity = Vector2.Zero;
-        _body.CharacterOwner.State = CharacterState.Idle;
+        _body.State = CharacterState.Idle;
         _animation.RequestIdle();
     }
 }

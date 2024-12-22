@@ -1,3 +1,4 @@
+using Dungeon.abstractions;
 using Dungeon.world.characters.commands;
 using Godot;
 
@@ -14,8 +15,7 @@ public partial class ConstantAttackBehaviour : BehaviourBase
         _timer -= delta;
         if (_timer <= 0)
         {
-            var command = new CharacterAttackCommand();
-            command.Execute(enemyNode.Character);
+            enemyNode.Character.Body.TryExecute(new CharacterAttackCommand());
             _timer = Interval;
         }
     }

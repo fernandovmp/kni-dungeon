@@ -1,3 +1,4 @@
+using Dungeon.abstractions;
 using Dungeon.world.characters;
 using Dungeon.world.characters.commands;
 using Dungeon.world.characters.components;
@@ -42,7 +43,7 @@ public partial class PlayerNode : Node2D
     public override void _PhysicsProcess(double detla)
     {
         Vector2 direction = GetDirectionFromInput();
-        _characterNode.Execute(new CharacterMovementCommand(direction));
+        _characterNode.Body.TryExecute(new CharacterMovementCommand(direction));
     }
 
     private Vector2 GetDirectionFromInput() => Input.GetVector("player_movement_left", "player_movement_right",
@@ -52,7 +53,7 @@ public partial class PlayerNode : Node2D
     {
         if (@event.IsActionPressed("attack"))
         {
-            _characterNode.Execute(new CharacterAttackCommand());
+            _characterNode.Body.TryExecute(new CharacterAttackCommand());
         }
     }
 }

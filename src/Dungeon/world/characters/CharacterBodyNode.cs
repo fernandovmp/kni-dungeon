@@ -1,4 +1,5 @@
 using Dungeon.world.characters.components;
+using Dungeon.world.constants;
 using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
@@ -6,6 +7,10 @@ namespace Dungeon.world.characters;
 
 public partial class CharacterBodyNode : CharacterBody2D
 {
+    public CharacterResource Character { get; set; }
+    public CharacterState State { get; set; }
+    [Export] public double Speed { get; set; } = 4;
+    
     private KnockbackData _knockback;
     public Movement Movement { get; private set; }
     public bool IsInvencible { get; private set; }
@@ -26,17 +31,25 @@ public partial class CharacterBodyNode : CharacterBody2D
         Sprite.CharacterOwner = this;
     }
 
-    private bool tempInit = false;
+    public void Configure(CharacterResource character, bool isEnemy)
+    {
+        Character = character;
+        Speed = character.Speed;
+        Sprite.SpriteFrames = character.Sprite;
+        uint layer = PhysicsConstants.PlayerLayer;
+        
+        var combatent = this.GetMetadata<CombatentNode>(nameof(CombatentNode));
+        combatent.Load(character);
+        
+        if (isEnemy)
+        {
+            layer = PhysicsConstants.EnemyLayer;
+        }
+        CollisionLayer = layer;
+    }
+
     public override void _PhysicsProcess(double delta)
     {
-        if (!tempInit)
-        {
-            tempInit = true;
-            Sprite.SpriteFrames = CharacterOwner.Character.Sprite;
-            var combatent = this.GetMetadata<CombatentNode>(nameof(CombatentNode));
-            combatent.Load(CharacterOwner.Character);
-            combatent.Connect(CombatentNode.SignalName.Died, new Callable(this, nameof(OnDied)));
-        }
         base._PhysicsProcess(delta);
         if (_knockback.force > 0)
         {
@@ -48,7 +61,7 @@ public partial class CharacterBodyNode : CharacterBody2D
 
     private void OnDied()
     {
-        CharacterOwner.State = CharacterState.Dead;
+        State = CharacterState.Dead;
         EmitSignal(SignalName.CharacterDied);
     }
 

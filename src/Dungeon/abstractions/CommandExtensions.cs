@@ -11,4 +11,10 @@ public static class CommandExtensions
         }
         return false;
     }
+    
+    
+    public static bool TryExecute<T>(this T parameter, ICommand<T> command)
+    {
+        return command.TryExecute(parameter);
+    }
 }

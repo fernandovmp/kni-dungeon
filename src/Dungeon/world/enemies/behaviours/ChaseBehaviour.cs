@@ -1,3 +1,4 @@
+using Dungeon.abstractions;
 using Dungeon.world.characters.commands;
 using Dungeon.world.player;
 using Godot;
@@ -42,13 +43,13 @@ public partial class ChaseBehaviour : BehaviourBase
         _navigationAgent.TargetPosition = _target.Character.Body.GlobalPosition;
         if (_navigationAgent.IsNavigationFinished())
         {
-            enemyNode.Character.Execute(new CharacterMovementCommand(Vector2.Zero));
+            enemyNode.Character.Body.TryExecute(new CharacterMovementCommand(Vector2.Zero));
             return;
         }
 
         Vector2 currentAgentPosition = body.GlobalTransform.Origin;
         Vector2 nextPathPosition = _navigationAgent.GetNextPathPosition();
         Vector2 direction = currentAgentPosition.DirectionTo(nextPathPosition);
-        enemyNode.Character.Execute(new CharacterMovementCommand(direction));
+        enemyNode.Character.Body.TryExecute(new CharacterMovementCommand(direction));
     }
 }

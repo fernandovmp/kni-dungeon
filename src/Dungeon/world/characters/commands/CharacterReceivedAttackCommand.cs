@@ -5,30 +5,30 @@ using Godot;
 
 namespace Dungeon.world.characters.commands;
 
-public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode body) : ICommand<CharacterNode>
+public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode body) : ICommand<CharacterBodyNode>
 {
-    public bool CanExecute(CharacterNode target) => !target.Body.IsInvencible
-                                                    && target.State != CharacterState.Dead;
+    public bool CanExecute(CharacterBodyNode target) => !target.IsInvencible
+                                                        && target.State != CharacterState.Dead;
 
-    public void Execute(CharacterNode target)
+    public void Execute(CharacterBodyNode target)
     {        
-        var combatent = target.Body.GetMetadata<CombatentNode>(nameof(CombatentNode));
+        var combatent = target.GetMetadata<CombatentNode>(nameof(CombatentNode));
         if (combatent == null)
         {
             return;
         }
         
-        target.Body.SetInvecibilityAsync();
+        target.SetInvecibilityAsync();
         int force = GetForce() + combatent.Force - combatent.Resistance;
         Vector2 direction = GetDirection(target);
 
         
         combatent.DealDamage();
-        target.Body.ApplyKnockBack(force, direction);
+        target.ApplyKnockBack(force, direction);
         PlayHitSound(target);
     }
 
-    private void PlayHitSound(CharacterNode target)
+    private void PlayHitSound(CharacterBodyNode target)
     {
         AudioStream sound = body.Weapon.HitSound;
         if (IsCritical())
@@ -36,15 +36,15 @@ public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode
             sound = body.Weapon.CriticalSound;
         }
 
-        if (target.Body.HitSoundPlayer.Playing)
+        if (target.HitSoundPlayer.Playing)
         {
-            target.Body.HitSoundPlayer.Stop();
+            target.HitSoundPlayer.Stop();
         }
-        target.Body.HitSoundPlayer.Stream = sound;
-        target.Body.HitSoundPlayer.Play();
+        target.HitSoundPlayer.Stream = sound;
+        target.HitSoundPlayer.Play();
     }
 
-    private Vector2 GetDirection(CharacterNode target) => body.Body.GlobalPosition.DirectionTo(target.Body.GlobalPosition);
+    private Vector2 GetDirection(CharacterBodyNode target) => body.GlobalPosition.DirectionTo(target.GlobalPosition);
 
     public bool IsCritical() => rotationDegrees >= 45 && rotationDegrees <= 120;
     
