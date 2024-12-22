@@ -1,6 +1,7 @@
-using Dungeon.ui.health;
 using Dungeon.world.characters;
 using Dungeon.world.characters.commands;
+using Dungeon.world.characters.components;
+using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.world.player;
@@ -22,8 +23,6 @@ public partial class PlayerNode : Node2D
     {
         _characterNode = GetNode<CharacterNode>("Character");
         _characterNode.Configure(CharacterResource);
-        _characterNode.Combatent.Hitted += EmitCombatentUpdate;
-        _characterNode.Combatent.Died += OnDied;
         EmitSignal(SignalName.PlayerReadied, this);
     }
 

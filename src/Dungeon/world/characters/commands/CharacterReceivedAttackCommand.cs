@@ -1,4 +1,6 @@
 using Dungeon.abstractions;
+using Dungeon.world.characters.components;
+using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.world.characters.commands;
@@ -6,14 +8,22 @@ namespace Dungeon.world.characters.commands;
 public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode body) : ICommand<CharacterNode>
 {
     public bool CanExecute(CharacterNode target) => !target.Body.IsInvencible
-                                                    && target.IsAlive;
+                                                    && target.State != CharacterState.Dead;
 
     public void Execute(CharacterNode target)
-    {
+    {        
+        var combatent = target.Body.GetMetadata<CombatentNode>(nameof(CombatentNode));
+        if (combatent == null)
+        {
+            return;
+        }
+        
         target.Body.SetInvecibilityAsync();
-        int force = GetForce() + body.Combatent.Force - target.Combatent.Resistance;
+        int force = GetForce() + combatent.Force - combatent.Resistance;
         Vector2 direction = GetDirection(target);
-        target.Combatent.DealDamage();
+
+        
+        combatent.DealDamage();
         target.Body.ApplyKnockBack(force, direction);
         PlayHitSound(target);
     }

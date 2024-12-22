@@ -1,3 +1,5 @@
+using Dungeon.world.characters.components;
+using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.world.characters;
@@ -27,7 +29,9 @@ public partial class CharacterBodyNode : CharacterBody2D
         if (!tempInit)
         {
             tempInit = true;
-            CharacterOwner.Combatent.Died += () => EmitSignal(SignalName.CharacterDied);
+            var combatent = this.GetMetadata<CombatentNode>(nameof(CombatentNode));
+            combatent.Load(CharacterOwner.Character);
+            combatent.Connect(CombatentNode.SignalName.Died, new Callable(this, nameof(OnDied)));
         }
         base._PhysicsProcess(delta);
         if (_knockback.force > 0)
@@ -36,6 +40,12 @@ public partial class CharacterBodyNode : CharacterBody2D
             _knockback.force = Mathf.Lerp(_knockback.force, 0, 0.1);
             MoveAndCollide(motion);
         }
+    }
+
+    private void OnDied()
+    {
+        CharacterOwner.State = CharacterState.Dead;
+        EmitSignal(SignalName.CharacterDied);
     }
 
     public async void SetInvecibilityAsync()

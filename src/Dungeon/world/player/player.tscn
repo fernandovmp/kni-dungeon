@@ -11,3 +11,9 @@ CharacterResource = ExtResource("2_sl4eb")
 
 [node name="Character" parent="." instance=ExtResource("3_57vg6")]
 position = Vector2(-12, 21)
+
+[connection signal="Died" from="Character/Body/Combatent" to="." method="OnDied"]
+[connection signal="Hitted" from="Character/Body/Combatent" to="." method="EmitCombatentUpdate"]
+
+[editable path="Character"]
+[editable path="Character/Body"]

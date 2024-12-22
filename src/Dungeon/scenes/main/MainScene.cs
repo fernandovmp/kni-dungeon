@@ -2,8 +2,10 @@ using Dungeon.services;
 using Dungeon.ui.controls;
 using Dungeon.world;
 using Dungeon.world.arena;
+using Dungeon.world.characters.components;
 using Dungeon.world.player;
 using Dungeon.world.waves;
+using FernandoVmp.GodotUtils.Extensions;
 using FernandoVmp.GodotUtils.Scene;
 using FernandoVmp.GodotUtils.Services;
 using Godot;
@@ -71,7 +73,8 @@ public partial class MainScene : Node2D
             var progressMonitor = GetNode<ProgressMonitorNode>("ProgressMonitor");
             var player = GetNode<PlayerNode>("Player");
             var progress = progressMonitor.GetProgress();
-            progress.CurrentLife = player.Character.Combatent.Life;
+            var combatent = player.Character.Body.GetMetadata<CombatentNode>(nameof(CombatentNode));
+            progress.CurrentLife = combatent.Life;
             _backgroundMusic.Stop();
             ShowResults(route, progress);
         }

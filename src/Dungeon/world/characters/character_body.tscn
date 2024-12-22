@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dlvumaqtwodwn"]
+[gd_scene load_steps=15 format=3 uid="uid://dlvumaqtwodwn"]
 
 [ext_resource type="Script" path="res://world/characters/CharacterBodyNode.cs" id="1_wiv2v"]
 [ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="2_tmdcn"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b6fb6wn0ih7k2" path="res://world/weapons/sword/weapon_regular_sword.png" id="7_yaa1d"]
 [ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="8_vp42o"]
 [ext_resource type="AudioStream" uid="uid://bghmex5ff8plx" path="res://sounds/sfx/sword.7.ogg" id="9_jj2pi"]
+[ext_resource type="Script" path="res://world/characters/components/CombatentNode.cs" id="10_g3vjw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g5nyh"]
 radius = 4.0
@@ -52,7 +53,6 @@ shape = SubResource("CapsuleShape2D_g5nyh")
 z_index = 1
 sprite_frames = ExtResource("2_tmdcn")
 animation = &"idle"
-frame_progress = 0.406722
 script = ExtResource("3_311fx")
 
 [node name="Weapon" type="Node2D" parent="."]
@@ -88,3 +88,6 @@ volume_db = -20.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.0
+
+[node name="Combatent" type="Node" parent="."]
+script = ExtResource("10_g3vjw")

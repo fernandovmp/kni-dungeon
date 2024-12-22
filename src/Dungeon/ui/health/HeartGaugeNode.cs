@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using Dungeon.world.characters.components;
 using Dungeon.world.player;
+using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.ui.health;
@@ -36,7 +38,11 @@ public partial class HeartGaugeNode : HBoxContainer
 
     public void OnCombatentUpdated(PlayerNode player)
     {
-        Health = player.Character.Combatent.Life;
+        var combatent = player.Character.Body.GetMetadata<CombatentNode>(nameof(CombatentNode));
+        if (combatent != null)
+        {
+            Health = combatent.Life;
+        }
     }
 
     private void PlaceHearts()

@@ -1,5 +1,7 @@
 using Dungeon.abstractions;
+using Dungeon.world.characters.components;
 using Dungeon.world.constants;
+using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.world.characters;
@@ -13,9 +15,7 @@ public partial class CharacterNode : Node2D
     
     public CharacterBodyNode Body { get; private set;  }
     public WeaponNode Weapon { get; private set; }
-    public Combatent Combatent { get; private set; }
     public CharacterState State { get; set; }
-    public bool IsAlive => Combatent?.IsAlive ?? false;
     public AnimatedCharacterNode Sprite => _sprite;
 
     public override void _Ready()
@@ -29,8 +29,6 @@ public partial class CharacterNode : Node2D
     {
         Character = character;
         Speed = character.Speed;
-        Combatent = Combatent.From(Character);
-        Combatent.Hitted += Hitted;
         _sprite = GetNode<AnimatedCharacterNode>("Body/Animation");
         _sprite.CharacterOwner = this;
         _sprite.SpriteFrames = Character.Sprite;

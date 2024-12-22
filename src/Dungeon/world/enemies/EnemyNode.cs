@@ -1,5 +1,7 @@
 using Dungeon.world.characters;
+using Dungeon.world.characters.components;
 using Dungeon.world.enemies.behaviours;
+using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.world.enemies;
@@ -34,7 +36,8 @@ public partial class EnemyNode : Node2D
         Character = GetNode<CharacterNode>("Character");
         Character.IsEnemy = true;
         Character.Configure(CharacterResource);
-        Character.Combatent.Died += Died;
+        var combatent = Character.Body.GetMetadata<CombatentNode>(nameof(CombatentNode));
+        combatent.Connect(CombatentNode.SignalName.Died, new Callable(this, nameof(Died)));
     }
 
     private void Died()
