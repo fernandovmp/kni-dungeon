@@ -5,7 +5,7 @@ using Godot;
 
 namespace Dungeon.world.characters.commands;
 
-public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode body) : ICommand<CharacterBodyNode>
+public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterBodyNode body) : ICommand<CharacterBodyNode>
 {
     public bool CanExecute(CharacterBodyNode target) => !target.IsInvencible
                                                         && target.State != CharacterState.Dead;
@@ -30,10 +30,11 @@ public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterNode
 
     private void PlayHitSound(CharacterBodyNode target)
     {
-        AudioStream sound = body.Weapon.HitSound;
+        var weapon = body.GetMetadata<WeaponNode>(nameof(WeaponNode));
+        AudioStream sound = weapon.HitSound;
         if (IsCritical())
         {
-            sound = body.Weapon.CriticalSound;
+            sound = weapon.CriticalSound;
         }
 
         if (target.HitSoundPlayer.Playing)

@@ -73,7 +73,7 @@ public partial class MainScene : Node2D
             var progressMonitor = GetNode<ProgressMonitorNode>("ProgressMonitor");
             var player = GetNode<PlayerNode>("Player");
             var progress = progressMonitor.GetProgress();
-            var combatent = player.Character.Body.GetMetadata<CombatentNode>(nameof(CombatentNode));
+            var combatent = player.Character.GetMetadata<CombatentNode>(nameof(CombatentNode));
             progress.CurrentLife = combatent.Life;
             _backgroundMusic.Stop();
             ShowResults(route, progress);

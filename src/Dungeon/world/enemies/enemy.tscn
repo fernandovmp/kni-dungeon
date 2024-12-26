@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxlt3tw6p2h2q"]
+[gd_scene load_steps=6 format=3 uid="uid://bxlt3tw6p2h2q"]
 
 [ext_resource type="Script" path="res://world/enemies/EnemyNode.cs" id="1_p2gey"]
 [ext_resource type="Resource" uid="uid://da8usnqbuygt1" path="res://world/enemies/behaviours/resources/constant_attack_behaviour.tres" id="2_u477v"]
-[ext_resource type="Script" path="res://world/characters/CharacterNode.cs" id="4_3tjds"]
 [ext_resource type="Resource" uid="uid://cp83dnnywp2nm" path="res://world/characters/orc_warrior/character.tres" id="4_qs6ua"]
 [ext_resource type="PackedScene" uid="uid://dlvumaqtwodwn" path="res://world/characters/character_body.tscn" id="5_lmeq7"]
 [ext_resource type="PackedScene" uid="uid://gugos5a2guv4" path="res://world/particles/enemy_explosion.tscn" id="6_qtc3v"]
@@ -12,18 +11,14 @@ script = ExtResource("1_p2gey")
 BehaviourResource = ExtResource("2_u477v")
 CharacterResource = ExtResource("4_qs6ua")
 
-[node name="Character" type="Node2D" parent="."]
-script = ExtResource("4_3tjds")
-Speed = 70.0
+[node name="Body" parent="." instance=ExtResource("5_lmeq7")]
 IsEnemy = true
 
-[node name="Body" parent="Character" instance=ExtResource("5_lmeq7")]
+[node name="MagicExplosion" parent="Body" instance=ExtResource("6_qtc3v")]
 
-[node name="MagicExplosion" parent="Character/Body" instance=ExtResource("6_qtc3v")]
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Character/Body"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
 path_desired_distance = 13.0
 target_desired_distance = 20.0
 
-[connection signal="CharacterDied" from="Character/Body" to="Character/Body/MagicExplosion" method="Play"]
-[connection signal="finished" from="Character/Body/MagicExplosion" to="." method="DeathAnimationFinished"]
+[connection signal="CharacterDied" from="Body" to="Body/MagicExplosion" method="Play"]
+[connection signal="finished" from="Body/MagicExplosion" to="." method="DeathAnimationFinished"]

@@ -15,7 +15,7 @@ public partial class ConstantAttackBehaviour : BehaviourBase
         _timer -= delta;
         if (_timer <= 0)
         {
-            enemyNode.Character.Body.TryExecute(new CharacterAttackCommand());
+            enemyNode.Character.TryExecute(new CharacterAttackCommand());
             _timer = Interval;
         }
     }

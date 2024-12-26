@@ -29,7 +29,7 @@ public partial class SpawnerNode : Node2D
         enemyNode.Visible = false;
         enemyNode.Ready += () =>
         {
-            enemyNode.Character.Body.GlobalPosition = GlobalPosition;
+            enemyNode.Character.GlobalPosition = GlobalPosition;
             enemyNode.Visible = true;
         };
         root.AddChild(enemyNode);

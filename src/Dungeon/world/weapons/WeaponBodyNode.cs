@@ -39,7 +39,7 @@ public partial class WeaponBodyNode : Area2D
         if (body is CharacterBodyNode characterBodyNode)
         {
             var rotationDegrees = Mathf.RadToDeg(_sprite.Rotation);
-            var command = new CharacterReceivedAttackCommand(rotationDegrees, CharacterOwner.CharacterOwner);
+            var command = new CharacterReceivedAttackCommand(rotationDegrees, CharacterOwner);
             characterBodyNode.TryExecute(command);
         }
     }

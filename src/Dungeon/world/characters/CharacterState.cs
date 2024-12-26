@@ -5,6 +5,7 @@ namespace Dungeon.world.characters;
 [Flags]
 public enum CharacterState
 {
+    None = 0,
     Idle = 1,
     Moving = 2,
     Attacking = 4,

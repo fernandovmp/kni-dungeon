@@ -1,3 +1,4 @@
+using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.world.characters;
@@ -19,6 +20,24 @@ public partial class WeaponNode : Node2D
         _animationPlayer.Connect("animation_finished", new Callable(this, nameof(ResetAnimation)));
         _weaponBody = GetNode<WeaponBodyNode>("Sprite/Body");
         AttackSound = GetNode<AudioStreamPlayer2D>("AttackSound");
+        
+        
+        if (Owner is CharacterBodyNode characterBodyNode)
+        {
+            Configure(characterBodyNode);
+        }
+    }
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        Owner.SetMetadata(nameof(WeaponNode), this);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        Owner.RemoveMeta(nameof(WeaponNode));
     }
 
     public void Attack(bool isDirectionLeft)
@@ -45,8 +64,8 @@ public partial class WeaponNode : Node2D
         _sprite.Visible = false;
     }
 
-    public void Configure(bool isEnemy, CharacterBodyNode character)
+    public void Configure(CharacterBodyNode character)
     {
-        _weaponBody.Configure(isEnemy, character);
+        _weaponBody.Configure(character.IsEnemy, character);
     }
 }

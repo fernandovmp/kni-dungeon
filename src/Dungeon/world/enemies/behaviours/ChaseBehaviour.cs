@@ -13,7 +13,7 @@ public partial class ChaseBehaviour : BehaviourBase
 
     public override void OnPhysicsProcess(double delta, EnemyNode enemyNode)
     {
-        var body = enemyNode.Character.Body;
+        var body = enemyNode.Character;
         if (_target == null)
         {
             _target = enemyNode.GetTree().Root.FindChild("Player", recursive: true, owned: false)  as PlayerNode;
@@ -24,7 +24,7 @@ public partial class ChaseBehaviour : BehaviourBase
         }
 
         if (!IsInstanceValid(_target) || !IsInstanceValid(_target.Character) ||
-            !IsInstanceValid(_target.Character.Body))
+            !IsInstanceValid(_target.Character))
         {
             _target = null;
             return;
@@ -40,16 +40,16 @@ public partial class ChaseBehaviour : BehaviourBase
             return;
         }
         
-        _navigationAgent.TargetPosition = _target.Character.Body.GlobalPosition;
+        _navigationAgent.TargetPosition = _target.Character.GlobalPosition;
         if (_navigationAgent.IsNavigationFinished())
         {
-            enemyNode.Character.Body.TryExecute(new CharacterMovementCommand(Vector2.Zero));
+            enemyNode.Character.TryExecute(new CharacterMovementCommand(Vector2.Zero));
             return;
         }
 
         Vector2 currentAgentPosition = body.GlobalTransform.Origin;
         Vector2 nextPathPosition = _navigationAgent.GetNextPathPosition();
         Vector2 direction = currentAgentPosition.DirectionTo(nextPathPosition);
-        enemyNode.Character.Body.TryExecute(new CharacterMovementCommand(direction));
+        enemyNode.Character.TryExecute(new CharacterMovementCommand(direction));
     }
 }

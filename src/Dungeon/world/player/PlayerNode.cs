@@ -9,9 +9,8 @@ namespace Dungeon.world.player;
 
 public partial class PlayerNode : Node2D
 {
-    private CharacterNode _characterNode = default!;
     [Export] public CharacterResource CharacterResource { get; set; }
-    public CharacterNode Character => _characterNode;
+    public CharacterBodyNode Character { get; private set; }
     
     [Signal]
     public delegate void PlayerReadiedEventHandler(PlayerNode player);
@@ -22,8 +21,8 @@ public partial class PlayerNode : Node2D
     
     public override void _Ready()
     {
-        _characterNode = GetNode<CharacterNode>("Character");
-        _characterNode.Configure(CharacterResource);
+        Character = GetNode<CharacterBodyNode>("Body");
+        Character.Configure(CharacterResource);
         EmitSignal(SignalName.PlayerReadied, this);
     }
 
@@ -43,7 +42,7 @@ public partial class PlayerNode : Node2D
     public override void _PhysicsProcess(double detla)
     {
         Vector2 direction = GetDirectionFromInput();
-        _characterNode.Body.TryExecute(new CharacterMovementCommand(direction));
+        Character.TryExecute(new CharacterMovementCommand(direction));
     }
 
     private Vector2 GetDirectionFromInput() => Input.GetVector("player_movement_left", "player_movement_right",
@@ -53,7 +52,7 @@ public partial class PlayerNode : Node2D
     {
         if (@event.IsActionPressed("attack"))
         {
-            _characterNode.Body.TryExecute(new CharacterAttackCommand());
+            Character.TryExecute(new CharacterAttackCommand());
         }
     }
 }

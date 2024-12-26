@@ -8,15 +8,15 @@ namespace Dungeon.world.characters;
 public partial class CharacterBodyNode : CharacterBody2D
 {
     public CharacterResource Character { get; set; }
-    public CharacterState State { get; set; }
+    public CharacterState State { get; set; } = CharacterState.None;
     [Export] public double Speed { get; set; } = 4;
     
     private KnockbackData _knockback;
     public Movement Movement { get; private set; }
     public bool IsInvencible { get; private set; }
-    public CharacterNode CharacterOwner { get; private set; }
     public AudioStreamPlayer2D HitSoundPlayer { get; private set; }
     public AnimatedCharacterNode Sprite { get; private set; }
+    [Export] public bool IsEnemy { get; set; }
     
     
     [Signal]
@@ -24,15 +24,14 @@ public partial class CharacterBodyNode : CharacterBody2D
     
     public override void _Ready()
     {
-        Movement = new Movement(this);
-        CharacterOwner = GetNode<CharacterNode>("..");
         HitSoundPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
         Sprite = GetNode<AnimatedCharacterNode>("Animation");
         Sprite.CharacterOwner = this;
     }
 
-    public void Configure(CharacterResource character, bool isEnemy)
+    public void Configure(CharacterResource character)
     {
+        Movement = new Movement(this);
         Character = character;
         Speed = character.Speed;
         Sprite.SpriteFrames = character.Sprite;
@@ -41,11 +40,12 @@ public partial class CharacterBodyNode : CharacterBody2D
         var combatent = this.GetMetadata<CombatentNode>(nameof(CombatentNode));
         combatent.Load(character);
         
-        if (isEnemy)
+        if (IsEnemy)
         {
             layer = PhysicsConstants.EnemyLayer;
         }
         CollisionLayer = layer;
+        State = CharacterState.Idle;
     }
 
     public override void _PhysicsProcess(double delta)

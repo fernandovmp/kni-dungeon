@@ -38,7 +38,7 @@ public partial class HeartGaugeNode : HBoxContainer
 
     public void OnCombatentUpdated(PlayerNode player)
     {
-        var combatent = player.Character.Body.GetMetadata<CombatentNode>(nameof(CombatentNode));
+        var combatent = player.Character.GetMetadata<CombatentNode>(nameof(CombatentNode));
         if (combatent != null)
         {
             Health = combatent.Life;
