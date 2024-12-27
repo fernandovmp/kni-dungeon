@@ -36,7 +36,11 @@ public partial class WeaponBodyNode : Area2D
     public void Disable() => _shape.Disabled = true;
 
     private void OnBodyEntered(Node2D body)
-    { 
+    {
+        if (CharacterOwner.State == CharacterState.Dead)
+        {
+            return;
+        }
         var hittable = body.GetMetadata<HittableNode>(nameof(HittableNode));
         hittable?.Hit(this);
     }

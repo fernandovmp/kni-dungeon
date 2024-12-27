@@ -42,9 +42,11 @@ public partial class EnemyNode : Node2D
 
     private void Died()
     {
-        EmitSignal(SignalName.OnDied);
         Character.State = CharacterState.Dead;
         Character.Sprite.Hide();
+        var weapon = Character.GetMetadata<WeaponNode>(nameof(WeaponNode));
+        weapon?.Hide();
+        EmitSignal(SignalName.OnDied);
     }
 
     public void DeathAnimationFinished()
