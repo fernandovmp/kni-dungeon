@@ -5,10 +5,9 @@ using Godot;
 
 namespace Dungeon.world.characters.commands;
 
-public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterBodyNode body) : ICommand<CharacterBodyNode>
+public class CharacterReceivedAttackCommand(WeaponBodyNode weaponBody, CharacterBodyNode body) : ICommand<CharacterBodyNode>
 {
-    public bool CanExecute(CharacterBodyNode target) => !target.IsInvencible
-                                                        && target.State != CharacterState.Dead;
+    public bool CanExecute(CharacterBodyNode target) => target.State != CharacterState.Dead;
 
     public void Execute(CharacterBodyNode target)
     {        
@@ -18,21 +17,26 @@ public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterBody
             return;
         }
         
-        target.SetInvecibilityAsync();
-        int force = GetForce() + combatent.Force - combatent.Resistance;
-        Vector2 direction = GetDirection(target);
-
-        
+        bool isCritical = IsCritical();
         combatent.DealDamage();
-        target.ApplyKnockBack(force, direction);
-        PlayHitSound(target);
+        
+        ApplyKnockBack(target, isCritical, combatent);
+        PlayHitSound(target, isCritical);
     }
 
-    private void PlayHitSound(CharacterBodyNode target)
+    private void ApplyKnockBack(CharacterBodyNode target, bool isCritical, CombatentNode combatent)
+    {
+        var knockback = target.GetMetadata<KnockbackNode>(nameof(KnockbackNode));
+        int force = GetForce(isCritical) + combatent.Force - combatent.Resistance;
+        Vector2 direction = GetDirection(target);
+        knockback?.Apply(new KnockbackData(direction, force));
+    }
+
+    private void PlayHitSound(CharacterBodyNode target, bool isCritical)
     {
         var weapon = body.GetMetadata<WeaponNode>(nameof(WeaponNode));
         AudioStream sound = weapon.HitSound;
-        if (IsCritical())
+        if (isCritical)
         {
             sound = weapon.CriticalSound;
         }
@@ -47,11 +51,15 @@ public class CharacterReceivedAttackCommand(float rotationDegrees, CharacterBody
 
     private Vector2 GetDirection(CharacterBodyNode target) => body.GlobalPosition.DirectionTo(target.GlobalPosition);
 
-    public bool IsCritical() => rotationDegrees >= 45 && rotationDegrees <= 120;
-    
-    private int GetForce()
+    public bool IsCritical()
     {
-        if (IsCritical())
+        var rotationDegrees = Mathf.RadToDeg(weaponBody.Sprite.Rotation);
+        return rotationDegrees >= 45 && rotationDegrees <= 120;
+    }
+    
+    private int GetForce(bool isCritical)
+    {
+        if (isCritical)
         {
             return 230;
         }

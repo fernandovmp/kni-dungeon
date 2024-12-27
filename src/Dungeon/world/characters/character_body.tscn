@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dlvumaqtwodwn"]
+[gd_scene load_steps=17 format=3 uid="uid://dlvumaqtwodwn"]
 
 [ext_resource type="Script" path="res://world/characters/CharacterBodyNode.cs" id="1_wiv2v"]
 [ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="2_tmdcn"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="8_vp42o"]
 [ext_resource type="AudioStream" uid="uid://bghmex5ff8plx" path="res://sounds/sfx/sword.7.ogg" id="9_jj2pi"]
 [ext_resource type="Script" path="res://world/characters/components/CombatentNode.cs" id="10_g3vjw"]
+[ext_resource type="Script" path="res://world/characters/components/HittableNode.cs" id="11_qg8da"]
+[ext_resource type="Script" path="res://world/characters/components/KnockbackNode.cs" id="12_1yxs3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g5nyh"]
 radius = 4.0
@@ -92,6 +94,15 @@ volume_db = -15.0
 [node name="Combatent" type="Node" parent="."]
 script = ExtResource("10_g3vjw")
 
+[node name="Hittable" type="Node" parent="." node_paths=PackedStringArray("Hitbox")]
+script = ExtResource("11_qg8da")
+Hitbox = NodePath("..")
+
+[node name="Knockback" type="Node" parent="." node_paths=PackedStringArray("Target")]
+script = ExtResource("12_1yxs3")
+Target = NodePath("..")
+
 [connection signal="Died" from="Combatent" to="." method="OnDied"]
 [connection signal="Died" from="Combatent" to="Animation" method="RequestDeath"]
 [connection signal="Hitted" from="Combatent" to="Animation" method="RequestHit"]
+[connection signal="Hitted" from="Hittable" to="." method="OnHit"]
