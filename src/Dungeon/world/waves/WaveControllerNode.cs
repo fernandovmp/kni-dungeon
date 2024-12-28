@@ -3,36 +3,67 @@ using System.Collections.Generic;
 using Dungeon.world.characters;
 using Dungeon.world.spawners;
 using Godot;
+using Godot.Collections;
 
 namespace Dungeon.world.waves;
 
 public partial class WaveControllerNode : Node2D
 {
+    [Export] public WaveResource CurrentWaveResource { get; set; }
+    [Export] public Array<WaveResource> WavesResources { get; set; }
     [Export] public SpawnPoolNode SpawnPool { get; set; }
     [Export] private double _minimumInterval = 3;
     [Export] private int _maxEnemyCount = 7;
-    [Export] private WaveResource? _wave;
+    public int WaveNumber => _currentWaveIndex + 1;
+    
+    private int _currentWaveIndex = -1;
     private double _timer;
     private Queue<CharacterResource> _enemiesQueue = new Queue<CharacterResource>(0);
     private bool _notNotifiedWaveEnd;
 
-    public Action OnWaveEnd { get; set; }
+    [Signal] public delegate void OnWaveEndedEventHandler();
+    [Signal] public delegate void OnWaveChangedEventHandler(WaveChangedEvent @event);
+
+    public partial class WaveChangedEvent : GodotObject
+    {
+        public int WaveNumber { get; set; }
+        public WaveResource Wave { get; set; }
+    }
+
+    [Signal] public delegate void OnFinishedEventHandler();
 
     public override void _Ready()
     {
         base._Ready();
         _timer = _minimumInterval;
 
-        if (_wave != null)
+        if (_currentWaveIndex == -1 && WavesResources != null && WavesResources.Count > 0)
         {
-            Configure(_wave);
+            NextWave();
         }
     }
-
-    public void Configure(WaveResource wave)
+    
+    public void NextWave()
     {
-        _wave = wave;
-        _enemiesQueue = new Queue<CharacterResource>(_wave!.Enemies);
+        _currentWaveIndex++;
+        if (_currentWaveIndex >= WavesResources.Count)
+        {
+            EmitSignal(SignalName.OnFinished);
+            return;
+        }
+        CurrentWaveResource = WavesResources[_currentWaveIndex];
+        StartWave();
+        
+        EmitSignal(SignalName.OnWaveChanged, new WaveChangedEvent
+        {
+            Wave = CurrentWaveResource,
+            WaveNumber = _currentWaveIndex + 1
+        });
+    }
+    
+    public void StartWave()
+    {
+        _enemiesQueue = new Queue<CharacterResource>(CurrentWaveResource!.Enemies);
         _notNotifiedWaveEnd = true;
     }
 
@@ -58,7 +89,8 @@ public partial class WaveControllerNode : Node2D
         if (enemyCount == 0 && _enemiesQueue.Count == 0 && _notNotifiedWaveEnd)
         {
             _notNotifiedWaveEnd = false;
-            OnWaveEnd?.Invoke();
+            NextWave();
+            EmitSignal(SignalName.OnWaveEnded);
         }
     }
 }

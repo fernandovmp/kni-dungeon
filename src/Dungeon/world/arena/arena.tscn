@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://8nf0bbs0cf8j"]
+[gd_scene load_steps=3 format=3 uid="uid://8nf0bbs0cf8j"]
 
 [ext_resource type="Script" path="res://world/waves/WaveControllerNode.cs" id="1_weyne"]
 [ext_resource type="Script" path="res://world/arena/ArenaNode.cs" id="1_yv8wc"]
-[ext_resource type="PackedScene" uid="uid://be0nwnq68h2a6" path="res://world/spawners/spawn_pool.tscn" id="3_72y3g"]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_yv8wc")
@@ -16,6 +15,5 @@ zoom = Vector2(3, 3)
 [node name="WaveController" type="Node2D" parent="."]
 script = ExtResource("1_weyne")
 
-[node name="SpawnPool" parent="." instance=ExtResource("3_72y3g")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[connection signal="OnFinished" from="WaveController" to="." method="OnWavesFinished"]
+[connection signal="OnWaveChanged" from="WaveController" to="." method="OnWaveChange"]

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Dungeon.world.characters;
 using Dungeon.world.enemies;
+using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.world.spawners;
@@ -14,13 +15,25 @@ public partial class SpawnPoolNode : Node2D
     private readonly Random _random = new Random();
     
     [Signal]
-    public delegate void OnEnemyDiedEventHandler();
+    public delegate void OnEnemySpawnEventHandler(EnemyNode enemy);
 
     public override void _Ready()
     {
         base._Ready();
         _enemiesRoot = GetNode<Node2D>("EnemiesRoot");
         FindSpawners();
+    }
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        Owner.SetMetadata(nameof(SpawnPoolNode), this);
+    }
+
+    public override void _ExitTree()
+    {
+        base._ExitTree();
+        Owner.RemoveMeta(nameof(SpawnPoolNode));
     }
 
     private void FindSpawners()
@@ -50,12 +63,7 @@ public partial class SpawnPoolNode : Node2D
         var spawner = _spawnersNodes[index];
         _lastSpawnerIndex = index;
         var enemy = spawner.SpawnEnemy(character, _enemiesRoot);
-        enemy.Connect(EnemyNode.SignalName.OnDied, new Callable(this, nameof(EmitEnemyDied)));
-    }
-
-    private void EmitEnemyDied()
-    {
-        EmitSignal(SignalName.OnEnemyDied);
+        EmitSignal(SignalName.OnEnemySpawn, enemy);
     }
 
     public int CountActiveEnemies() => _enemiesRoot.GetChildCount();

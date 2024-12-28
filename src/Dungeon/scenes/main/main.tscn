@@ -218,13 +218,16 @@ text = "Title"
 
 [connection signal="ArenaStateChanged" from="Arena" to="ProgressMonitor" method="OnArenaStateChanged"]
 [connection signal="ArenaStateChanged" from="Arena" to="CanvasLayer/MainUI/WaveMessage" method="_on_arena_arena_state_changed"]
-[connection signal="ArenaStateChanged" from="Arena" to="CanvasLayer/MainUI/ArenaInfo/CurrentWave" method="OnWaveChange"]
 [connection signal="OnArenaEnemyDied" from="Arena" to="ProgressMonitor" method="OnArenaEnemyDied"]
 [connection signal="child_exiting_tree" from="Arena" to="ProgressMonitor" method="OnArenaChildExited"]
+[connection signal="OnWaveChanged" from="Arena/WaveController" to="ProgressMonitor" method="OnWaveChanged"]
+[connection signal="OnWaveChanged" from="Arena/WaveController" to="CanvasLayer/MainUI/ArenaInfo/CurrentWave" method="OnWaveChange"]
 [connection signal="CombatentUpdated" from="Player" to="CanvasLayer/MainUI/HeartGauge" method="OnCombatentUpdated"]
 [connection signal="PlayerDied" from="Player" to="." method="OnPlayerDied"]
 [connection signal="PlayerDied" from="Player" to="ProgressMonitor" method="OnPlayerDied"]
 [connection signal="PlayerReadied" from="Player" to="CanvasLayer/MainUI/HeartGauge" method="OnPlayerReadied"]
-[connection signal="WaveMessagePressed" from="CanvasLayer/MainUI/WaveMessage" to="." method="OnWaveMessagePressed"]
+[connection signal="MessagePressed" from="CanvasLayer/MainUI/WaveMessage" to="." method="OnWaveMessagePressed"]
 [connection signal="pressed" from="CanvasLayer/ResultsUI/VBoxContainer/Retry" to="." method="Retry"]
 [connection signal="pressed" from="CanvasLayer/ResultsUI/VBoxContainer/Title" to="." method="GoToTitle"]
+
+[editable path="Arena"]

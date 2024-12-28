@@ -4,12 +4,10 @@ using Dungeon.world;
 using Dungeon.world.arena;
 using Dungeon.world.characters.components;
 using Dungeon.world.player;
-using Dungeon.world.waves;
 using FernandoVmp.GodotUtils.Extensions;
 using FernandoVmp.GodotUtils.Scene;
 using FernandoVmp.GodotUtils.Services;
 using Godot;
-using Godot.Collections;
 
 namespace Dungeon.scenes.main;
 
@@ -97,24 +95,17 @@ public partial class MainScene : Node2D
     private void ConfigureArena(ArenaData arenaData)
     {
         _arenaNode = GetNode<ArenaNode>("Arena");
-        var waves = new Array<WaveResource>();
-        foreach (var wave in arenaData.WavesResources)
-        {
-            waves.Add(ResourceLoader.Load<WaveResource>(wave));
-        }
-        _arenaNode.WavesResources = waves;
-        _arenaNode.Level = ResourceLoader.Load<PackedScene>(arenaData.Level);
-        _arenaNode.Configure();
+        _arenaNode.Configure(arenaData);
     }
 
-    public void OnWaveMessagePressed(WaveMessagePressedEvent @event)
+    public void OnWaveMessagePressed()
     {
-        if (@event.ArenaState == ArenaStateEnum.Setup)
+        if (_arenaNode.State == ArenaStateEnum.Setup)
         {
-            _arenaNode.Start();
+            _arenaNode.WaveController.NextWave();
         }
         
-        if (@event.ArenaState == ArenaStateEnum.Cleared)
+        if (@_arenaNode.State == ArenaStateEnum.Cleared)
         {
             if (_arenaData.ArenaNumber >= 3)
             {

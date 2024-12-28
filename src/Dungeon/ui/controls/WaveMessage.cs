@@ -9,9 +9,10 @@ public partial class WaveMessage : Panel
     private Label _label;
     private ArenaStateEnum _currentState;
     private double _timer = 4;
+    private bool _awaitConfirmation;
     
     [Signal]
-    public delegate void WaveMessagePressedEventHandler(WaveMessagePressedEvent @event);
+    public delegate void MessagePressedEventHandler();
 
     public bool IsVisible 
     { 
@@ -49,11 +50,11 @@ public partial class WaveMessage : Panel
         string text = state.State switch
         {
             ArenaStateEnum.Setup => "Arena opened",
-            ArenaStateEnum.WaveChange => $"Wave {state.Index + 1}",
+            ArenaStateEnum.WaveChange => $"Wave {state.WaveNumber}",
             ArenaStateEnum.Cleared => "Arena Cleared!",
             _ => string.Empty
         };
-        _currentState = state.State;
+        _awaitConfirmation = state.State != ArenaStateEnum.WaveChange;
         Visible = true;
         if (_label != null)
         {
@@ -63,7 +64,7 @@ public partial class WaveMessage : Panel
 
     public override void _Process(double delta)
     {
-        if (Visible && _currentState == ArenaStateEnum.WaveChange)
+        if (Visible && !_awaitConfirmation)
         {
             _timer -= delta;
             if (_timer <= 0 && Visible)
@@ -76,15 +77,10 @@ public partial class WaveMessage : Panel
 
     public override void _Input(InputEvent @event)
     {
-        if ((_currentState == ArenaStateEnum.Setup || _currentState == ArenaStateEnum.Cleared) && @event.IsActionPressed("ui_accept") && Visible)
+        if (@event.IsActionPressed("ui_accept") && Visible && _awaitConfirmation)
         {
             Visible = false;
-            EmitSignal(SignalName.WaveMessagePressed, new WaveMessagePressedEvent(_currentState));
+            EmitSignal(SignalName.MessagePressed);
         }
     }
-}
-
-public partial class WaveMessagePressedEvent(ArenaStateEnum arenaState) : GodotObject
-{
-    public ArenaStateEnum ArenaState { get; } = arenaState;
 }

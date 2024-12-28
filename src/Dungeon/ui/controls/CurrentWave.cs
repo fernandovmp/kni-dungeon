@@ -1,4 +1,4 @@
-using Dungeon.world.arena;
+using Dungeon.world.waves;
 using Godot;
 
 namespace Dungeon.ui.controls;
@@ -12,14 +12,8 @@ public partial class CurrentWave : Panel
         _label = GetNode<Label>("Label");
     }
 
-    public void OnWaveChange(ArenaState arenaState)
+    public void OnWaveChange(WaveControllerNode.WaveChangedEvent @event)
     {
-        bool waveChanged = arenaState.State == ArenaStateEnum.WaveChange; 
-        if (waveChanged)
-        {
-            _label.Text = $"Wave: {arenaState.Index + 1}";
-        }
-
-        Visible = waveChanged;
+        _label.Text = $"Wave: {@event.WaveNumber}";
     }
 }

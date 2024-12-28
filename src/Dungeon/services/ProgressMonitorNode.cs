@@ -1,5 +1,6 @@
 using Dungeon.world.arena;
 using Dungeon.world.player;
+using Dungeon.world.waves;
 using FernandoVmp.GodotUtils.Services;
 using Godot;
 
@@ -29,17 +30,17 @@ public partial class ProgressMonitorNode : Node2D
 
     public void OnArenaStateChanged(ArenaState state)
     {
-        if (state.State == ArenaStateEnum.WaveChange)
-        {
-            var data = GetProgress();
-            data.TotalWaves++;
-        }
-
         if (state.State == ArenaStateEnum.Cleared)
         {
             var data = GetProgress();
             data.TotalArenas++;
         }
+    }
+
+    public void OnWaveChanged(WaveControllerNode.WaveChangedEvent @event)
+    {
+        var data = GetProgress();
+        data.TotalWaves++;
     }
 
     public void OnArenaEnemyDied()
