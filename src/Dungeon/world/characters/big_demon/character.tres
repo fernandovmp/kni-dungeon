@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://cifa600j8dryr"]
+
+[ext_resource type="SpriteFrames" uid="uid://lqa4id3ccjeg" path="res://world/characters/big_demon/sprite_frames.tres" id="1_yc4rh"]
+[ext_resource type="Script" path="res://world/characters/CharacterResource.cs" id="2_ynile"]
+
+[resource]
+script = ExtResource("2_ynile")
+Sprite = ExtResource("1_yc4rh")
+Life = 8
+Force = 20
+Resistance = 10
+Speed = 40

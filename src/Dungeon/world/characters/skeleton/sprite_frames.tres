@@ -1,0 +1,47 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://oq0f5eipiqlx"]
+
+[ext_resource type="Texture2D" uid="uid://5dq2nfmlbh1f" path="res://world/characters/skeleton/skelet_idle_anim_f0.png" id="1_63bi3"]
+[ext_resource type="Texture2D" uid="uid://cd7x788qy50av" path="res://world/characters/skeleton/skelet_idle_anim_f1.png" id="2_ubrfn"]
+[ext_resource type="Texture2D" uid="uid://rjt27n1wvehf" path="res://world/characters/skeleton/skelet_idle_anim_f2.png" id="3_t0ts1"]
+[ext_resource type="Texture2D" uid="uid://bummc8xa0l06v" path="res://world/characters/skeleton/skelet_idle_anim_f3.png" id="4_jlwgw"]
+[ext_resource type="Texture2D" uid="uid://ctttfbbaxacv4" path="res://world/characters/skeleton/skelet_run_anim_f0.png" id="5_bnma4"]
+[ext_resource type="Texture2D" uid="uid://p3c8umncoox7" path="res://world/characters/skeleton/skelet_run_anim_f1.png" id="6_qovsf"]
+[ext_resource type="Texture2D" uid="uid://b4q2ocayld80q" path="res://world/characters/skeleton/skelet_run_anim_f2.png" id="7_1fu4s"]
+[ext_resource type="Texture2D" uid="uid://d10ncrchmdfju" path="res://world/characters/skeleton/skelet_run_anim_f3.png" id="8_7kjw4"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_63bi3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ubrfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t0ts1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jlwgw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_bnma4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qovsf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_1fu4s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7kjw4")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]

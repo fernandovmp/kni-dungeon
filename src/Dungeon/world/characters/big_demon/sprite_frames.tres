@@ -1,0 +1,64 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://lqa4id3ccjeg"]
+
+[ext_resource type="Texture2D" uid="uid://dlfwuvtwyetmh" path="res://world/characters/big_demon/big_demon_idle_anim_f2.png" id="1_ai87f"]
+[ext_resource type="Texture2D" uid="uid://w3eq1dgfohmo" path="res://world/characters/big_demon/big_demon_idle_anim_f0.png" id="2_utvh0"]
+[ext_resource type="Texture2D" uid="uid://du0gevewb6rji" path="res://world/characters/big_demon/big_demon_idle_anim_f3.png" id="3_2uxd5"]
+[ext_resource type="Texture2D" uid="uid://dvevbf0rjdell" path="res://world/characters/big_demon/big_demon_idle_anim_f1.png" id="4_n3rum"]
+[ext_resource type="Texture2D" uid="uid://dk385iiinh847" path="res://world/characters/big_demon/big_demon_run_anim_f0.png" id="5_wjh06"]
+[ext_resource type="Texture2D" uid="uid://didwh7o8hqdqr" path="res://world/characters/big_demon/big_demon_run_anim_f1.png" id="6_8htf3"]
+[ext_resource type="Texture2D" uid="uid://cxhr8n6kf2nwy" path="res://world/characters/big_demon/big_demon_run_anim_f2.png" id="7_eeec0"]
+[ext_resource type="Texture2D" uid="uid://7bjus7lcwni0" path="res://world/characters/big_demon/big_demon_run_anim_f3.png" id="8_mldy4"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ai87f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ai87f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_utvh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2uxd5")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_utvh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n3rum")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ai87f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2uxd5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wjh06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8htf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_eeec0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mldy4")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]

@@ -2,6 +2,7 @@ using Godot;
 
 namespace Dungeon.world.characters;
 
+[GlobalClass]
 public partial class CharacterResource : Resource
 {
     [Export]
@@ -18,4 +19,6 @@ public partial class CharacterResource : Resource
     
     [Export]
     public int Speed { get; set; }
+    [Export]
+    public PackedScene Weapon { get; set; }
 }

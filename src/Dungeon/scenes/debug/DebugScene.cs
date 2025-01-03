@@ -31,10 +31,10 @@ public partial class DebugScene : Node
 
             if (entry.GetExtension() == "tscn")
             {
-                string finalPath = path + "/" + entry;
-                var scene = ResourceLoader.Load<PackedScene>(finalPath);
-                var sceneDto = new SceneDto(scene, finalPath, entry.GetBaseName());
-                _debugScenes.Add(sceneDto);
+                // string finalPath = path + "/" + entry;
+                // var scene = ResourceLoader.Load<PackedScene>(finalPath);
+                // var sceneDto = new SceneDto(scene, finalPath, entry.GetBaseName());
+                // _debugScenes.Add(sceneDto);
             }
             
             entry = debugDirectory.GetNext();

@@ -2,6 +2,7 @@ using Dungeon.abstractions;
 using Dungeon.world.characters.commands;
 using Dungeon.world.characters.components;
 using Dungeon.world.constants;
+using Dungeon.world.weapons;
 using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
@@ -30,10 +31,10 @@ public partial class CharacterBodyNode : CharacterBody2D
 
     public void Configure(CharacterResource character)
     {
-        Movement = new Movement(this);
         Character = character;
         Speed = character.Speed;
         Sprite.SpriteFrames = character.Sprite;
+        Movement = new Movement(this);
         uint layer = PhysicsConstants.PlayerLayer;
         
         var combatent = this.GetMetadata<CombatentNode>(nameof(CombatentNode));
@@ -45,6 +46,17 @@ public partial class CharacterBodyNode : CharacterBody2D
         }
         CollisionLayer = layer;
         State = CharacterState.Idle;
+        AddWeapon();
+    }
+
+    private void AddWeapon()
+    {
+        if (HasMeta(nameof(WeaponNode)) || Character.Weapon == null)
+            return;
+
+        var weapon = Character.Weapon.Instantiate<WeaponNode>();
+        AddChild(weapon);
+        weapon.UpdateOwner(this);
     }
 
     private void OnDied()

@@ -1,0 +1,114 @@
+[gd_scene load_steps=11 format=3 uid="uid://buqijds2762no"]
+
+[ext_resource type="Texture2D" uid="uid://b6fb6wn0ih7k2" path="res://world/weapons/sword/weapon_regular_sword.png" id="1_u4ew5"]
+[ext_resource type="Script" path="res://world/weapons/WeaponNode.cs" id="1_y7yg8"]
+[ext_resource type="AudioStream" uid="uid://bghmex5ff8plx" path="res://sounds/sfx/sword.7.ogg" id="2_unsju"]
+[ext_resource type="AudioStream" uid="uid://caws6mbg1x8l7" path="res://sounds/sfx/sfx_sounds_impact7.wav" id="3_kgk3o"]
+[ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="3_kx4jw"]
+[ext_resource type="AudioStream" uid="uid://fuknykhnjno" path="res://sounds/sfx/sfx_wpn_sword3.wav" id="4_0l5wt"]
+
+[sub_resource type="Animation" id="Animation_mnypc"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Body/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+
+[sub_resource type="Animation" id="Animation_jh10d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Body/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lousa"]
+_data = {
+"RESET": SubResource("Animation_jh10d"),
+"attack": SubResource("Animation_mnypc")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ou72i"]
+size = Vector2(6, 19)
+
+[node name="RegularSword" type="Node2D"]
+script = ExtResource("1_y7yg8")
+CriticalSound = ExtResource("3_kgk3o")
+HitSound = ExtResource("4_0l5wt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lousa")
+}
+
+[node name="Sprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_u4ew5")
+offset = Vector2(0, -15)
+
+[node name="Body" type="Area2D" parent="Sprite"]
+position = Vector2(0, -16)
+collision_layer = 8
+collision_mask = 4
+input_pickable = false
+script = ExtResource("3_kx4jw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Body"]
+shape = SubResource("RectangleShape2D_ou72i")
+disabled = true
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_unsju")
+volume_db = -20.0

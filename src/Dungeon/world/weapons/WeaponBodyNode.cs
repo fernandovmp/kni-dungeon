@@ -1,9 +1,10 @@
+using Dungeon.world.characters;
 using Dungeon.world.characters.components;
 using Dungeon.world.constants;
 using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
-namespace Dungeon.world.characters;
+namespace Dungeon.world.weapons;
 
 public partial class WeaponBodyNode : Area2D
 {
@@ -37,7 +38,7 @@ public partial class WeaponBodyNode : Area2D
 
     private void OnBodyEntered(Node2D body)
     {
-        if (CharacterOwner.State == CharacterState.Dead)
+        if (CharacterOwner == null || CharacterOwner.State == CharacterState.Dead)
         {
             return;
         }

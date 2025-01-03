@@ -1,4 +1,5 @@
 using Dungeon.abstractions;
+using Dungeon.world.weapons;
 using FernandoVmp.GodotUtils.Extensions;
 
 namespace Dungeon.world.characters.commands;

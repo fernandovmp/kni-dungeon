@@ -1,5 +1,6 @@
 using Dungeon.abstractions;
 using Dungeon.world.characters.components;
+using Dungeon.world.weapons;
 using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 

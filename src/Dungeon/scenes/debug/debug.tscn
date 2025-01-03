@@ -1,21 +1,28 @@
-[gd_scene load_steps=10 format=3 uid="uid://bet2q8rwyyu31"]
+[gd_scene load_steps=13 format=3 uid="uid://bet2q8rwyyu31"]
 
 [ext_resource type="TileSet" uid="uid://benvgv2a333x6" path="res://world/dungeon/tileset.tres" id="1_8beut"]
 [ext_resource type="Script" path="res://scenes/debug/DebugScene.cs" id="1_r4xu7"]
 [ext_resource type="PackedScene" uid="uid://760ug0fxpf0d" path="res://world/player/player.tscn" id="3_2k58b"]
 [ext_resource type="PackedScene" uid="uid://bxlt3tw6p2h2q" path="res://world/enemies/enemy.tscn" id="4_lrke3"]
 [ext_resource type="Script" path="res://world/enemies/behaviours/ConstantAttackBehaviour.cs" id="5_vivgu"]
+[ext_resource type="Resource" uid="uid://151xwy75d7kb" path="res://world/characters/skeleton/character.tres" id="6_ahg81"]
 [ext_resource type="Script" path="res://ui/health/HeartGaugeNode.cs" id="7_bjys3"]
+[ext_resource type="Resource" uid="uid://bowv5u5cwhyx3" path="res://world/characters/chort/character.tres" id="7_ja7w4"]
 
-[sub_resource type="Resource" id="Resource_g0klk"]
+[sub_resource type="Resource" id="Resource_hckb1"]
 resource_local_to_scene = true
 script = ExtResource("5_vivgu")
 Interval = 3.0
 
-[sub_resource type="Resource" id="Resource_ttsj5"]
+[sub_resource type="Resource" id="Resource_lvcti"]
 resource_local_to_scene = true
 script = ExtResource("5_vivgu")
-Interval = 6.0
+Interval = 3.0
+
+[sub_resource type="Resource" id="Resource_shhky"]
+resource_local_to_scene = true
+script = ExtResource("5_vivgu")
+Interval = 3.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_8win1"]
 font_size = 12
@@ -36,13 +43,21 @@ position = Vector2(193, 108)
 zoom = Vector2(3, 3)
 
 [node name="Player" parent="." instance=ExtResource("3_2k58b")]
+position = Vector2(201, 94)
 
-[node name="Enemy" parent="." instance=ExtResource("4_lrke3")]
-BehaviourResource = SubResource("Resource_g0klk")
+[node name="Orc" parent="." instance=ExtResource("4_lrke3")]
+position = Vector2(132, 50)
+BehaviourResource = SubResource("Resource_hckb1")
 
-[node name="Enemy2" parent="." instance=ExtResource("4_lrke3")]
-position = Vector2(64, 0)
-BehaviourResource = SubResource("Resource_ttsj5")
+[node name="Skeleton" parent="." instance=ExtResource("4_lrke3")]
+position = Vector2(195, 50)
+BehaviourResource = SubResource("Resource_lvcti")
+CharacterResource = ExtResource("6_ahg81")
+
+[node name="Chort" parent="." instance=ExtResource("4_lrke3")]
+position = Vector2(265, 51)
+BehaviourResource = SubResource("Resource_shhky")
+CharacterResource = ExtResource("7_ja7w4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -79,6 +94,3 @@ text = "[1] Load {Scene}  [2] Reload {Scene} [3] Load scene"
 label_settings = SubResource("LabelSettings_8win1")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[connection signal="CombatentUpdated" from="Player" to="CanvasLayer/HeartGauge" method="OnCombatentUpdated"]
-[connection signal="PlayerReadied" from="Player" to="CanvasLayer/HeartGauge" method="OnPlayerReadied"]

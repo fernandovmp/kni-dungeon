@@ -1,12 +1,14 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cp83dnnywp2nm"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=4 format=3 uid="uid://cp83dnnywp2nm"]
 
 [ext_resource type="SpriteFrames" uid="uid://bo8wgnuwj2s3u" path="res://world/characters/orc_warrior/sprite_frames.tres" id="1_hrl3h"]
+[ext_resource type="PackedScene" uid="uid://buqijds2762no" path="res://world/weapons/sword/regular_sword.tscn" id="2_htsfd"]
 [ext_resource type="Script" path="res://world/characters/CharacterResource.cs" id="2_xjcvo"]
 
 [resource]
 script = ExtResource("2_xjcvo")
 Sprite = ExtResource("1_hrl3h")
 Life = 2
-Force = 10
+Force = 6
 Resistance = 0
-Speed = 50
+Speed = 60
+Weapon = ExtResource("2_htsfd")

@@ -1,0 +1,64 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://dentef1fck4ds"]
+
+[ext_resource type="Texture2D" uid="uid://dcxicrte1b1o4" path="res://world/characters/chort/chort_idle_anim_f3.png" id="1_1fv57"]
+[ext_resource type="Texture2D" uid="uid://4hfe7aojxpnx" path="res://world/characters/chort/chort_idle_anim_f0.png" id="2_b6i7c"]
+[ext_resource type="Texture2D" uid="uid://83p4h2iyoedy" path="res://world/characters/chort/chort_idle_anim_f1.png" id="3_eat26"]
+[ext_resource type="Texture2D" uid="uid://5x2vf5leli6" path="res://world/characters/chort/chort_idle_anim_f2.png" id="4_8t6b1"]
+[ext_resource type="Texture2D" uid="uid://bgah4wmyp68d" path="res://world/characters/chort/chort_run_anim_f0.png" id="5_73jqi"]
+[ext_resource type="Texture2D" uid="uid://b60swaotqj8s6" path="res://world/characters/chort/chort_run_anim_f1.png" id="6_1usuj"]
+[ext_resource type="Texture2D" uid="uid://c68y42p44kovn" path="res://world/characters/chort/chort_run_anim_f2.png" id="7_606gd"]
+[ext_resource type="Texture2D" uid="uid://btsgdkx57i2i8" path="res://world/characters/chort/chort_run_anim_f3.png" id="8_ch2rx"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1fv57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_1fv57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_b6i7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eat26")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b6i7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eat26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8t6b1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_1fv57")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_73jqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1usuj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_606gd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ch2rx")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]

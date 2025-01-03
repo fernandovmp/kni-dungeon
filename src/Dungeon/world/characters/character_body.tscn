@@ -1,14 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://dlvumaqtwodwn"]
+[gd_scene load_steps=8 format=3 uid="uid://dlvumaqtwodwn"]
 
 [ext_resource type="Script" path="res://world/characters/CharacterBodyNode.cs" id="1_wiv2v"]
 [ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="2_tmdcn"]
 [ext_resource type="Script" path="res://world/characters/AnimatedCharacterNode.cs" id="3_311fx"]
-[ext_resource type="Script" path="res://world/weapons/WeaponNode.cs" id="4_1mivb"]
-[ext_resource type="AudioStream" uid="uid://caws6mbg1x8l7" path="res://sounds/sfx/sfx_sounds_impact7.wav" id="5_vs8pk"]
-[ext_resource type="AudioStream" uid="uid://fuknykhnjno" path="res://sounds/sfx/sfx_wpn_sword3.wav" id="6_hdt4a"]
-[ext_resource type="Texture2D" uid="uid://b6fb6wn0ih7k2" path="res://world/weapons/sword/weapon_regular_sword.png" id="7_yaa1d"]
-[ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="8_vp42o"]
-[ext_resource type="AudioStream" uid="uid://bghmex5ff8plx" path="res://sounds/sfx/sword.7.ogg" id="9_jj2pi"]
 [ext_resource type="Script" path="res://world/characters/components/CombatentNode.cs" id="10_g3vjw"]
 [ext_resource type="Script" path="res://world/characters/components/HittableNode.cs" id="11_qg8da"]
 [ext_resource type="Script" path="res://world/characters/components/KnockbackNode.cs" id="12_1yxs3"]
@@ -16,30 +10,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g5nyh"]
 radius = 4.0
 height = 14.0
-
-[sub_resource type="Animation" id="Animation_mnypc"]
-resource_name = "attack"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 3.14159]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lousa"]
-_data = {
-"attack": SubResource("Animation_mnypc")
-}
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_byrqu"]
-size = Vector2(6, 19)
 
 [node name="CharacterBody" type="CharacterBody2D"]
 collision_layer = 4
@@ -56,37 +26,6 @@ z_index = 1
 sprite_frames = ExtResource("2_tmdcn")
 animation = &"idle"
 script = ExtResource("3_311fx")
-
-[node name="Weapon" type="Node2D" parent="."]
-script = ExtResource("4_1mivb")
-CriticalSound = ExtResource("5_vs8pk")
-HitSound = ExtResource("6_hdt4a")
-
-[node name="Sprite" type="Sprite2D" parent="Weapon"]
-visible = false
-z_index = 2
-texture = ExtResource("7_yaa1d")
-offset = Vector2(0, -15)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Weapon/Sprite"]
-libraries = {
-"": SubResource("AnimationLibrary_lousa")
-}
-
-[node name="Body" type="Area2D" parent="Weapon/Sprite"]
-collision_layer = 8
-collision_mask = 4
-input_pickable = false
-script = ExtResource("8_vp42o")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/Sprite/Body"]
-position = Vector2(0, -16.5)
-shape = SubResource("RectangleShape2D_byrqu")
-disabled = true
-
-[node name="AttackSound" type="AudioStreamPlayer2D" parent="Weapon"]
-stream = ExtResource("9_jj2pi")
-volume_db = -20.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 volume_db = -15.0

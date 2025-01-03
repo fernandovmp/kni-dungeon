@@ -1,7 +1,8 @@
+using Dungeon.world.characters;
 using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
-namespace Dungeon.world.characters;
+namespace Dungeon.world.weapons;
 
 public partial class WeaponNode : Node2D
 {
@@ -15,23 +16,30 @@ public partial class WeaponNode : Node2D
     
     public override void _Ready()
     {
-        _sprite = GetNode<Sprite2D>("Sprite");
-        _animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
-        _animationPlayer.Connect("animation_finished", new Callable(this, nameof(ResetAnimation)));
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _weaponBody = GetNode<WeaponBodyNode>("Sprite/Body");
         AttackSound = GetNode<AudioStreamPlayer2D>("AttackSound");
-        
-        
-        if (Owner is CharacterBodyNode characterBodyNode)
-        {
-            Configure(characterBodyNode);
-        }
     }
 
     public override void _EnterTree()
     {
         base._EnterTree();
-        Owner.SetMetadata(nameof(WeaponNode), this);
+        SetMetadata();
+    }
+
+    public void UpdateOwner(Node owner)
+    {
+        Owner = owner;
+        SetMetadata();
+    }
+
+    private void SetMetadata()
+    {
+        Owner?.SetMetadata(nameof(WeaponNode), this);
+        if (Owner is CharacterBodyNode characterBodyNode)
+        {
+            Configure(characterBodyNode);
+        }
     }
 
     public override void _ExitTree()
@@ -42,13 +50,11 @@ public partial class WeaponNode : Node2D
 
     public void Attack(bool isDirectionLeft)
     {
-        _weaponBody.Enable();
         if (_isLookingLeft != isDirectionLeft)
         {
             _isLookingLeft = isDirectionLeft;
             Scale = new Vector2(Scale.X * -1, Scale.Y);
         }
-        _sprite.Visible = true;
         _animationPlayer.Play("attack");
         PlayAttackSound();
     }
@@ -57,13 +63,7 @@ public partial class WeaponNode : Node2D
     {
         AttackSound.Play();
     }
-
-    public void ResetAnimation(string name)
-    {
-        _weaponBody.Disable();
-        _sprite.Visible = false;
-    }
-
+    
     public void Configure(CharacterBodyNode character)
     {
         _weaponBody.Configure(character.IsEnemy, character);

@@ -1,12 +1,14 @@
-[gd_resource type="Resource" load_steps=3 format=3 uid="uid://cocpsqtnydb2g"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=4 format=3 uid="uid://cocpsqtnydb2g"]
 
 [ext_resource type="SpriteFrames" uid="uid://dwespldkdu4bb" path="res://world/characters/knight_f/sprite_frames.tres" id="1_3ndhh"]
 [ext_resource type="Script" path="res://world/characters/CharacterResource.cs" id="1_hieio"]
+[ext_resource type="PackedScene" uid="uid://buqijds2762no" path="res://world/weapons/sword/regular_sword.tscn" id="2_plaf3"]
 
 [resource]
 script = ExtResource("1_hieio")
 Sprite = ExtResource("1_3ndhh")
-Life = 2
+Life = 6
 Force = 10
 Resistance = 0
 Speed = 70
+Weapon = ExtResource("2_plaf3")
