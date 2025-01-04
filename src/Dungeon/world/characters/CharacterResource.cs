@@ -3,6 +3,7 @@ using Godot;
 namespace Dungeon.world.characters;
 
 [GlobalClass]
+[Tool]
 public partial class CharacterResource : Resource
 {
     [Export]

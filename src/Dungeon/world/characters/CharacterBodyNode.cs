@@ -31,6 +31,10 @@ public partial class CharacterBodyNode : CharacterBody2D
 
     public void Configure(CharacterResource character)
     {
+        if (character == null)
+        {
+            return;
+        }
         Character = character;
         Speed = character.Speed;
         Sprite.SpriteFrames = character.Sprite;

@@ -7,6 +7,7 @@ using Godot;
 
 namespace Dungeon.world.enemies;
 
+[Tool]
 public partial class EnemyNode : Node2D
 {
     public CharacterBodyNode Character { get; set; }
@@ -26,7 +27,19 @@ public partial class EnemyNode : Node2D
                 Behaviour = null;
             }
         } }
-    [Export] public CharacterResource CharacterResource { get; set; }
+
+    private CharacterResource _characterResource;
+    [Export] public CharacterResource CharacterResource { get => _characterResource;
+        set
+        {
+            _characterResource = value;
+            if (Engine.IsEditorHint() && _characterResource != null)
+            {
+                GetNode<AnimatedSprite2D>("Body/Animation").SpriteFrames = _characterResource.Sprite;
+            }
+        }
+        
+    }
     
     [Signal]
     public delegate void OnDiedEventHandler();
@@ -34,6 +47,10 @@ public partial class EnemyNode : Node2D
     public override void _Ready()
     {
         base._Ready();
+        if (Engine.IsEditorHint())
+        {
+            return;
+        }
         Character = GetNode<CharacterBodyNode>("Body");
         Character.IsEnemy = true;
         Character.Configure(CharacterResource);
@@ -57,6 +74,10 @@ public partial class EnemyNode : Node2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if (Engine.IsEditorHint())
+        {
+            return;
+        }
         base._PhysicsProcess(delta);
         Behaviour?.OnPhysicsProcess(delta, this);
     }

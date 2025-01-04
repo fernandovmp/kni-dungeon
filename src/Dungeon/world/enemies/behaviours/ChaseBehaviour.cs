@@ -6,6 +6,7 @@ using Godot;
 namespace Dungeon.world.enemies.behaviours;
 
 [GlobalClass]
+[Tool]
 public partial class ChaseBehaviour : BehaviourBase
 {
     private PlayerNode _target;

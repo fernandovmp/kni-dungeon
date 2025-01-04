@@ -4,6 +4,7 @@ using Godot.Collections;
 namespace Dungeon.world.enemies.behaviours;
 
 [GlobalClass]
+[Tool]
 public partial class ComposedBehaviour : BehaviourBase
 {
     [Export] public Array<Resource> BehavioursResources { get; set; } = new Array<Resource>();

@@ -5,6 +5,7 @@ using Godot;
 namespace Dungeon.world.enemies.behaviours;
 
 [GlobalClass]
+[Tool]
 public partial class ConstantAttackBehaviour : BehaviourBase
 {
     [Export] public double Interval { get; set; } = 3;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bet2q8rwyyu31"]
+[gd_scene load_steps=14 format=3 uid="uid://bet2q8rwyyu31"]
 
 [ext_resource type="TileSet" uid="uid://benvgv2a333x6" path="res://world/dungeon/tileset.tres" id="1_8beut"]
 [ext_resource type="Script" path="res://scenes/debug/DebugScene.cs" id="1_r4xu7"]
@@ -6,21 +6,19 @@
 [ext_resource type="PackedScene" uid="uid://bxlt3tw6p2h2q" path="res://world/enemies/enemy.tscn" id="4_lrke3"]
 [ext_resource type="Script" path="res://world/enemies/behaviours/ConstantAttackBehaviour.cs" id="5_vivgu"]
 [ext_resource type="Resource" uid="uid://151xwy75d7kb" path="res://world/characters/skeleton/character.tres" id="6_ahg81"]
+[ext_resource type="Resource" uid="uid://cp83dnnywp2nm" path="res://world/characters/orc_warrior/character.tres" id="6_usjb1"]
 [ext_resource type="Script" path="res://ui/health/HeartGaugeNode.cs" id="7_bjys3"]
 [ext_resource type="Resource" uid="uid://bowv5u5cwhyx3" path="res://world/characters/chort/character.tres" id="7_ja7w4"]
 
-[sub_resource type="Resource" id="Resource_hckb1"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_p402q"]
 script = ExtResource("5_vivgu")
 Interval = 3.0
 
-[sub_resource type="Resource" id="Resource_lvcti"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_7kiqq"]
 script = ExtResource("5_vivgu")
 Interval = 3.0
 
-[sub_resource type="Resource" id="Resource_shhky"]
-resource_local_to_scene = true
+[sub_resource type="Resource" id="Resource_hwxvv"]
 script = ExtResource("5_vivgu")
 Interval = 3.0
 
@@ -47,16 +45,17 @@ position = Vector2(201, 94)
 
 [node name="Orc" parent="." instance=ExtResource("4_lrke3")]
 position = Vector2(132, 50)
-BehaviourResource = SubResource("Resource_hckb1")
+BehaviourResource = SubResource("Resource_p402q")
+CharacterResource = ExtResource("6_usjb1")
 
 [node name="Skeleton" parent="." instance=ExtResource("4_lrke3")]
 position = Vector2(195, 50)
-BehaviourResource = SubResource("Resource_lvcti")
+BehaviourResource = SubResource("Resource_7kiqq")
 CharacterResource = ExtResource("6_ahg81")
 
 [node name="Chort" parent="." instance=ExtResource("4_lrke3")]
 position = Vector2(265, 51)
-BehaviourResource = SubResource("Resource_shhky")
+BehaviourResource = SubResource("Resource_hwxvv")
 CharacterResource = ExtResource("7_ja7w4")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
