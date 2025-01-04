@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="WaveResource" load_steps=3 format=3 uid="uid://flvu7o04uvep"]
-
-[ext_resource type="Resource" uid="uid://cp83dnnywp2nm" path="res://world/characters/orc_warrior/character.tres" id="1_sgql6"]
-[ext_resource type="Script" path="res://world/waves/WaveResource.cs" id="3_hoapg"]
-
-[resource]
-script = ExtResource("3_hoapg")
-Enemies = Array[Resource]([ExtResource("1_sgql6"), ExtResource("1_sgql6")])

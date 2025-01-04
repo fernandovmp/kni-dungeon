@@ -31,6 +31,11 @@ public partial class ChaseBehaviour : BehaviourBase
             return;
         }
 
+        if (!enemyNode.BehaviorData.ContainsKey("Target"))
+        {
+            enemyNode.BehaviorData.Add("Target", _target);
+        }
+
         if (_navigationAgent == null)
         {
             _navigationAgent = body.GetNodeOrNull<NavigationAgent2D>("NavigationAgent2D");

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Dungeon.world.characters;
 using Dungeon.world.characters.components;
 using Dungeon.world.enemies.behaviours;
@@ -12,6 +13,7 @@ public partial class EnemyNode : Node2D
 {
     public CharacterBodyNode Character { get; set; }
     public BehaviourBase Behaviour { get; set; }
+    public Dictionary<string, object> BehaviorData { get; private set; } = new Dictionary<string, object>(); 
     private BehaviourBase _behaviourResource;
     [Export]
     public BehaviourBase BehaviourResource { get => _behaviourResource;

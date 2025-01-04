@@ -13,11 +13,13 @@ public partial class WeaponNode : Node2D
     [Export] public AudioStream CriticalSound;
     [Export] public AudioStream HitSound;
     public AudioStreamPlayer2D AttackSound { get; private set; }
+
+    protected virtual string BodyPath => "Sprite/Body";
     
     public override void _Ready()
     {
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        _weaponBody = GetNode<WeaponBodyNode>("Sprite/Body");
+        _weaponBody = GetNode<WeaponBodyNode>(BodyPath);
         AttackSound = GetNode<AudioStreamPlayer2D>("AttackSound");
     }
 
@@ -48,7 +50,7 @@ public partial class WeaponNode : Node2D
         Owner.RemoveMeta(nameof(WeaponNode));
     }
 
-    public void Attack(bool isDirectionLeft)
+    public virtual void Attack(bool isDirectionLeft)
     {
         if (_isLookingLeft != isDirectionLeft)
         {
