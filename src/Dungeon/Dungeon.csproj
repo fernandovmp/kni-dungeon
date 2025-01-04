@@ -13,4 +13,8 @@
     <TrimmerRootAssembly Include="GodotSharp" />
     <TrimmerRootAssembly Include="$(TargetName)" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="world\weapons\crunch\" />
+  </ItemGroup>
 </Project>

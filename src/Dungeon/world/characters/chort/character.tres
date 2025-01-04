@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://bowv5u5cwhyx3"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=4 format=3 uid="uid://bowv5u5cwhyx3"]
 
 [ext_resource type="SpriteFrames" uid="uid://dentef1fck4ds" path="res://world/characters/chort/sprite_frames.tres" id="1_nqvex"]
 [ext_resource type="Script" path="res://world/characters/CharacterResource.cs" id="2_5b560"]
+[ext_resource type="PackedScene" uid="uid://dku0t3ujsisey" path="res://world/weapons/crunch/crunch.tscn" id="2_v5j1h"]
 
 [resource]
 script = ExtResource("2_5b560")
@@ -10,3 +11,4 @@ Life = 4
 Force = 15
 Resistance = 4
 Speed = 50
+Weapon = ExtResource("2_v5j1h")
