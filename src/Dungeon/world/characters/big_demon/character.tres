@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="CharacterResource" load_steps=3 format=3 uid="uid://cifa600j8dryr"]
+[gd_resource type="Resource" script_class="CharacterResource" load_steps=4 format=3 uid="uid://cifa600j8dryr"]
 
 [ext_resource type="SpriteFrames" uid="uid://lqa4id3ccjeg" path="res://world/characters/big_demon/sprite_frames.tres" id="1_yc4rh"]
+[ext_resource type="PackedScene" uid="uid://dr7ymalfm85ae" path="res://world/weapons/crunch/big_crunch.tscn" id="2_e0dve"]
 [ext_resource type="Script" path="res://world/characters/CharacterResource.cs" id="2_ynile"]
 
 [resource]
@@ -10,3 +11,4 @@ Life = 8
 Force = 20
 Resistance = 10
 Speed = 40
+Weapon = ExtResource("2_e0dve")

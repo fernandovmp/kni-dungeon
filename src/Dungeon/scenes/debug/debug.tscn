@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bet2q8rwyyu31"]
+[gd_scene load_steps=16 format=3 uid="uid://bet2q8rwyyu31"]
 
 [ext_resource type="TileSet" uid="uid://benvgv2a333x6" path="res://world/dungeon/tileset.tres" id="1_8beut"]
 [ext_resource type="Script" path="res://scenes/debug/DebugScene.cs" id="1_r4xu7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://cp83dnnywp2nm" path="res://world/characters/orc_warrior/character.tres" id="6_usjb1"]
 [ext_resource type="Script" path="res://ui/health/HeartGaugeNode.cs" id="7_bjys3"]
 [ext_resource type="Resource" uid="uid://bowv5u5cwhyx3" path="res://world/characters/chort/character.tres" id="7_ja7w4"]
+[ext_resource type="Resource" uid="uid://cifa600j8dryr" path="res://world/characters/big_demon/character.tres" id="9_3d8ru"]
 
 [sub_resource type="Resource" id="Resource_p402q"]
 script = ExtResource("5_vivgu")
@@ -19,6 +20,10 @@ script = ExtResource("5_vivgu")
 Interval = 3.0
 
 [sub_resource type="Resource" id="Resource_hwxvv"]
+script = ExtResource("5_vivgu")
+Interval = 3.0
+
+[sub_resource type="Resource" id="Resource_axafb"]
 script = ExtResource("5_vivgu")
 Interval = 3.0
 
@@ -57,6 +62,11 @@ CharacterResource = ExtResource("6_ahg81")
 position = Vector2(265, 51)
 BehaviourResource = SubResource("Resource_hwxvv")
 CharacterResource = ExtResource("7_ja7w4")
+
+[node name="BigDemon" parent="." instance=ExtResource("4_lrke3")]
+position = Vector2(192, 158)
+BehaviourResource = SubResource("Resource_axafb")
+CharacterResource = ExtResource("9_3d8ru")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

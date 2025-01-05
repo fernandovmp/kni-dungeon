@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://dr7ymalfm85ae"]
+
+[ext_resource type="Script" path="res://world/weapons/WeaponNode.cs" id="1_xpx3c"]
+[ext_resource type="Texture2D" uid="uid://bv46f1vku8wa3" path="res://world/weapons/crunch/bite4.png" id="2_l1opf"]
+[ext_resource type="Texture2D" uid="uid://5q1aqf1d87t3" path="res://world/weapons/crunch/bite.png" id="3_p7stt"]
+[ext_resource type="Texture2D" uid="uid://d0igvgkhgni41" path="res://world/weapons/crunch/bite3.png" id="4_rgyi2"]
+[ext_resource type="Texture2D" uid="uid://chf8bbssdt3gx" path="res://world/weapons/crunch/bite2.png" id="5_6tsd8"]
+[ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="6_uusik"]
+
+[sub_resource type="Animation" id="Animation_tnf6p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite/Body/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cm5dp"]
+resource_name = "attack"
+length = 1.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_l1opf"), ExtResource("3_p7stt"), ExtResource("4_rgyi2"), ExtResource("5_6tsd8")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite/Body/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ehfch"]
+_data = {
+"RESET": SubResource("Animation_tnf6p"),
+"attack": SubResource("Animation_cm5dp")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7jco"]
+size = Vector2(15.8333, 15.8333)
+
+[node name="Crunch" type="Node2D"]
+position = Vector2(0, 5)
+scale = Vector2(2.5, 1.5)
+script = ExtResource("1_xpx3c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ehfch")
+}
+
+[node name="Sprite" type="Sprite2D" parent="."]
+visible = false
+z_index = 3
+texture = ExtResource("5_6tsd8")
+
+[node name="Body" type="Area2D" parent="Sprite"]
+script = ExtResource("6_uusik")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Body"]
+position = Vector2(0.416667, -0.416667)
+shape = SubResource("RectangleShape2D_x7jco")
+disabled = true
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+
+[node name="TargetPoint" type="Node2D" parent="."]
