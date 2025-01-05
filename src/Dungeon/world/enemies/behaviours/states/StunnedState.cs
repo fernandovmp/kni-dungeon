@@ -1,4 +1,5 @@
 using Dungeon.abstractions;
+using Dungeon.services.state_machine;
 using Dungeon.world.characters.commands;
 using Godot;
 
@@ -12,9 +13,11 @@ public partial class StunnedState : EnemyState
     private bool _isStunned;
     private double _timer;
     
-    
     [Export]
     public double Duration { get; set; }
+    
+    [Export]
+    public State StateWhenFinished { get; private set; }
     
     public override void Enter()
     {
@@ -36,9 +39,9 @@ public partial class StunnedState : EnemyState
         if (!_isStunned) return;
         
         _timer -= delta;
-        if (_timer <= 0)
+        if (_timer <= 0 && StateWhenFinished != null)
         {
-            TransitionTo("chaseAndAttack");
+            TransitionTo(StateWhenFinished.Name);
         }
     }
 }

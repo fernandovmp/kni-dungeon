@@ -87,6 +87,7 @@ size = Vector2(15.8333, 15.8333)
 position = Vector2(0, 5)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("1_gcy60")
+metadata/TargetPoint = NodePath("TargetPoint")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
