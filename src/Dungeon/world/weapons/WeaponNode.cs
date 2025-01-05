@@ -14,6 +14,19 @@ public partial class WeaponNode : Node2D
     [Export] public AudioStream HitSound;
     public AudioStreamPlayer2D AttackSound { get; private set; }
 
+    public AnimationPlayer AnimationPlayer
+    {
+        get
+        {
+            if (_animationPlayer == null)
+            {
+                _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+                
+            }
+            return _animationPlayer;
+        }
+    }
+
     protected virtual string BodyPath => "Sprite/Body";
     
     public override void _Ready()

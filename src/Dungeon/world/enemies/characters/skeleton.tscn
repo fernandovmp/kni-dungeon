@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://wm6ck7r2by8g"]
+
+[ext_resource type="PackedScene" uid="uid://bxlt3tw6p2h2q" path="res://world/enemies/enemy.tscn" id="1_8lklr"]
+[ext_resource type="Resource" uid="uid://151xwy75d7kb" path="res://world/characters/skeleton/character.tres" id="2_evvle"]
+[ext_resource type="Script" path="res://services/state_machine/StateMachineNode.cs" id="2_hskql"]
+[ext_resource type="Script" path="res://world/enemies/behaviours/states/ChaseAndAttackState.cs" id="4_yc3jm"]
+[ext_resource type="Script" path="res://world/enemies/behaviours/states/StunnedState.cs" id="5_gqhem"]
+
+[node name="Enemy" instance=ExtResource("1_8lklr")]
+CharacterResource = ExtResource("2_evvle")
+
+[node name="StateMachineNode" type="Node" parent="." index="1" node_paths=PackedStringArray("InitialState")]
+script = ExtResource("2_hskql")
+InitialState = NodePath("ChaseAndAttack")
+
+[node name="ChaseAndAttack" type="Node" parent="StateMachineNode" index="0" node_paths=PackedStringArray("_navigationAgent", "Enemy")]
+script = ExtResource("4_yc3jm")
+AttackCooldown = 4.0
+AttackDistance = 30.0
+DistanceToTarget = 20.0
+_navigationAgent = NodePath("../../Body/NavigationAgent2D")
+Enemy = NodePath("../..")
+
+[node name="Stunned" type="Node" parent="StateMachineNode" index="1" node_paths=PackedStringArray("Enemy")]
+script = ExtResource("5_gqhem")
+Duration = 1.0
+Enemy = NodePath("../..")

@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://cocpsqtnydb2g" path="res://world/characters/knight_f/character.tres" id="2_sl4eb"]
 [ext_resource type="PackedScene" uid="uid://dlvumaqtwodwn" path="res://world/characters/character_body.tscn" id="3_idf77"]
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" groups=["Player"]]
 position = Vector2(207, 82)
 script = ExtResource("1_qng4v")
 CharacterResource = ExtResource("2_sl4eb")
