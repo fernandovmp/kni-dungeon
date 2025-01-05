@@ -107,19 +107,19 @@ libraries = {
 }
 
 [node name="Origin" type="Node2D" parent="."]
-rotation = 1.5708
 
 [node name="Sprite" type="Sprite2D" parent="Origin"]
 visible = false
+z_index = 3
 rotation = 1.5708
 texture = ExtResource("2_xsv22")
-offset = Vector2(0, -5)
+offset = Vector2(5, -5)
 
 [node name="Body" type="Area2D" parent="Origin/Sprite"]
 script = ExtResource("5_utu22")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Origin/Sprite/Body"]
-position = Vector2(0, -5.5)
+position = Vector2(5, -5.5)
 shape = SubResource("RectangleShape2D_bv63p")
 disabled = true
 
