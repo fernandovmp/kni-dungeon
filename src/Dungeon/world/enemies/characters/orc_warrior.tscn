@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://6a01533qpx04"]
+
+[ext_resource type="PackedScene" uid="uid://bxlt3tw6p2h2q" path="res://world/enemies/enemy.tscn" id="1_6ti6q"]
+[ext_resource type="Resource" uid="uid://cp83dnnywp2nm" path="res://world/characters/orc_warrior/character.tres" id="2_uljjv"]
+[ext_resource type="Script" path="res://services/state_machine/StateMachineNode.cs" id="3_mjcna"]
+[ext_resource type="Script" path="res://world/enemies/behaviours/states/ChaseState.cs" id="4_xtaaj"]
+[ext_resource type="Script" path="res://world/enemies/behaviours/states/AttackState.cs" id="5_o3e88"]
+
+[node name="Enemy" instance=ExtResource("1_6ti6q")]
+CharacterResource = ExtResource("2_uljjv")
+
+[node name="StateMachineNode" type="Node" parent="." index="1" node_paths=PackedStringArray("InitialState")]
+script = ExtResource("3_mjcna")
+InitialState = NodePath("Chase")
+
+[node name="Chase" type="Node" parent="StateMachineNode" index="0" node_paths=PackedStringArray("_navigationAgent", "StateWhenReachTarget", "Enemy")]
+script = ExtResource("4_xtaaj")
+DistanceToTarget = 20.0
+_navigationAgent = NodePath("../../Body/NavigationAgent2D")
+StateWhenReachTarget = NodePath("../Attack")
+Enemy = NodePath("../..")
+
+[node name="Attack" type="Node" parent="StateMachineNode" index="1" node_paths=PackedStringArray("StateWhenAttackFinished", "Enemy")]
+script = ExtResource("5_o3e88")
+AttackCooldown = 1.5
+AttackDistance = 200.0
+StateWhenAttackFinished = NodePath("../Chase")
+Enemy = NodePath("../..")

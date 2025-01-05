@@ -1,4 +1,5 @@
 using Dungeon.abstractions;
+using Dungeon.services.state_machine;
 using Dungeon.world.characters.commands;
 using Godot;
 
@@ -12,6 +13,9 @@ public partial class ChaseState : EnemyState
 
     [Export] private NavigationAgent2D _navigationAgent;
     protected bool NavigationReady;
+    
+    [Export]
+    public State StateWhenReachTarget { get; private set; }
 
     public override void PhysicsUpdate(double delta)
     {
@@ -40,9 +44,13 @@ public partial class ChaseState : EnemyState
         }
         
         _navigationAgent.TargetPosition = target.GlobalPosition;
-        if (_navigationAgent.IsNavigationFinished() || target.GlobalPosition.DistanceTo(Enemy.Character.Position) <= DistanceToTarget)
+        if (_navigationAgent.IsNavigationFinished() || target.GlobalPosition.DistanceTo(Enemy.Character.GlobalPosition) <= DistanceToTarget)
         {
             Enemy.Character.TryExecute(new CharacterMovementCommand(Vector2.Zero));
+            if (StateWhenReachTarget != null)
+            {
+                TransitionTo(StateWhenReachTarget.Name);
+            }
             return;
         }
 
