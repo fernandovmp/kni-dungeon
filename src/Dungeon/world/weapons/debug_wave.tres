@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="WaveResource" load_steps=4 format=3 uid="uid://flvu7o04uvep"]
-
-[ext_resource type="Script" path="res://world/waves/WaveResource.cs" id="2_0qrf4"]
-[ext_resource type="Resource" uid="uid://bowv5u5cwhyx3" path="res://world/characters/chort/character.tres" id="2_dytgn"]
-[ext_resource type="Resource" uid="uid://151xwy75d7kb" path="res://world/characters/skeleton/character.tres" id="3_rtk1i"]
-
-[resource]
-script = ExtResource("2_0qrf4")
-Enemies = Array[Resource]([ExtResource("2_dytgn"), ExtResource("2_dytgn"), ExtResource("3_rtk1i")])

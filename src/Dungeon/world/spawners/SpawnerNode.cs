@@ -8,24 +8,11 @@ namespace Dungeon.world.spawners;
 
 public partial class SpawnerNode : Node2D
 {
-    private PackedScene _enemyScene;
-    
-    public override void _Ready()
-    {
-        _enemyScene = ResourceLoader.Load<PackedScene>("res://world/enemies/enemy.tscn");
-    }
 
-    public EnemyNode SpawnEnemy(CharacterResource character, Node root)
+    public EnemyNode SpawnEnemy(PackedScene enemyScene, Node root)
     {
-        var enemyNode = _enemyScene.Instantiate<EnemyNode>();
-        enemyNode.Behaviour = new ComposedBehaviour()
-        {
-            BehavioursResources = new Array<Resource>(new Resource[]
-            {
-                new ChaseBehaviour(), new ConstantAttackBehaviour()
-            })
-        };
-        enemyNode.CharacterResource = character;
+        var enemyNode = enemyScene.Instantiate<EnemyNode>();
+        
         enemyNode.Visible = false;
         enemyNode.Ready += () =>
         {

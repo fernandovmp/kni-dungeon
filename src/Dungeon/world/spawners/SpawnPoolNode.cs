@@ -48,7 +48,7 @@ public partial class SpawnPoolNode : Node2D
         }
     }
 
-    public void SpawnEnemy(CharacterResource character)
+    public void SpawnEnemy(PackedScene enemyScene)
     {
         if (_spawnersNodes.Count == 0)
         {
@@ -62,7 +62,7 @@ public partial class SpawnPoolNode : Node2D
         }
         var spawner = _spawnersNodes[index];
         _lastSpawnerIndex = index;
-        var enemy = spawner.SpawnEnemy(character, _enemiesRoot);
+        var enemy = spawner.SpawnEnemy(enemyScene, _enemiesRoot);
         EmitSignal(SignalName.OnEnemySpawn, enemy);
     }
 

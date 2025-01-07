@@ -18,7 +18,7 @@ public partial class WaveControllerNode : Node2D
     
     private int _currentWaveIndex = -1;
     private double _timer;
-    private Queue<CharacterResource> _enemiesQueue = new Queue<CharacterResource>(0);
+    private Queue<PackedScene> _enemiesQueue = new Queue<PackedScene>(0);
     private bool _notNotifiedWaveEnd;
 
     [Signal] public delegate void OnWaveEndedEventHandler();
@@ -63,7 +63,7 @@ public partial class WaveControllerNode : Node2D
     
     public void StartWave()
     {
-        _enemiesQueue = new Queue<CharacterResource>(CurrentWaveResource!.Enemies);
+        _enemiesQueue = new Queue<PackedScene>(CurrentWaveResource!.Enemies);
         _notNotifiedWaveEnd = true;
     }
 
@@ -80,8 +80,8 @@ public partial class WaveControllerNode : Node2D
         }
         if (_timer <= 0 && _enemiesQueue.Count > 0)
         {
-            var character = _enemiesQueue.Dequeue();
-            SpawnPool.SpawnEnemy(character);
+            var enemy = _enemiesQueue.Dequeue();
+            SpawnPool.SpawnEnemy(enemy);
             enemyCount += 1;
             _timer = _minimumInterval;
         }

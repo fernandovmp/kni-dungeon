@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://ui/health/HeartGaugeNode.cs" id="6_h6xsi"]
 [ext_resource type="PackedScene" uid="uid://bfojr5tk1kwsm" path="res://world/spawners/spawner001.tscn" id="7_01deu"]
 [ext_resource type="Script" path="res://world/waves/WaveControllerNode.cs" id="8_eepch"]
-[ext_resource type="Resource" uid="uid://flvu7o04uvep" path="res://world/weapons/debug_wave.tres" id="9_3bg8u"]
+[ext_resource type="Resource" uid="uid://flvu7o04uvep" path="res://world/waves/resources/debug_wave.tres" id="9_3bg8u"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_r6sdq"]
 vertices = PackedVector2Array(331, 134, 309, 134, 309, 74, 331, 74, 299, 70, 277, 70, 277, 58, 293, 58, 299, 26, 293, 26, 267, 74, 261, 134, 219, 134, 213, 106, 235, 74, 219, 198, 165, 138, 171, 106, 165, 86, 171, 54, 149, 198, 149, 182, 123, 138, 133, 166, 341, 186, 341, 138, 363, 138, 363, 198, 261, 198, 267, 186, 213, 54, 235, 26, 165, 26, 165, 42, 133, 182, 59, 166, 53, 54, 59, 58, 59, 182, 37, 182, 53, 170, 37, 170, 37, 54, 37, 42, 59, 42, 123, 86, 133, 58, 133, 42)
