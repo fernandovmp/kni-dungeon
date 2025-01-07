@@ -57,6 +57,9 @@ public partial class ChaseState : EnemyState
         Vector2 currentAgentPosition = Enemy.Character.GlobalTransform.Origin;
         Vector2 nextPathPosition = _navigationAgent.GetNextPathPosition();
         Vector2 direction = currentAgentPosition.DirectionTo(nextPathPosition);
-        Enemy.Character.TryExecute(new CharacterMovementCommand(direction));
+        // Vector2 direction =target.GlobalPosition -  Enemy.Character.GlobalPosition;
+        // GD.Print(direction);
+        Vector2 desiredDirection = Enemy.ContextMap.GetDesiredDirection(direction);
+        Enemy.Character.TryExecute(new CharacterMovementCommand(desiredDirection));
     }
 }

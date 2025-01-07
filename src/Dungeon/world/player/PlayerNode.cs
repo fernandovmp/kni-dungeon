@@ -39,7 +39,7 @@ public partial class PlayerNode : Node2D
 
     private void EmitCombatentUpdate() => EmitSignal(SignalName.CombatentUpdated, this);
 
-    public override void _PhysicsProcess(double detla)
+    public override void _PhysicsProcess(double delta)
     {
         Vector2 direction = GetDirectionFromInput();
         Character.TryExecute(new CharacterMovementCommand(direction));

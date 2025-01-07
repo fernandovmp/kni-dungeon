@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxlt3tw6p2h2q"]
+[gd_scene load_steps=5 format=3 uid="uid://bxlt3tw6p2h2q"]
 
 [ext_resource type="Script" path="res://world/enemies/EnemyNode.cs" id="1_p2gey"]
+[ext_resource type="PackedScene" uid="uid://wugswvmohit" path="res://world/enemies/context_raycast.tscn" id="4_370a2"]
 [ext_resource type="PackedScene" uid="uid://dlvumaqtwodwn" path="res://world/characters/character_body.tscn" id="5_lmeq7"]
 [ext_resource type="PackedScene" uid="uid://gugos5a2guv4" path="res://world/particles/enemy_explosion.tscn" id="6_qtc3v"]
 
@@ -15,6 +16,8 @@ IsEnemy = true
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Body"]
 path_desired_distance = 13.0
 target_desired_distance = 20.0
+
+[node name="ContextRaycast" parent="Body" instance=ExtResource("4_370a2")]
 
 [connection signal="CharacterDied" from="Body" to="Body/MagicExplosion" method="Play"]
 [connection signal="finished" from="Body/MagicExplosion" to="." method="DeathAnimationFinished"]

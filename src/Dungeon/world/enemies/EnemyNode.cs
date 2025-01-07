@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Dungeon.services.context_map;
 using Dungeon.world.characters;
 using Dungeon.world.characters.components;
 using Dungeon.world.enemies.behaviours;
@@ -12,6 +13,7 @@ namespace Dungeon.world.enemies;
 public partial class EnemyNode : Node2D
 {
     public CharacterBodyNode Character { get; set; }
+    public ContextMapNode ContextMap { get; private set; }
     public BehaviourBase Behaviour { get; set; }
     public Dictionary<string, object> BehaviorData { get; private set; } = new Dictionary<string, object>(); 
     private BehaviourBase _behaviourResource;
@@ -58,6 +60,7 @@ public partial class EnemyNode : Node2D
         Character.Configure(CharacterResource);
         var combatent = Character.GetMetadata<CombatentNode>(nameof(CombatentNode));
         combatent.Connect(CombatentNode.SignalName.Died, new Callable(this, nameof(Died)));
+        ContextMap = GetNode<ContextMapNode>("Body/ContextRaycast");
     }
 
     private void Died()
