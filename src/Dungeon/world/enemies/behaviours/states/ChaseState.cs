@@ -54,12 +54,9 @@ public partial class ChaseState : EnemyState
             return;
         }
 
-        Vector2 currentAgentPosition = Enemy.Character.GlobalTransform.Origin;
         Vector2 nextPathPosition = _navigationAgent.GetNextPathPosition();
-        Vector2 direction = currentAgentPosition.DirectionTo(nextPathPosition);
-        // Vector2 direction =target.GlobalPosition -  Enemy.Character.GlobalPosition;
-        // GD.Print(direction);
+        Vector2 direction = nextPathPosition - Enemy.Character.GlobalPosition;
         Vector2 desiredDirection = Enemy.ContextMap.GetDesiredDirection(direction);
-        Enemy.Character.TryExecute(new CharacterMovementCommand(desiredDirection));
+        Enemy.Character.TryExecute(new CharacterMovementWithSteeringCommand(desiredDirection, delta));
     }
 }

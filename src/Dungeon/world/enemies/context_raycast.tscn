@@ -7,40 +7,40 @@ script = ExtResource("1_5udkp")
 
 [node name="0" type="RayCast2D" parent="."]
 position = Vector2(0, -1)
-target_position = Vector2(0, -20)
+target_position = Vector2(0, -30)
 collide_with_areas = true
 
 [node name="1" type="RayCast2D" parent="."]
 position = Vector2(1, -1)
-target_position = Vector2(15, -15)
+target_position = Vector2(20, -20)
 collide_with_areas = true
 
 [node name="2" type="RayCast2D" parent="."]
 position = Vector2(1, 0)
-target_position = Vector2(20, 0)
+target_position = Vector2(30, 0)
 collide_with_areas = true
 
 [node name="3" type="RayCast2D" parent="."]
 position = Vector2(1, 1)
-target_position = Vector2(15, 15)
+target_position = Vector2(20, 20)
 collide_with_areas = true
 
 [node name="4" type="RayCast2D" parent="."]
 position = Vector2(0, 1)
-target_position = Vector2(0, 20)
+target_position = Vector2(0, 30)
 collide_with_areas = true
 
 [node name="5" type="RayCast2D" parent="."]
 position = Vector2(-1, 1)
-target_position = Vector2(-15, 15)
+target_position = Vector2(-20, 20)
 collide_with_areas = true
 
 [node name="6" type="RayCast2D" parent="."]
 position = Vector2(-1, 0)
-target_position = Vector2(-20, 0)
+target_position = Vector2(-30, 0)
 collide_with_areas = true
 
 [node name="7" type="RayCast2D" parent="."]
 position = Vector2(-1, -1)
-target_position = Vector2(-15, -15)
+target_position = Vector2(-20, -20)
 collide_with_areas = true
