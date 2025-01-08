@@ -22,7 +22,8 @@ _navigationAgent = NodePath("../../Body/NavigationAgent2D")
 StateWhenReachTarget = NodePath("../Stunned")
 Enemy = NodePath("../..")
 
-[node name="Stunned" type="Node" parent="StateMachineNode" index="1" node_paths=PackedStringArray("Enemy")]
+[node name="Stunned" type="Node" parent="StateMachineNode" index="1" node_paths=PackedStringArray("StateWhenFinished", "Enemy")]
 script = ExtResource("5_gqhem")
 Duration = 1.0
+StateWhenFinished = NodePath("../ChaseAndAttack")
 Enemy = NodePath("../..")
