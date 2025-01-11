@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://world/weapons/knife/KnifeNode.cs" id="1_ef2jb"]
 [ext_resource type="AudioStream" uid="uid://caws6mbg1x8l7" path="res://sounds/sfx/sfx_sounds_impact7.wav" id="2_lnmuo"]
 [ext_resource type="Texture2D" uid="uid://cbcqv54gqnhfd" path="res://world/weapons/knife/weapon_knife.png" id="2_xsv22"]
-[ext_resource type="AudioStream" uid="uid://fuknykhnjno" path="res://sounds/sfx/sfx_wpn_sword3.wav" id="2_yimji"]
+[ext_resource type="AudioStream" uid="uid://xdkv6qy8npgy" path="res://sounds/sfx/sfx_damage_hit1.wav" id="3_fdjln"]
 [ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="5_utu22"]
-[ext_resource type="AudioStream" uid="uid://bghmex5ff8plx" path="res://sounds/sfx/sword.7.ogg" id="5_vwyy4"]
+[ext_resource type="AudioStream" uid="uid://bghfs01o3i01p" path="res://sounds/sfx/knifeSlice.ogg" id="6_00l5l"]
 
 [sub_resource type="Animation" id="Animation_41d8s"]
 length = 0.001
@@ -98,7 +98,7 @@ size = Vector2(6, 13)
 [node name="Knife" type="Node2D"]
 script = ExtResource("1_ef2jb")
 CriticalSound = ExtResource("2_lnmuo")
-HitSound = ExtResource("2_yimji")
+HitSound = ExtResource("3_fdjln")
 metadata/TargetPoint = NodePath("TargetPoint")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -124,6 +124,7 @@ shape = SubResource("RectangleShape2D_bv63p")
 disabled = true
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_vwyy4")
+stream = ExtResource("6_00l5l")
+volume_db = -20.0
 
 [node name="TargetPoint" type="Node2D" parent="."]
