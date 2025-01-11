@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://wgfamaju2y46"]
+
+[ext_resource type="PackedScene" uid="uid://bxlt3tw6p2h2q" path="res://world/enemies/enemy.tscn" id="1_gaeoo"]
+[ext_resource type="Resource" uid="uid://cifa600j8dryr" path="res://world/characters/big_demon/character.tres" id="2_hrq86"]
+[ext_resource type="Script" path="res://services/state_machine/StateMachineNode.cs" id="3_l0fvv"]
+[ext_resource type="Script" path="res://world/enemies/behaviours/states/ChaseState.cs" id="4_t1aho"]
+[ext_resource type="Script" path="res://world/enemies/behaviours/states/AttackAndJumpState.cs" id="5_f7bmb"]
+[ext_resource type="Script" path="res://world/enemies/behaviours/states/StunnedState.cs" id="6_a2c8i"]
+
+[node name="Enemy" instance=ExtResource("1_gaeoo")]
+CharacterResource = ExtResource("2_hrq86")
+
+[node name="StateMachineNode" type="Node" parent="." index="1" node_paths=PackedStringArray("InitialState")]
+script = ExtResource("3_l0fvv")
+InitialState = NodePath("Chase")
+
+[node name="Chase" type="Node" parent="StateMachineNode" index="0" node_paths=PackedStringArray("_navigationAgent", "StateWhenReachTarget", "Enemy")]
+script = ExtResource("4_t1aho")
+DistanceToTarget = 30.0
+_navigationAgent = NodePath("../../Body/NavigationAgent2D")
+StateWhenReachTarget = NodePath("../AttackAndJump")
+Enemy = NodePath("../..")
+
+[node name="AttackAndJump" type="Node" parent="StateMachineNode" index="1" node_paths=PackedStringArray("StateWhenAttackFinished", "Enemy")]
+script = ExtResource("5_f7bmb")
+AttackCooldown = 2.0
+AttackDistance = 200.0
+JumpForce = 200.0
+JumpDelay = 0.4
+StateWhenAttackFinished = NodePath("../Stunned")
+Enemy = NodePath("../..")
+
+[node name="Stunned" type="Node" parent="StateMachineNode" index="2" node_paths=PackedStringArray("StateWhenFinished", "Enemy")]
+script = ExtResource("6_a2c8i")
+Duration = 0.5
+StateWhenFinished = NodePath("../Chase")
+Enemy = NodePath("../..")

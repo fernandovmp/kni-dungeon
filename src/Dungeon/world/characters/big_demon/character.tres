@@ -9,6 +9,6 @@ script = ExtResource("2_ynile")
 Sprite = ExtResource("1_yc4rh")
 Life = 8
 Force = 20
-Resistance = 10
+Resistance = 30
 Speed = 40
 Weapon = ExtResource("2_e0dve")
