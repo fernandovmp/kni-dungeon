@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dr7ymalfm85ae"]
+[gd_scene load_steps=13 format=3 uid="uid://dr7ymalfm85ae"]
 
 [ext_resource type="Script" path="res://world/weapons/WeaponNode.cs" id="1_xpx3c"]
+[ext_resource type="AudioStream" uid="uid://b3a25xa60r8fx" path="res://sounds/sfx/sfx_damage_hit7.wav" id="2_fv0kp"]
 [ext_resource type="Texture2D" uid="uid://bv46f1vku8wa3" path="res://world/weapons/crunch/bite4.png" id="2_l1opf"]
 [ext_resource type="Texture2D" uid="uid://5q1aqf1d87t3" path="res://world/weapons/crunch/bite.png" id="3_p7stt"]
 [ext_resource type="Texture2D" uid="uid://d0igvgkhgni41" path="res://world/weapons/crunch/bite3.png" id="4_rgyi2"]
 [ext_resource type="Texture2D" uid="uid://chf8bbssdt3gx" path="res://world/weapons/crunch/bite2.png" id="5_6tsd8"]
 [ext_resource type="Script" path="res://world/weapons/WeaponBodyNode.cs" id="6_uusik"]
+[ext_resource type="AudioStream" uid="uid://chlmp8a7p6f5o" path="res://sounds/sfx/mnstr9.wav" id="7_ktpx1"]
 
 [sub_resource type="Animation" id="Animation_tnf6p"]
 length = 0.001
@@ -87,6 +89,8 @@ size = Vector2(15.8333, 15.8333)
 position = Vector2(0, 5)
 scale = Vector2(2.5, 1.5)
 script = ExtResource("1_xpx3c")
+CriticalSound = ExtResource("2_fv0kp")
+HitSound = ExtResource("2_fv0kp")
 metadata/TargetPoint = NodePath("TargetPoint")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -108,5 +112,7 @@ shape = SubResource("RectangleShape2D_x7jco")
 disabled = true
 
 [node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ktpx1")
+volume_db = -20.0
 
 [node name="TargetPoint" type="Node2D" parent="."]

@@ -28,8 +28,13 @@ License Link: https://creativecommons.org/publicdomain/zero/1.0/
 Link: https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes
 
 [RPG sounds]
-
 Credits: Kenney Vleugels
 License: CC0 1.0
 License Link: https://creativecommons.org/publicdomain/zero/1.0/
 Link: https://opengameart.org/content/50-rpg-sound-effects
+
+[RPG Sound Pack]
+Credis: artisticdude
+License: CC0 1.0
+License Link: https://creativecommons.org/publicdomain/zero/1.0/
+Link: https://opengameart.org/content/rpg-sound-pack
