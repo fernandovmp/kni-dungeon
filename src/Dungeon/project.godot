@@ -13,6 +13,7 @@ config_version=5
 config/name="Dungeon"
 run/main_scene="res://scenes/debug/debug.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://icon.svg"
 
 [display]
@@ -83,3 +84,4 @@ debug_previous_scene={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.133333, 0.133333, 0.133333, 1)
