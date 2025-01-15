@@ -96,6 +96,12 @@ public partial class MainScene : Node2D
     {
         _arenaNode = GetNode<ArenaNode>("Arena");
         _arenaNode.Configure(arenaData);
+        var node = GetTree().GetFirstNodeInGroup("Player");
+        var originNode = GetTree().GetFirstNodeInGroup("PlayerOrigin");
+        if (node is PlayerNode player && originNode is Node2D origin)
+        {
+            player.Character.GlobalPosition = origin.GlobalPosition;
+        }
     }
 
     public void OnWaveMessagePressed()

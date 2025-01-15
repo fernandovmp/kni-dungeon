@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://8nf0bbs0cf8j"]
+[gd_scene load_steps=4 format=3 uid="uid://8nf0bbs0cf8j"]
 
 [ext_resource type="Script" path="res://world/waves/WaveControllerNode.cs" id="1_weyne"]
 [ext_resource type="Script" path="res://world/arena/ArenaNode.cs" id="1_yv8wc"]
+[ext_resource type="Script" path="res://services/CameraFollow.cs" id="2_fllev"]
 
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_yv8wc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
 zoom = Vector2(3, 3)
+script = ExtResource("2_fllev")
+TargetGroup = "PlayerBody"
 
 [node name="Map" type="Node2D" parent="."]
 

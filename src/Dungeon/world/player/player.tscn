@@ -9,7 +9,7 @@ position = Vector2(207, 82)
 script = ExtResource("1_qng4v")
 CharacterResource = ExtResource("2_sl4eb")
 
-[node name="Body" parent="." instance=ExtResource("3_idf77")]
+[node name="Body" parent="." groups=["PlayerBody"] instance=ExtResource("3_idf77")]
 position = Vector2(-12, 21)
 
 [connection signal="Died" from="Body/Combatent" to="." method="OnDied"]
