@@ -4,6 +4,8 @@
 
 [node name="ContextRaycast" type="Node2D"]
 script = ExtResource("1_5udkp")
+DangerValue = 3
+AdjacentDangerValue = 1
 
 [node name="0" type="RayCast2D" parent="."]
 position = Vector2(0, -1)
