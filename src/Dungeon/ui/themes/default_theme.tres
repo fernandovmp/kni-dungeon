@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://divet77vy7lft"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://divet77vy7lft"]
 
 [ext_resource type="FontFile" uid="uid://pkulwmxsl0d2" path="res://ui/fonts/PublicPixel-rv0pA.ttf" id="1_j0s0p"]
 
@@ -71,6 +71,12 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pfni1"]
+bg_color = Color(0.513726, 0.541176, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6nq33"]
+bg_color = Color(0.513726, 0.541176, 1, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0jvse"]
 
 [sub_resource type="Gradient" id="Gradient_e07y4"]
@@ -110,6 +116,14 @@ Button/styles/normal = SubResource("StyleBoxFlat_inlfr")
 Button/styles/pressed = SubResource("StyleBoxFlat_3bx27")
 Fonts/fonts/large = ExtResource("1_j0s0p")
 Fonts/fonts/normal = ExtResource("1_j0s0p")
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = null
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = null
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_pfni1")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_6nq33")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(1, 1, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0)

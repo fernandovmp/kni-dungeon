@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd2stnxste5vs"]
+[gd_scene load_steps=6 format=3 uid="uid://bd2stnxste5vs"]
 
 [ext_resource type="Script" path="res://scenes/title/TitleScene.cs" id="1_vr3n8"]
 [ext_resource type="PackedScene" uid="uid://dhqc7w3cxkj0i" path="res://scenes/title/background.tscn" id="2_3a31k"]
+[ext_resource type="Script" path="res://ui/controls/VolumeSlider.cs" id="3_ak4ho"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gch4v"]
 font_size = 36
@@ -72,6 +73,30 @@ text = "Credits"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Close"
+
+[node name="SoundControl" type="HBoxContainer" parent="CanvasLayer/Main"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -90.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Main/SoundControl"]
+layout_mode = 2
+text = "Volume:"
+
+[node name="SoundSlider" type="HSlider" parent="CanvasLayer/Main/SoundControl"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+value = 50.0
+script = ExtResource("3_ak4ho")
 
 [node name="Credits" type="Control" parent="CanvasLayer"]
 visible = false
