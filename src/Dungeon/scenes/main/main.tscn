@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b76qkxuukf2u4"]
+[gd_scene load_steps=17 format=3 uid="uid://b76qkxuukf2u4"]
 
 [ext_resource type="Script" path="res://scenes/main/MainScene.cs" id="1_sfhro"]
 [ext_resource type="PackedScene" uid="uid://8nf0bbs0cf8j" path="res://world/arena/arena.tscn" id="1_wpur1"]
@@ -12,25 +12,32 @@
 [ext_resource type="Script" path="res://ui/controls/ArenaResultPanel.cs" id="9_3l0gs"]
 [ext_resource type="AudioStream" uid="uid://ot6busqni778" path="res://sounds/sfx/win.ogg" id="11_p0ydc"]
 [ext_resource type="AudioStream" uid="uid://diyfa1it2nxes" path="res://sounds/sfx/gameover.ogg" id="12_nq467"]
+[ext_resource type="PackedScene" uid="uid://o8w13ec04jkn" path="res://ui/controls/sound_control.tscn" id="13_j2acd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q3gid"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhq3s"]
 font_size = 32
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dtbtq"]
+bg_color = Color(0.235294, 0.235294, 0.235294, 0.392157)
+
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_sfhro")
 
 [node name="ProgressMonitor" type="Node2D" parent="."]
 script = ExtResource("2_w5h62")
 
 [node name="Arena" parent="." instance=ExtResource("1_wpur1")]
+process_mode = 1
 
 [node name="WaveController" parent="Arena" index="2"]
 _minimumInterval = 1.5
 _maxEnemyCount = 5
 
 [node name="Player" parent="." instance=ExtResource("2_pv2r0")]
+process_mode = 1
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_j70wr")
@@ -38,6 +45,7 @@ volume_db = -20.0
 autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="MainUI" type="Control" parent="CanvasLayer"]
 visible = false
@@ -220,6 +228,55 @@ text = "Title"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer/ResultsUI"]
 
+[node name="PauseUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PauseUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dtbtq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PauseUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = 150.0
+offset_right = -200.0
+offset_bottom = -150.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Continue" type="Button" parent="CanvasLayer/PauseUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Resume"
+
+[node name="Retry" type="Button" parent="CanvasLayer/PauseUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Retry"
+
+[node name="Title" type="Button" parent="CanvasLayer/PauseUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+text = "Title"
+
+[node name="SoundControl" parent="CanvasLayer/PauseUI" instance=ExtResource("13_j2acd")]
+layout_mode = 1
+offset_left = -356.0
+
 [connection signal="ArenaStateChanged" from="Arena" to="ProgressMonitor" method="OnArenaStateChanged"]
 [connection signal="ArenaStateChanged" from="Arena" to="CanvasLayer/MainUI/WaveMessage" method="_on_arena_arena_state_changed"]
 [connection signal="OnArenaEnemyDied" from="Arena" to="ProgressMonitor" method="OnArenaEnemyDied"]
@@ -233,5 +290,8 @@ text = "Title"
 [connection signal="MessagePressed" from="CanvasLayer/MainUI/WaveMessage" to="." method="OnWaveMessagePressed"]
 [connection signal="pressed" from="CanvasLayer/ResultsUI/VBoxContainer/Retry" to="." method="Retry"]
 [connection signal="pressed" from="CanvasLayer/ResultsUI/VBoxContainer/Title" to="." method="GoToTitle"]
+[connection signal="pressed" from="CanvasLayer/PauseUI/VBoxContainer/Continue" to="." method="Resume"]
+[connection signal="pressed" from="CanvasLayer/PauseUI/VBoxContainer/Retry" to="." method="Retry"]
+[connection signal="pressed" from="CanvasLayer/PauseUI/VBoxContainer/Title" to="." method="GoToTitle"]
 
 [editable path="Arena"]

@@ -17,6 +17,7 @@ public partial class MainScene : Node2D
     private ArenaData _arenaData;
     
     private Control _mainUI;
+    private Control _pauseUI;
     private ArenaResultPanel _resultsUI;
     private AudioStreamPlayer2D _backgroundMusic;
 
@@ -24,7 +25,8 @@ public partial class MainScene : Node2D
     {
         Main,
         Death,
-        Cleared
+        Cleared,
+        Pause
     }
 
     public override void _Ready()
@@ -54,6 +56,7 @@ public partial class MainScene : Node2D
     {
         GetNode<CurrentArena>("CanvasLayer/MainUI/ArenaInfo/CurrentArena").SetArena(arenaData);
         _mainUI = GetNode<Control>("CanvasLayer/MainUI");
+        _pauseUI = GetNode<Control>("CanvasLayer/PauseUI");
         _resultsUI = GetNode<ArenaResultPanel>("CanvasLayer/ResultsUI");
         ShowUI(UIRoutesEnum.Main);
     }
@@ -66,7 +69,12 @@ public partial class MainScene : Node2D
     private void ShowUI(UIRoutesEnum route)
     {
         _mainUI.Visible = route == UIRoutesEnum.Main;
-        if (route == UIRoutesEnum.Cleared || route == UIRoutesEnum.Death)
+        _pauseUI.Visible = route == UIRoutesEnum.Pause;
+        if (route == UIRoutesEnum.Pause)
+        {
+            GetTree().Paused = true;
+        }
+        else if (route == UIRoutesEnum.Cleared || route == UIRoutesEnum.Death)
         {
             var progressMonitor = GetNode<ProgressMonitorNode>("ProgressMonitor");
             var player = GetNode<PlayerNode>("Player");
@@ -80,6 +88,28 @@ public partial class MainScene : Node2D
         {
             _resultsUI.Hide();
         }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+        if (@event.IsActionPressed("ui_cancel"))
+        {
+            if (!GetTree().Paused)
+            {
+                ShowUI(UIRoutesEnum.Pause);
+            }
+            else
+            {
+                Resume();
+            }
+        }
+    }
+
+    private void Resume()
+    {
+        ShowUI(UIRoutesEnum.Main);
+        GetTree().Paused = false;
     }
 
     private void ShowResults(UIRoutesEnum route, ProgressData progress)
@@ -136,11 +166,13 @@ public partial class MainScene : Node2D
 
     public void Retry()
     {
+        GetTree().Paused = false;
         SceneLoader.LoadInto(GetTree().Root, "res://scenes/main/main.tscn");
     }
 
     public void GoToTitle()
     {
+        GetTree().Paused = false;
         SceneLoader.LoadInto(GetTree().Root, "res://scenes/title/title.tscn");
     }
 }
