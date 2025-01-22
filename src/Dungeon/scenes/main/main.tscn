@@ -26,6 +26,10 @@ script = ExtResource("2_w5h62")
 
 [node name="Arena" parent="." instance=ExtResource("1_wpur1")]
 
+[node name="WaveController" parent="Arena" index="2"]
+_minimumInterval = 1.5
+_maxEnemyCount = 5
+
 [node name="Player" parent="." instance=ExtResource("2_pv2r0")]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]

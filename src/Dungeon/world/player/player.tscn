@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://760ug0fxpf0d"]
+[gd_scene load_steps=5 format=3 uid="uid://760ug0fxpf0d"]
 
 [ext_resource type="Script" path="res://world/player/PlayerNode.cs" id="1_qng4v"]
 [ext_resource type="Resource" uid="uid://cocpsqtnydb2g" path="res://world/characters/knight_f/character.tres" id="2_sl4eb"]
 [ext_resource type="PackedScene" uid="uid://dlvumaqtwodwn" path="res://world/characters/character_body.tscn" id="3_idf77"]
+[ext_resource type="PackedScene" uid="uid://wgfamaju2y46" path="res://world/enemies/characters/big_demon.tscn" id="4_rw8uc"]
 
 [node name="Player" type="Node2D" groups=["Player"]]
 position = Vector2(207, 82)
@@ -11,6 +12,9 @@ CharacterResource = ExtResource("2_sl4eb")
 
 [node name="Body" parent="." groups=["PlayerBody"] instance=ExtResource("3_idf77")]
 position = Vector2(-12, 21)
+
+[node name="Enemy" parent="." instance=ExtResource("4_rw8uc")]
+position = Vector2(80, 1179)
 
 [connection signal="Died" from="Body/Combatent" to="." method="OnDied"]
 [connection signal="Hitted" from="Body/Combatent" to="." method="EmitCombatentUpdate"]

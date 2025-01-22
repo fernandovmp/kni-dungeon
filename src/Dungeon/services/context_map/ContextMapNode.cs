@@ -42,15 +42,12 @@ public partial class ContextMapNode : Node2D
     {
         desiredDirection = desiredDirection.Normalized();
         var interests = GetInterestVectors(desiredDirection);
-        GD.Print($"interests: {string.Join(',', interests)}");
         var dangers = GetDangerVectors();
-        GD.Print($"dangers: {string.Join(',', dangers)}");
         var contextMap = new float[interests.Length];
         for (int i = 0; i < interests.Length; i++)
         {
             contextMap[i] = interests[i] - dangers[i];
         }
-        GD.Print($"contextMap: {string.Join(',', contextMap)}");
         return contextMap;
     }
 

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="WaveResource" load_steps=4 format=3 uid="uid://b8s58yx5ooori"]
+
+[ext_resource type="PackedScene" uid="uid://wm6ck7r2by8g" path="res://world/enemies/characters/skeleton.tscn" id="1_dnq2p"]
+[ext_resource type="Script" path="res://world/waves/WaveResource.cs" id="1_pcblg"]
+[ext_resource type="PackedScene" uid="uid://6a01533qpx04" path="res://world/enemies/characters/orc_warrior.tscn" id="2_shllu"]
+
+[resource]
+script = ExtResource("1_pcblg")
+Enemies = Array[PackedScene]([ExtResource("1_dnq2p"), ExtResource("1_dnq2p"), ExtResource("1_dnq2p"), ExtResource("1_dnq2p"), ExtResource("2_shllu"), ExtResource("1_dnq2p"), ExtResource("1_dnq2p"), ExtResource("2_shllu"), ExtResource("2_shllu"), ExtResource("1_dnq2p"), ExtResource("1_dnq2p"), ExtResource("1_dnq2p"), ExtResource("2_shllu"), ExtResource("2_shllu"), ExtResource("2_shllu")])

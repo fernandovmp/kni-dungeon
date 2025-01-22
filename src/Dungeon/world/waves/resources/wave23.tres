@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WaveResource" load_steps=6 format=3 uid="uid://b3rwsl8itl6bq"]
+
+[ext_resource type="PackedScene" uid="uid://wgfamaju2y46" path="res://world/enemies/characters/big_demon.tscn" id="1_jp7sq"]
+[ext_resource type="Script" path="res://world/waves/WaveResource.cs" id="1_k5ytw"]
+[ext_resource type="PackedScene" uid="uid://wm6ck7r2by8g" path="res://world/enemies/characters/skeleton.tscn" id="2_dyu7r"]
+[ext_resource type="PackedScene" uid="uid://dmiblga30i8dr" path="res://world/enemies/characters/chort.tscn" id="3_nkp3g"]
+[ext_resource type="PackedScene" uid="uid://6a01533qpx04" path="res://world/enemies/characters/orc_warrior.tscn" id="4_6yosa"]
+
+[resource]
+script = ExtResource("1_k5ytw")
+Enemies = Array[PackedScene]([ExtResource("1_jp7sq"), ExtResource("1_jp7sq"), ExtResource("1_jp7sq"), ExtResource("2_dyu7r"), ExtResource("2_dyu7r"), ExtResource("2_dyu7r"), ExtResource("1_jp7sq"), ExtResource("3_nkp3g"), ExtResource("3_nkp3g"), ExtResource("3_nkp3g"), ExtResource("1_jp7sq"), ExtResource("4_6yosa"), ExtResource("4_6yosa"), ExtResource("4_6yosa"), ExtResource("1_jp7sq")])

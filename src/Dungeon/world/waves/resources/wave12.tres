@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WaveResource" load_steps=5 format=3 uid="uid://bsb01pfi53dox"]
+
+[ext_resource type="PackedScene" uid="uid://dmiblga30i8dr" path="res://world/enemies/characters/chort.tscn" id="1_dlury"]
+[ext_resource type="Script" path="res://world/waves/WaveResource.cs" id="1_k08p5"]
+[ext_resource type="PackedScene" uid="uid://6a01533qpx04" path="res://world/enemies/characters/orc_warrior.tscn" id="2_kpwo6"]
+[ext_resource type="PackedScene" uid="uid://wm6ck7r2by8g" path="res://world/enemies/characters/skeleton.tscn" id="3_54me8"]
+
+[resource]
+script = ExtResource("1_k08p5")
+Enemies = Array[PackedScene]([ExtResource("1_dlury"), ExtResource("1_dlury"), ExtResource("1_dlury"), ExtResource("2_kpwo6"), ExtResource("3_54me8"), ExtResource("2_kpwo6"), ExtResource("3_54me8"), ExtResource("1_dlury"), ExtResource("3_54me8"), ExtResource("3_54me8"), ExtResource("3_54me8"), ExtResource("2_kpwo6"), ExtResource("2_kpwo6"), ExtResource("2_kpwo6"), ExtResource("1_dlury")])

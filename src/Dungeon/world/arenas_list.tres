@@ -1,28 +1,39 @@
-[gd_resource type="Resource" load_steps=9 format=3 uid="uid://0al47n72jbu0"]
+[gd_resource type="Resource" load_steps=20 format=3 uid="uid://0al47n72jbu0"]
 
-[ext_resource type="Resource" uid="uid://eqtrwbjd50k1" path="res://world/waves/resources/debug_wave01.tres" id="1_5ghki"]
 [ext_resource type="Script" path="res://world/ArenaDefinitionResource.cs" id="1_f6v8m"]
-[ext_resource type="PackedScene" uid="uid://c6oha2xyc2ghj" path="res://world/dungeon/levels/level_00.tscn" id="2_6kr3u"]
-[ext_resource type="Resource" uid="uid://flvu7o04uvep" path="res://world/waves/resources/debug_wave.tres" id="3_ukss3"]
+[ext_resource type="Resource" uid="uid://5430t8yh32yb" path="res://world/waves/resources/wave03.tres" id="1_xeuu4"]
+[ext_resource type="PackedScene" uid="uid://bxpjecy3wpv32" path="res://world/dungeon/levels/level_03.tscn" id="2_po4fa"]
+[ext_resource type="PackedScene" uid="uid://b66vqohoig5uk" path="res://world/dungeon/levels/level_04.tscn" id="3_pyftk"]
+[ext_resource type="PackedScene" uid="uid://mwuqh0xkxslu" path="res://world/dungeon/levels/level_05.tscn" id="4_866f6"]
+[ext_resource type="Resource" uid="uid://cnxl7r25hdqnh" path="res://world/waves/resources/wave01.tres" id="5_lgglk"]
 [ext_resource type="Script" path="res://world/ArenaDefinitionListResource.cs" id="5_wi34w"]
+[ext_resource type="Resource" uid="uid://b8s58yx5ooori" path="res://world/waves/resources/wave02.tres" id="6_xfsem"]
+[ext_resource type="PackedScene" uid="uid://cg2eraci6kvde" path="res://world/dungeon/levels/level_02.tscn" id="7_3w71k"]
+[ext_resource type="PackedScene" uid="uid://cva5d2y5b5u3l" path="res://world/dungeon/levels/level_01.tscn" id="8_28fli"]
+[ext_resource type="Resource" uid="uid://dqbd8p0jxhflm" path="res://world/waves/resources/wave13.tres" id="8_jmbjv"]
+[ext_resource type="Resource" uid="uid://daykekc8w8kct" path="res://world/waves/resources/wave11.tres" id="10_35gyl"]
+[ext_resource type="Resource" uid="uid://bsb01pfi53dox" path="res://world/waves/resources/wave12.tres" id="11_vwjo4"]
+[ext_resource type="Resource" uid="uid://b3rwsl8itl6bq" path="res://world/waves/resources/wave23.tres" id="12_3x386"]
+[ext_resource type="Resource" uid="uid://cp6pvaj5vab4q" path="res://world/waves/resources/wave21.tres" id="14_wngay"]
+[ext_resource type="Resource" uid="uid://b1hnoj7dsl60w" path="res://world/waves/resources/wave22.tres" id="15_p1xe4"]
 
 [sub_resource type="Resource" id="Resource_jducg"]
 script = ExtResource("1_f6v8m")
-Levels = Array[PackedScene]([ExtResource("2_6kr3u")])
-Waves = Array[Object]([ExtResource("3_ukss3"), ExtResource("1_5ghki")])
-FinalWaves = Array[Object]([ExtResource("1_5ghki")])
+Levels = Array[PackedScene]([ExtResource("2_po4fa"), ExtResource("3_pyftk"), ExtResource("4_866f6")])
+Waves = Array[Object]([ExtResource("5_lgglk"), ExtResource("6_xfsem")])
+FinalWaves = Array[Object]([ExtResource("1_xeuu4")])
 
 [sub_resource type="Resource" id="Resource_ebg65"]
 script = ExtResource("1_f6v8m")
-Levels = Array[PackedScene]([ExtResource("2_6kr3u")])
-Waves = Array[Object]([ExtResource("3_ukss3"), ExtResource("1_5ghki")])
-FinalWaves = Array[Object]([ExtResource("1_5ghki")])
+Levels = Array[PackedScene]([ExtResource("2_po4fa"), ExtResource("3_pyftk"), ExtResource("7_3w71k")])
+Waves = Array[Object]([ExtResource("10_35gyl"), ExtResource("11_vwjo4")])
+FinalWaves = Array[Object]([ExtResource("8_jmbjv")])
 
 [sub_resource type="Resource" id="Resource_usd1j"]
 script = ExtResource("1_f6v8m")
-Levels = Array[PackedScene]([ExtResource("2_6kr3u")])
-Waves = Array[Object]([ExtResource("3_ukss3"), ExtResource("1_5ghki")])
-FinalWaves = Array[Object]([ExtResource("1_5ghki")])
+Levels = Array[PackedScene]([ExtResource("8_28fli"), ExtResource("7_3w71k")])
+Waves = Array[Object]([ExtResource("14_wngay"), ExtResource("15_p1xe4")])
+FinalWaves = Array[Object]([ExtResource("12_3x386")])
 
 [resource]
 script = ExtResource("5_wi34w")
