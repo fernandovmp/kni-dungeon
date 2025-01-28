@@ -7,6 +7,7 @@ namespace Dungeon.ui.controls;
 public partial class WaveMessage : Panel
 {
     private Label _label;
+    private Label _pressSpaceLabel;
     private ArenaStateEnum _currentState;
     private double _timer = 4;
     private bool _awaitConfirmation;
@@ -43,6 +44,7 @@ public partial class WaveMessage : Panel
     {
         base._Ready();
         _label = GetNode<Label>("Label");
+        _pressSpaceLabel = GetNode<Label>("PressSpace");
     }
 
     public void _on_arena_arena_state_changed(ArenaState state)
@@ -55,6 +57,7 @@ public partial class WaveMessage : Panel
             _ => string.Empty
         };
         _awaitConfirmation = state.State != ArenaStateEnum.WaveChange;
+        _pressSpaceLabel.Visible = _awaitConfirmation;
         Visible = true;
         if (_label != null)
         {

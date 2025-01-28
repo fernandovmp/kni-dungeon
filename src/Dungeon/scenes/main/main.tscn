@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b76qkxuukf2u4"]
+[gd_scene load_steps=18 format=3 uid="uid://b76qkxuukf2u4"]
 
 [ext_resource type="Script" path="res://scenes/main/MainScene.cs" id="1_sfhro"]
 [ext_resource type="PackedScene" uid="uid://8nf0bbs0cf8j" path="res://world/arena/arena.tscn" id="1_wpur1"]
@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://o8w13ec04jkn" path="res://ui/controls/sound_control.tscn" id="13_j2acd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q3gid"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0o2mk"]
+font_size = 10
 
 [sub_resource type="LabelSettings" id="LabelSettings_rhq3s"]
 font_size = 32
@@ -48,7 +51,6 @@ autoplay = true
 process_mode = 3
 
 [node name="MainUI" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,6 +92,21 @@ text = "This is a test"
 label_settings = SubResource("LabelSettings_q3gid")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PressSpace" type="Label" parent="CanvasLayer/MainUI/WaveMessage"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -16.0
+offset_right = 65.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "[PRESS SPACE]"
+label_settings = SubResource("LabelSettings_0o2mk")
 
 [node name="ArenaInfo" type="VBoxContainer" parent="CanvasLayer/MainUI"]
 layout_mode = 1
@@ -229,6 +246,7 @@ text = "Title"
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer/ResultsUI"]
 
 [node name="PauseUI" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
