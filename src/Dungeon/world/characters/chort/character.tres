@@ -12,3 +12,4 @@ Force = 15
 Resistance = 4
 Speed = 50
 Weapon = ExtResource("2_v5j1h")
+LifeDropChance = 0.2

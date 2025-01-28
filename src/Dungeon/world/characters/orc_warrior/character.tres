@@ -12,3 +12,4 @@ Force = 6
 Resistance = 0
 Speed = 60
 Weapon = ExtResource("2_kf3gd")
+LifeDropChance = 0.08

@@ -42,6 +42,8 @@ _maxEnemyCount = 5
 [node name="Player" parent="." instance=ExtResource("2_pv2r0")]
 process_mode = 1
 
+[node name="ItemsRoot" type="Node2D" parent="." groups=["ItemsRoot"]]
+
 [node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_j70wr")
 volume_db = -20.0

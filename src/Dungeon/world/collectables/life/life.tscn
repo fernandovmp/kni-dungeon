@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://by04cemmoy27n"]
+
+[ext_resource type="Texture2D" uid="uid://dfkg2xu1vofc" path="res://ui/health/ui_heart_full.png" id="1_j3j66"]
+[ext_resource type="Script" path="res://world/collectables/life/LifeCollectable.cs" id="2_3op7q"]
+[ext_resource type="AudioStream" uid="uid://c3gk70s7fkhc4" path="res://world/collectables/life/sfx_sounds_powerup6.wav" id="3_03od5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqe1m"]
+
+[node name="Life" type="Sprite2D" node_paths=PackedStringArray("_collectSound", "Collision")]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_j3j66")
+script = ExtResource("2_3op7q")
+_collectSound = NodePath("CollectSound")
+Collision = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.8, 0.735294)
+shape = SubResource("RectangleShape2D_dqe1m")
+
+[node name="CollectSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_03od5")
+volume_db = -20.0

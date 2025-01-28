@@ -3,6 +3,7 @@ using Dungeon.services.context_map;
 using Dungeon.world.characters;
 using Dungeon.world.characters.components;
 using Dungeon.world.enemies.behaviours;
+using Dungeon.world.player;
 using Dungeon.world.weapons;
 using FernandoVmp.GodotUtils.Extensions;
 using Godot;
@@ -45,6 +46,9 @@ public partial class EnemyNode : Node2D
         
     }
     
+    [Export]
+    public PackedScene LifeDropScene { get; set; }
+    
     [Signal]
     public delegate void OnDiedEventHandler();
 
@@ -70,6 +74,34 @@ public partial class EnemyNode : Node2D
         var weapon = Character.GetMetadata<WeaponNode>(nameof(WeaponNode));
         weapon?.Hide();
         EmitSignal(SignalName.OnDied);
+
+        if (ShouldDropLife())
+        {
+            var rootNode = GetTree().GetFirstNodeInGroup("ItemsRoot");
+            if (rootNode != null)
+            {
+                var life = LifeDropScene.Instantiate<Node2D>();
+                life.GlobalPosition = Character.GlobalPosition;
+                rootNode.CallDeferred("add_child", life);
+            }
+        }
+    }
+
+    public bool ShouldDropLife()
+    {
+        var playerNode = GetTree().GetFirstNodeInGroup("Player");
+        const int lifeLimit = 11;
+        if (playerNode is PlayerNode player)
+        {
+            CombatentNode playerCombatent = player.Character.GetMetadata<CombatentNode>(nameof(CombatentNode));
+            int currentLife = playerCombatent.Life;
+            
+            float chance = CharacterResource.LifeDropChance * ((lifeLimit - currentLife) * 0.1f);
+            float rand = GD.Randf();
+            return rand <= chance;
+        }
+
+        return false;
     }
 
     public void DeathAnimationFinished()

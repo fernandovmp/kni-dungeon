@@ -20,6 +20,10 @@ public partial class CharacterResource : Resource
     
     [Export]
     public int Speed { get; set; }
+    
     [Export]
     public PackedScene Weapon { get; set; }
+    
+    [Export]
+    public float LifeDropChance { get; set; }
 }

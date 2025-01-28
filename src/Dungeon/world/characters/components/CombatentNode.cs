@@ -1,3 +1,4 @@
+using System;
 using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
@@ -5,6 +6,7 @@ namespace Dungeon.world.characters.components;
 
 public partial class CombatentNode : Node
 {
+    private int _maxLife;
     public int Life { get; private set; }
     public int Force { get; private set; }
     public int Resistance { get; private set; }
@@ -13,6 +15,8 @@ public partial class CombatentNode : Node
     public delegate void DiedEventHandler();
     [Signal]
     public delegate void HittedEventHandler();
+    [Signal]
+    public delegate void HealedEventHandler();
     
     public bool IsAlive => Life > 0;
 
@@ -41,9 +45,17 @@ public partial class CombatentNode : Node
             EmitSignal(SignalName.Hitted);
         }
     }
+    
+    public void Heal(int amount)
+    {
+        Life += amount;
+        Life = Math.Min(_maxLife, Life);
+        EmitSignal(SignalName.Healed);
+    }
 
     public void Load(CharacterResource characterResource)
     {
+        _maxLife = characterResource.Life;
         Life = characterResource.Life;
         Force = characterResource.Force;
         Resistance = characterResource.Resistance;

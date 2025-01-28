@@ -1,8 +1,6 @@
 using Dungeon.abstractions;
 using Dungeon.world.characters;
 using Dungeon.world.characters.commands;
-using Dungeon.world.characters.components;
-using FernandoVmp.GodotUtils.Extensions;
 using Godot;
 
 namespace Dungeon.world.player;
