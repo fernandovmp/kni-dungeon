@@ -20,6 +20,7 @@ Credits: Patrick Maney
 License: CC-BY 3.0
 License Link: http://creativecommons.org/licenses/by/3.0/
 Link: https://opengameart.org/content/adventure-ho
+Changes: Converted file format to ogg
 
 [20 Sword Sound Effects (Attacks and Clashes)]
 Credits: StarNinjas
@@ -38,3 +39,10 @@ Credis: artisticdude
 License: CC0 1.0
 License Link: https://creativecommons.org/publicdomain/zero/1.0/
 Link: https://opengameart.org/content/rpg-sound-pack
+
+[Strange Dungeon Theme]
+Credis: Patrick Maney
+License: CC-BY 3.0
+License Link: https://creativecommons.org/licenses/by/3.0/
+Link: https://opengameart.org/content/strange-dungeon-theme
+Changes: Converted file format to ogg

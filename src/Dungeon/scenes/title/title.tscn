@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd2stnxste5vs"]
+[gd_scene load_steps=8 format=3 uid="uid://bd2stnxste5vs"]
 
 [ext_resource type="Script" path="res://scenes/title/TitleScene.cs" id="1_vr3n8"]
 [ext_resource type="PackedScene" uid="uid://dhqc7w3cxkj0i" path="res://scenes/title/background.tscn" id="2_3a31k"]
 [ext_resource type="PackedScene" uid="uid://o8w13ec04jkn" path="res://ui/controls/sound_control.tscn" id="3_xqtbv"]
+[ext_resource type="AudioStream" uid="uid://c1igropjtrgjc" path="res://sounds/music/Strange-Dungeon.ogg" id="4_svwhm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gch4v"]
 font_size = 36
@@ -193,6 +194,11 @@ text = "Go back"
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(227, 147)
 zoom = Vector2(3, 3)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_svwhm")
+volume_db = -20.0
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/Main/Buttons/Start" to="." method="Start"]
 [connection signal="pressed" from="CanvasLayer/Main/Buttons/Controls" to="." method="Controls"]
