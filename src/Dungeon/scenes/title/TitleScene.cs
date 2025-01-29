@@ -10,11 +10,13 @@ public partial class TitleScene : Node2D
 {
     private Control _mainUi;
     private Control _creditsUi;
+    private Control _controlsUi;
     
     public override void _Ready()
     {
         _mainUi = GetNode<Control>("CanvasLayer/Main");
         _creditsUi = GetNode<Control>("CanvasLayer/Credits");
+        _controlsUi = GetNode<Control>("CanvasLayer/Controls");
         
         using var file = FileAccess.Open("res://credits.txt", FileAccess.ModeFlags.Read);
         var credits = file.GetAsText();
@@ -37,12 +39,28 @@ public partial class TitleScene : Node2D
     {
         _mainUi.Visible = false;
         _creditsUi.Visible = true;
+        _controlsUi.Visible = false;
+    }
+    
+    public void Controls()
+    {
+        _mainUi.Visible = false;
+        _creditsUi.Visible = false;
+        _controlsUi.Visible = true;
     }
 
     public void CloseCredits()
     {
         _mainUi.Visible = true;
         _creditsUi.Visible = false;
+        _controlsUi.Visible = false;
+    }
+    
+    public void CloseControls()
+    {
+        _mainUi.Visible = true;
+        _creditsUi.Visible = false;
+        _controlsUi.Visible = false;
     }
     
     public void Quit()

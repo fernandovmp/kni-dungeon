@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd2stnxste5vs"]
+[gd_scene load_steps=7 format=3 uid="uid://bd2stnxste5vs"]
 
 [ext_resource type="Script" path="res://scenes/title/TitleScene.cs" id="1_vr3n8"]
 [ext_resource type="PackedScene" uid="uid://dhqc7w3cxkj0i" path="res://scenes/title/background.tscn" id="2_3a31k"]
@@ -11,6 +11,9 @@ shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lx0lw"]
 line_spacing = 12.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_7glt0"]
+line_spacing = 16.0
 
 [node name="Title" type="Node2D"]
 script = ExtResource("1_vr3n8")
@@ -63,6 +66,11 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_vertical = 3
 text = "Start"
+
+[node name="Controls" type="Button" parent="CanvasLayer/Main/Buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Controls"
 
 [node name="Credits" type="Button" parent="CanvasLayer/Main/Buttons"]
 layout_mode = 2
@@ -133,11 +141,62 @@ custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 text = "Go back"
 
+[node name="Controls" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Controls"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Controls/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/Controls/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "[WASD} Move
+[Mouse Right Click] Attack
+[ESC] Open pause menu"
+label_settings = SubResource("LabelSettings_7glt0")
+
+[node name="GoBack" type="Button" parent="CanvasLayer/Controls/VBoxContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Go back"
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(227, 147)
 zoom = Vector2(3, 3)
 
 [connection signal="pressed" from="CanvasLayer/Main/Buttons/Start" to="." method="Start"]
+[connection signal="pressed" from="CanvasLayer/Main/Buttons/Controls" to="." method="Controls"]
 [connection signal="pressed" from="CanvasLayer/Main/Buttons/Credits" to="." method="Credits"]
 [connection signal="pressed" from="CanvasLayer/Main/Buttons/Quit" to="." method="Quit"]
 [connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/GoBack" to="." method="CloseCredits"]
+[connection signal="pressed" from="CanvasLayer/Controls/VBoxContainer/GoBack" to="." method="CloseControls"]
