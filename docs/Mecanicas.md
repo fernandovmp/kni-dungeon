@@ -47,3 +47,16 @@ As arenas podem ser nos formatos:
 - duas ondas de inimigos + uma onda com apenas um chefe
 - três ondas de inimigos
 
+### Vida
+
+Cada inimigo tem uma chance de deixar uma vida caso a vida do jogador não esteja completa.
+
+A chance de deixar uma vida é:
+
+chance_base * ((11 - vida_atual) * 0.1)
+
+chances:
+- orc: 20%
+- esqueleto: 20%
+- chort: 50%
+- demônio grande: 100%
