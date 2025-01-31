@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Dungeon"
-run/main_scene="res://scenes/debug/debug.tscn"
+config/name="Kni. Dungeon"
+run/main_scene="res://scenes/title/title.tscn"
 config/features=PackedStringArray("4.2", "C#", "GL Compatibility")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://icon.svg"
